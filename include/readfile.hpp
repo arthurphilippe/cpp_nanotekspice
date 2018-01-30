@@ -10,6 +10,7 @@
 
 namespace nts::readfile {
 	void readFile(std::string file);
+	void checkLine(const std::string &line);
 }
 
 #endif /* READFILE_HPP_ */

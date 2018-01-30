@@ -25,6 +25,7 @@ namespace nts {
 					std::size_t otherPin) = 0;
 		virtual void dump() const = 0;
 	protected:
+		std::list<IComponent> _list;
 	private:
 	};
 }
