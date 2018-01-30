@@ -5,7 +5,7 @@
 ** 4008
 */
 
-#include "Ref4008Comp.hpp"
+#include "components/Ref4008Comp.hpp"
 
 nts::Ref4008Comp::Ref4008Comp()
 {

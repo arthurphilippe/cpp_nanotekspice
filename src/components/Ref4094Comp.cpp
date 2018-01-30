@@ -5,7 +5,7 @@
 ** 4094
 */
 
-#include "Ref4094Comp.hpp"
+#include "components/Ref4094Comp.hpp"
 
 nts::Ref4094Comp::Ref4094Comp()
 {

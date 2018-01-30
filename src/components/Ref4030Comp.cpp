@@ -5,7 +5,7 @@
 ** 4030
 */
 
-#include "Ref4030Comp.hpp"
+#include "components/Ref4030Comp.hpp"
 
 nts::Ref4030Comp::Ref4030Comp()
 {

@@ -5,7 +5,7 @@
 ** 4081
 */
 
-#include "Ref4081Comp.hpp"
+#include "components/Ref4081Comp.hpp"
 
 nts::Ref4081Comp::Ref4081Comp()
 {

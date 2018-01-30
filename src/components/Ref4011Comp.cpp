@@ -5,7 +5,7 @@
 ** 4011
 */
 
-#include "Ref4011Comp.hpp"
+#include "components/Ref4011Comp.hpp"
 
 nts::Ref4011Comp::Ref4011Comp()
 {

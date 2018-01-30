@@ -5,7 +5,7 @@
 ** 2716
 */
 
-#include "Ref2716Comp.hpp"
+#include "components/Ref2716Comp.hpp"
 
 nts::Ref2716Comp::Ref2716Comp()
 {

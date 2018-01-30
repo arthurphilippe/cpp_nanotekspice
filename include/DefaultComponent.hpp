@@ -15,7 +15,6 @@
 namespace nts {
 	class DefaultComponent : public IComponent {
 	public:
-		virtual Tristate compute(std::size_t pin = 1) = 0;
 		void setLink(std::size_t pin, IComponent &other,
 					std::size_t otherPin) override;
 		void dump() const override;
