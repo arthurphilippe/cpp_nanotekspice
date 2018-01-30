@@ -11,7 +11,8 @@ NAME		=	nanotekspice
 
 RM		=	rm -vf
 
-SRCS		=	src/main.cpp
+SRCS		=	src/main.cpp		\
+			src/readfile/openfile.cpp
 
 OBJS		=	$(SRCS:.cpp=.o)
 
