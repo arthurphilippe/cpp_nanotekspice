@@ -20,12 +20,18 @@ namespace nts {
 	class IComponent {
 	public:
 		virtual ~IComponent() = default;
-		virtual nts::Tristate compute(std::size_t pin = 1) = 0;
-		virtual void setLink(std::size_t pin, nts::IComponent &other,
+		virtual Tristate compute(std::size_t pin = 1) = 0;
+		virtual void setLink(std::size_t pin, IComponent &other,
 					std::size_t otherPin) = 0;
 		virtual void dump() const = 0;
 	protected:
 	private:
+	};
+
+	struct ComponentLink {
+		IComponent 	&_linked;
+		size_t		_pairedPin;
+		size_t		_pin;
 	};
 }
 
