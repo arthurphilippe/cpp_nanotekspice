@@ -11,3 +11,8 @@ nts::Ref4011Comp::Ref4011Comp()
 {
 	_name.assign("4011");
 }
+
+nts::Tristate nts::Ref4011Comp::compute(std::size_t pin)
+{
+
+}

@@ -11,3 +11,8 @@ nts::Ref2716Comp::Ref2716Comp()
 {
 	_name.assign("2716");
 }
+
+nts::Tristate nts::Ref2716Comp::compute(std::size_t pin)
+{
+
+}

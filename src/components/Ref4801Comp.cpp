@@ -2,12 +2,17 @@
 ** EPITECH PROJECT, 2017
 ** nanotekspice
 ** File description:
-** 4081
+** 4801
 */
 
-#include "Ref4081Comp.hpp"
+#include "Ref4801Comp.hpp"
 
-nts::Ref4081Comp::Ref4081Comp()
+nts::Ref4801Comp::Ref4801Comp()
 {
-	_name.assign("4081");
+	_name.assign("4801");
+}
+
+nts::Tristate nts::Ref4801Comp::compute(std::size_t pin)
+{
+
 }

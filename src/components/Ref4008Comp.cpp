@@ -11,3 +11,8 @@ nts::Ref4008Comp::Ref4008Comp()
 {
 	_name.assign("4008");
 }
+
+nts::Tristate nts::Ref4008Comp::compute(std::size_t pin)
+{
+
+}

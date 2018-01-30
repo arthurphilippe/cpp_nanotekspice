@@ -15,10 +15,10 @@
 namespace nts {
 	class DefaultComponent : public IComponent {
 	public:
-		virtual Tristate compute(std::size_t pint = 1) = 0;
-		virtual void setLink(std::size_t pin, IComponent &other,
+		virtual Tristate compute(std::size_t pin = 1) = 0;
+		void setLink(std::size_t pin, IComponent &other,
 					std::size_t otherPin) override;
-		virtual void dump() const override;
+		void dump() const override;
 	protected:
 		std::string			_name;
 		std::vector<ComponentLink>	_links;
