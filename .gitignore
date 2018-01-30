@@ -6,3 +6,4 @@ vgcore*
 *.log
 .vscode/
 nanotekspice
+*.nts
