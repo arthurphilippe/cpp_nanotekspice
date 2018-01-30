@@ -6,8 +6,12 @@
 */
 
 #include <iostream>
+#include "readfile.hpp"
 
-int main()
+int main(int ac, char **av)
 {
-	std::cout << "salut" << std::endl;
+	if (ac > 1)
+		nts::readfile::readFile(av[1]);
+	else
+		std::cout << "kappa ta pas mis d'arguments" << std::endl;
 }

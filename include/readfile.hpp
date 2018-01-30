@@ -6,4 +6,10 @@
 //
 
 #ifndef READFILE_HPP_
-		
+	# define READFILE_HPP_
+
+namespace nts::readfile {
+	void readFile(std::string file);
+}
+
+#endif /* READFILE_HPP_ */
