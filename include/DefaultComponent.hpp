@@ -9,6 +9,7 @@
 	#define DEFAULTCOMPONENT_HPP_
 
 	#include <vector>
+	#include <string>
 	#include "IComponent.hpp"
 
 namespace nts {
@@ -19,6 +20,7 @@ namespace nts {
 					std::size_t otherPin) override;
 		virtual void dump() const override;
 	protected:
+		std::string			_name;
 		std::vector<ComponentLink>	_links;
 	};
 }
