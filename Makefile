@@ -15,19 +15,19 @@ SRCS		=	src/main.cpp				\
 			src/LogicGates.cpp			\
 			src/components/DefaultComponent.cpp	\
 			src/components/Ref4001Comp.cpp		\
-			# src/components/Ref2716Comp.cpp		\
-			# src/components/Ref4008Comp.cpp		\
-			# src/components/Ref4011Comp.cpp		\
-			# src/components/Ref4013Comp.cpp		\
-			# src/components/Ref4017Comp.cpp		\
-			# src/components/Ref4030Comp.cpp		\
-			# src/components/Ref4040Comp.cpp		\
-			# src/components/Ref4069Comp.cpp		\
-			# src/components/Ref4071Comp.cpp		\
-			# src/components/Ref4081Comp.cpp		\
-			# src/components/Ref4094Comp.cpp		\
-			# src/components/Ref4514Comp.cpp		\
-			# src/components/Ref4801Comp.cpp
+			src/components/Ref2716Comp.cpp		\
+			src/components/Ref4008Comp.cpp		\
+			src/components/Ref4011Comp.cpp		\
+			src/components/Ref4013Comp.cpp		\
+			src/components/Ref4017Comp.cpp		\
+			src/components/Ref4030Comp.cpp		\
+			src/components/Ref4040Comp.cpp		\
+			src/components/Ref4069Comp.cpp		\
+			src/components/Ref4071Comp.cpp		\
+			src/components/Ref4081Comp.cpp		\
+			src/components/Ref4094Comp.cpp		\
+			src/components/Ref4514Comp.cpp		\
+			src/components/Ref4801Comp.cpp
 
 
 OBJS		=	$(SRCS:.cpp=.o)

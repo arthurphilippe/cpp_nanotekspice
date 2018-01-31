@@ -9,6 +9,7 @@
 	#define ICOMPONENT_HPP_
 
 	#include <cstddef>
+	#include <string>
 
 namespace nts {
 	enum Tristate {
@@ -24,6 +25,7 @@ namespace nts {
 		virtual void setLink(std::size_t pin, IComponent &other,
 					std::size_t otherPin) = 0;
 		virtual void dump() const = 0;
+		virtual const std::string &getName() const;
 	protected:
 	private:
 	};

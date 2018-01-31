@@ -14,5 +14,5 @@ nts::Ref4030Comp::Ref4030Comp()
 
 nts::Tristate nts::Ref4030Comp::compute(std::size_t pin)
 {
-
+	(void) pin;
 }
