@@ -13,7 +13,7 @@
 namespace nts {
 	class Ref4017Comp : public DefaultComponent {
 	public:
-		Ref4017Comp();
+		Ref4017Comp(const std::string &name);
 		virtual Tristate compute(std::size_t pin = 1) override;
 	protected:
 	private:

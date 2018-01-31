@@ -10,9 +10,9 @@
 
 int main()
 {
-	std::unique_ptr<nts::IComponent> kappa = std::move(nts::DefaultComponent::createComponent("4001"));
-	std::cout << "salut" << std::endl;
+	std::unique_ptr<nts::IComponent> kappa = std::move(nts::DefaultComponent::createComponent("4001", "voiture"));
 	kappa->dump();
+	std::cout << kappa->getName() << std::endl;
 	kappa = std::move(nts::DefaultComponent::createComponent("4001"));
 	kappa->dump();
 	kappa = std::move(nts::DefaultComponent::createComponent("4008"));
