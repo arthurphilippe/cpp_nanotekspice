@@ -9,7 +9,6 @@
 
 nts::Ref4011Comp::Ref4011Comp(const std::string &name)
 {
-	_name.assign("4011");
 	_name.assign(name);
 }
 
