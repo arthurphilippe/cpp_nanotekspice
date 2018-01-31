@@ -43,6 +43,8 @@ void nts::readfile::setROM(std::string type, std::string name)
 
 void nts::readfile::setChipset(std::string type, std::string name)
 {
+	if (name.length() < 1)
+		throw FileError("Error in the file, check the chipset list");
 	if ((int)name.find("(") > 1 && (int)name.find(")") > 1) {
 		try { setROM(type, name);
 		} catch (const FileError &error) {

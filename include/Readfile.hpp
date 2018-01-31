@@ -21,7 +21,7 @@ namespace nts::readfile {
 	void setLink(std::string, std::string);
 	void readFile(const std::string &line);
 	void checkLine(std::string line);
-	void setRAM(std::string type, std::string name);
+	void setROM(std::string type, std::string name);
 }
 
 #endif /* READFILE_HPP_ */
