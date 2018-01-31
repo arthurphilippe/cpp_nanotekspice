@@ -25,6 +25,7 @@
 #include "components/Output.hpp"
 #include "components/False.hpp"
 #include "components/True.hpp"
+#include "components/Clock.hpp"
 
 void nts::DefaultComponent::dump() const
 {
@@ -60,6 +61,10 @@ std::unique_ptr<nts::IComponent> nts::DefaultComponent::createComponent(
 	}
 	else if (type.compare("true") == 0) {
 		std::unique_ptr<True> comp(new True(name));
+		ret = std::move(comp);
+	}
+	else if (type.compare("clock") == 0) {
+		std::unique_ptr<Clock> comp(new Clock(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4001") == 0) {

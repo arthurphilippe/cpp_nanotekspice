@@ -5,7 +5,6 @@
 ** true
 */
 
-#include <iostream>
 #include "components/True.hpp"
 
 nts::True::True(const std::string &name)
