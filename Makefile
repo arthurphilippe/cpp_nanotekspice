@@ -29,19 +29,34 @@ SRCS		=	src/main.cpp				\
 			# src/components/Ref4514Comp.cpp		\
 			# src/components/Ref4801Comp.cpp
 
+
 OBJS		=	$(SRCS:.cpp=.o)
+
+TEST		=	unit_tests.out
+
+SRCS_TEST	=	tests/test-LogicGates.cpp	\
+			src/LogicGates.cpp
+
+OBJS_TEST	=	$(SRCS_TEST:.cpp=.o)
 
 CPPFLAGS	=	-W -Wextra -Wall -Iinclude/
 
 all: $(NAME)
 
 debug: CPPFLAGS += -ggdb
-debug: fclean
+debug: clean
 debug: $(NAME)
+
+tests: CPPFLAGS += -lcriterion
+tests: fclean
+tests: $(NAME) $(TEST)
 
 $(NAME): $(OBJS)
 	@$(CXX) $(OBJS) -o $(NAME)
 	@echo " --> $(NAME) built!"
+
+$(TEST): $(OBJS_TEST)
+	@$(CXX) $(OBJS_TEST) -o $(TEST) -lcriterion
 
 clean:
 	@$(RM) $(OBJS)
