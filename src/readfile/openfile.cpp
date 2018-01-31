@@ -45,7 +45,7 @@ void nts::readfile::setLink(std::string a, std::string b)
 	std::string a_chipset;
 	std::string a_value;
 	std::string b_chipset;
-	std::string b_vblue;
+	std::string b_value;
 	int i = 0;
 
 	if ((i = a.find(":")) < 1)
@@ -53,8 +53,10 @@ void nts::readfile::setLink(std::string a, std::string b)
 	a_chipset = a.substr(0, i);
 	i++;
 	a_value = a.substr(i, a.length());
-//	std::cout << a_chipset << ":";
-//	std::cout << a_value << "\t";
+	std::cout << a_chipset << ":";
+	std::cout << a_value << std::endl;
+	if (a_value.length() < 1)
+		throw FileError("Error in the file links : One of the chipset isn't linked to an pin");
 //	std::cout << a << std::endl;
 	i = 0;
 
@@ -62,7 +64,10 @@ void nts::readfile::setLink(std::string a, std::string b)
 		throw FileError("Error in the file links");
 	b_chipset = b.substr(0, i);
 	i++;
-	b_vblue = b.substr(i, b.length());
+	b_value = b.substr(i, b.length());
+	if (b_value.length() < 1)
+		throw FileError("Error in the file links : One of the chipset isn't linked to an pin");
+
 //	std::cout << b_chipset << ":";
 //	std::cout << b_vblue << std::endl;
 //	std::cout << b << std::endl;
