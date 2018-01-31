@@ -10,13 +10,15 @@
 
 #include <list>
 #include <memory>
+#include "DefaultComponent.hpp"
 #include "IComponent.hpp"
 
 namespace nts {
 	class Parser {
+	public:
+		Parser(char *fileNAme);
 		Parser(std::string fileName);
 		~Parser() {}
-	public:
 		enum ParseWork {
 			CHIPSET,
 			LINK

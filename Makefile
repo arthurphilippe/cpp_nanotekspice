@@ -30,6 +30,7 @@ SRCS		=	src/main.cpp				\
 			src/components/Ref4801Comp.cpp \
 			src/Error.cpp \
 			src/readfile/openfile.cpp	\
+			src/readfile/Parser.cpp
 
 
 OBJS		=	$(SRCS:.cpp=.o)

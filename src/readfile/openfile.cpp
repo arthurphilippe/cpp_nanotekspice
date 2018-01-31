@@ -69,7 +69,7 @@ void nts::Parser::setChipset(std::string type, std::string name)
 		   ((int)name.find("(") < 1 && (int)name.find(")") > 1)){
 		throw FileError("Error in the file, check the chipset list");
 	} else {
-createComponent
+		nts::DefaultComponent::createComponent();
 	}
 }
 
@@ -130,7 +130,7 @@ void nts::Parser::checkLine(std::string line)
 **	Read the file from the filename given as argument
 */
 
-void nts::Parser::readfile(const std::string &file)
+void nts::Parser::readFile(const std::string &file)
 {
 	std::ifstream fd(file.c_str());
 	std::string line;

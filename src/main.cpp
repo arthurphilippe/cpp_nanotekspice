@@ -16,7 +16,7 @@ int main(int ac, char **av)
 	{
 		try
 		{
-			nts::Parser kappa;
+			nts::Parser kappa(av[1]);
 		        kappa.readFile(av[1]);
 		}
 		catch (const FileError &error)
