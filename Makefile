@@ -28,7 +28,8 @@ SRCS		=	src/main.cpp				\
 			src/components/Ref4094Comp.cpp		\
 			src/components/Ref4514Comp.cpp		\
 			src/components/Ref4801Comp.cpp		\
-			src/components/Input.cpp
+			src/components/Input.cpp		\
+			src/components/Output.cpp
 
 
 OBJS		=	$(SRCS:.cpp=.o)
@@ -45,11 +46,11 @@ CPPFLAGS	=	-W -Wextra -Wall -Iinclude/
 all: $(NAME)
 
 debug: CPPFLAGS += -ggdb
-debug: clean
+debug: fclean
 debug: $(NAME)
 
 tests: CPPFLAGS += -lcriterion
-tests: fclean
+tests: clean
 tests: $(NAME) $(TEST)
 
 $(NAME): $(OBJS)

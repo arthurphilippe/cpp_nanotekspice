@@ -29,12 +29,6 @@ namespace nts {
 	protected:
 	private:
 	};
-
-	struct ComponentLink {
-		IComponent 	&_linked;
-		size_t		_pairedPin;
-		size_t		_pin;
-	};
 }
 
 

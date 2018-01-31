@@ -22,6 +22,7 @@
 #include "components/Ref4514Comp.hpp"
 #include "components/Ref4801Comp.hpp"
 #include "components/Input.hpp"
+#include "components/Output.hpp"
 
 void nts::DefaultComponent::dump() const
 {
@@ -38,69 +39,73 @@ void nts::DefaultComponent::setLink(std::size_t pin, IComponent &other,
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::createComponent(
 	const std::string &type,
-	const std::string &value,
+	const std::string &name,
 	const std::string &param)
 {
 	std::unique_ptr<nts::IComponent> ret;
 
 	if (type.compare("input") == 0) {
-		std::unique_ptr<Input> comp(new Input(value));
+		std::unique_ptr<Input> comp(new Input(name));
+		ret = std::move(comp);
+	}
+	else if (type.compare("output") == 0) {
+		std::unique_ptr<Output> comp(new Output(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4001") == 0) {
-		std::unique_ptr<Ref4001Comp> comp(new Ref4001Comp(value));
+		std::unique_ptr<Ref4001Comp> comp(new Ref4001Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4008") == 0) {
-		std::unique_ptr<Ref4008Comp> comp(new Ref4008Comp(value));
+		std::unique_ptr<Ref4008Comp> comp(new Ref4008Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4011") == 0) {
-		std::unique_ptr<Ref4011Comp> comp(new Ref4011Comp(value));
+		std::unique_ptr<Ref4011Comp> comp(new Ref4011Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4013") == 0) {
-		std::unique_ptr<Ref4013Comp> comp(new Ref4013Comp(value));
+		std::unique_ptr<Ref4013Comp> comp(new Ref4013Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4017") == 0) {
-		std::unique_ptr<Ref4017Comp> comp(new Ref4017Comp(value));
+		std::unique_ptr<Ref4017Comp> comp(new Ref4017Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4030") == 0) {
-		std::unique_ptr<Ref4030Comp> comp(new Ref4030Comp(value));
+		std::unique_ptr<Ref4030Comp> comp(new Ref4030Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4040") == 0) {
-		std::unique_ptr<Ref4040Comp> comp(new Ref4040Comp(value));
+		std::unique_ptr<Ref4040Comp> comp(new Ref4040Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4069") == 0) {
-		std::unique_ptr<Ref4069Comp> comp(new Ref4069Comp(value));
+		std::unique_ptr<Ref4069Comp> comp(new Ref4069Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4071") == 0) {
-		std::unique_ptr<Ref4071Comp> comp(new Ref4071Comp(value));
+		std::unique_ptr<Ref4071Comp> comp(new Ref4071Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4081") == 0) {
-		std::unique_ptr<Ref4081Comp> comp(new Ref4081Comp(value));
+		std::unique_ptr<Ref4081Comp> comp(new Ref4081Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4094") == 0) {
-		std::unique_ptr<Ref4094Comp> comp(new Ref4094Comp(value));
+		std::unique_ptr<Ref4094Comp> comp(new Ref4094Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4514") == 0) {
-		std::unique_ptr<Ref4514Comp> comp(new Ref4514Comp(value));
+		std::unique_ptr<Ref4514Comp> comp(new Ref4514Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4801") == 0) {
-		std::unique_ptr<Ref4801Comp> comp(new Ref4801Comp(value));
+		std::unique_ptr<Ref4801Comp> comp(new Ref4801Comp(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("2716") == 0) {
-		std::unique_ptr<Ref2716Comp> comp(new Ref2716Comp(value, param));
+		std::unique_ptr<Ref2716Comp> comp(new Ref2716Comp(name, param));
 		ret = std::move(comp);
 	}
 	else {
