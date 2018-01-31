@@ -11,6 +11,11 @@
 #include "Readfile.hpp"
 #include "Error.hpp"
 
+/*
+**	Parse the line given as parameter and run the according function
+**	from the second argument (ENUM)
+*/
+
 void nts::readfile::parseLine(std::string line, nts::readfile::ParseWork a)
 {
 	int i = 0;
@@ -32,6 +37,10 @@ void nts::readfile::parseLine(std::string line, nts::readfile::ParseWork a)
 	}
 }
 
+/*
+**	Parse the 'Rom' type Chipset
+*/
+
 void nts::readfile::setROM(std::string type, std::string name)
 {
 	std::string value;
@@ -40,6 +49,10 @@ void nts::readfile::setROM(std::string type, std::string name)
 	value.erase(std::remove(value.begin(), value.end(), '('), value.end());
 	value.erase(std::remove(value.begin(), value.end(), ')'), value.end());
 }
+
+/*
+**	Parse the Chipset information
+*/
 
 void nts::readfile::setChipset(std::string type, std::string name)
 {
@@ -58,6 +71,11 @@ void nts::readfile::setChipset(std::string type, std::string name)
 
 	}
 }
+
+/*
+**	Parse and
+*/
+
 void nts::readfile::setLink(std::string a, std::string b)
 {
 	std::string a_chipset;
@@ -71,13 +89,9 @@ void nts::readfile::setLink(std::string a, std::string b)
 	a_chipset = a.substr(0, i);
 	i++;
 	a_value = a.substr(i, a.length());
-//	std::cout << a_chipset << ":";
-//	std::cout << a_value << std::endl;
 	if (a_value.length() < 1)
 		throw FileError("Error in the file links : One of the chipset isn't linked to an pin");
-//	std::cout << a << std::endl;
 	i = 0;
-
 	if ((i = b.find(":")) < 1)
 		throw FileError("Error in the file links");
 	b_chipset = b.substr(0, i);
@@ -85,12 +99,12 @@ void nts::readfile::setLink(std::string a, std::string b)
 	b_value = b.substr(i, b.length());
 	if (b_value.length() < 1)
 		throw FileError("Error in the file links : One of the chipset isn't linked to an pin");
-
-//	std::cout << b_chipset << ":";
-//	std::cout << b_vblue << std::endl;
-//	std::cout << b << std::endl;
-
 }
+
+/*
+**	Check line if it's a description (chipset or links)
+**	and run the according function with the good param
+*/
 
 void nts::readfile::checkLine(std::string line)
 {
@@ -110,6 +124,10 @@ void nts::readfile::checkLine(std::string line)
 		throw error;
 	}
 }
+
+/*
+**	Read the file from the filename given as argument
+*/
 
 void nts::readfile::readFile(const std::string &file)
 {
