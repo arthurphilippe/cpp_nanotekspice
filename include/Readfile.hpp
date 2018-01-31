@@ -8,6 +8,9 @@
 #ifndef READFILE_HPP_
 	# define READFILE_HPP_
 
+
+#include "IComponent.hpp"
+
 namespace nts::readfile {
 	enum ParseWork {
 		CHIPSET,

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include "Readfile.hpp"
+#include "Error.hpp"
 
 void nts::readfile::parseLine(std::string line, nts::readfile::ParseWork a)
 {
@@ -16,13 +17,22 @@ void nts::readfile::parseLine(std::string line, nts::readfile::ParseWork a)
 	std::string first;
 	std::string value;
 
+	if ((int)line.find("\t") < 1 && (int)line.find(" ") < 1)
+		throw FileError("Please, check the configuration file");
 	while (!(line[i] == ' ' || line[i] == '\0' || line[i] == '\t'))
 		++i;
 	first = line.substr(0, i);
 	value = line.substr(i, line.length());
 	value.erase(std::remove(value.begin(), value.end(), '\t'), value.end());
 	value.erase(std::remove(value.begin(), value.end(), ' '), value.end());
+	try
+	{
 	(a == CHIPSET) ? setChipset(first, value) : setLink(first, value);
+	}
+	catch (const FileError &error)
+	{
+		throw error;
+	}
 }
 
 void nts::readfile::setChipset(std::string type, std::string name)
@@ -38,21 +48,23 @@ void nts::readfile::setLink(std::string a, std::string b)
 	std::string b_vblue;
 	int i = 0;
 
-	i = a.find(":");
+	if ((i = a.find(":")) < 1)
+		throw FileError("Error in the file links");
 	a_chipset = a.substr(0, i);
 	i++;
 	a_value = a.substr(i, a.length());
-	std::cout << a_chipset << ":";
-	std::cout << a_value << "\t";
+//	std::cout << a_chipset << ":";
+//	std::cout << a_value << "\t";
 //	std::cout << a << std::endl;
 	i = 0;
 
-	i = b.find(":");
+	if ((i = b.find(":")) < 1)
+		throw FileError("Error in the file links");
 	b_chipset = b.substr(0, i);
 	i++;
 	b_vblue = b.substr(i, b.length());
-	std::cout << b_chipset << ":";
-	std::cout << b_vblue << std::endl;
+//	std::cout << b_chipset << ":";
+//	std::cout << b_vblue << std::endl;
 //	std::cout << b << std::endl;
 
 }
@@ -61,13 +73,19 @@ void nts::readfile::checkLine(std::string line)
 {
 	static std::string temporary;
 
+try
+{
 	if (line[0] == '.')
 		temporary = line;
-
 	else if (temporary.compare(".links:") == 0)
 		parseLine(line, LINK);
 	else if (temporary == ".chipsets:")
 		parseLine(line, CHIPSET);
+}
+catch (const FileError &error)
+{
+	throw error;
+}
 }
 
 void nts::readfile::readFile(const std::string &file)
@@ -76,8 +94,7 @@ void nts::readfile::readFile(const std::string &file)
 	std::string line;
 
 	if (fd.is_open() == false) {
-		std::cerr << "Received invalid file in argument" << std::endl;
-		throw;
+		throw FileError("Received invalid file in argument");
 	}
 	while (getline(fd, line)) {
 		line = line.substr(0, line.find("#"));

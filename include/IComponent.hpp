@@ -9,6 +9,7 @@
 	#define ICOMPONENT_HPP_
 
 	#include <cstddef>
+	#include <list>
 
 namespace nts {
 	enum Tristate {

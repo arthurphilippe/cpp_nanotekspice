@@ -5,14 +5,15 @@
 ## tests
 ##
 
-CXX		=	g++
+CXX		=	c++
 
 NAME		=	nanotekspice
 
 RM		=	rm -vf
 
 SRCS		=	src/main.cpp		\
-			src/readfile/openfile.cpp
+			src/readfile/openfile.cpp	\
+			src/Error.cpp
 
 OBJS		=	$(SRCS:.cpp=.o)
 
