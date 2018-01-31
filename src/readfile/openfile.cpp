@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <iostream>
 #include <fstream>
+#include <memory>
 #include "Readfile.hpp"
 #include "Error.hpp"
 
@@ -16,7 +17,7 @@
 **	from the second argument (ENUM)
 */
 
-void nts::readfile::parseLine(std::string line, nts::readfile::ParseWork a)
+void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork a)
 {
 	int i = 0;
 	std::string first;
@@ -41,7 +42,7 @@ void nts::readfile::parseLine(std::string line, nts::readfile::ParseWork a)
 **	Parse the 'Rom' type Chipset
 */
 
-void nts::readfile::setROM(std::string type, std::string name)
+void nts::Parser::setROM(std::string type, std::string name)
 {
 	std::string value;
 
@@ -54,7 +55,7 @@ void nts::readfile::setROM(std::string type, std::string name)
 **	Parse the Chipset information
 */
 
-void nts::readfile::setChipset(std::string type, std::string name)
+void nts::Parser::setChipset(std::string type, std::string name)
 {
 	if (name.length() < 1)
 		throw FileError("Error in the file, check the chipset list");
@@ -68,7 +69,7 @@ void nts::readfile::setChipset(std::string type, std::string name)
 		   ((int)name.find("(") < 1 && (int)name.find(")") > 1)){
 		throw FileError("Error in the file, check the chipset list");
 	} else {
-
+createComponent
 	}
 }
 
@@ -76,7 +77,7 @@ void nts::readfile::setChipset(std::string type, std::string name)
 **	Parse and
 */
 
-void nts::readfile::setLink(std::string a, std::string b)
+void nts::Parser::setLink(std::string a, std::string b)
 {
 	std::string a_chipset;
 	std::string a_value;
@@ -106,7 +107,7 @@ void nts::readfile::setLink(std::string a, std::string b)
 **	and run the according function with the good param
 */
 
-void nts::readfile::checkLine(std::string line)
+void nts::Parser::checkLine(std::string line)
 {
 	static std::string temporary;
 
@@ -129,7 +130,7 @@ void nts::readfile::checkLine(std::string line)
 **	Read the file from the filename given as argument
 */
 
-void nts::readfile::readFile(const std::string &file)
+void nts::Parser::readfile(const std::string &file)
 {
 	std::ifstream fd(file.c_str());
 	std::string line;

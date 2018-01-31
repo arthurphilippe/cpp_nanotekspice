@@ -5,7 +5,7 @@
 ## tests
 ##
 
-CXX		=	c++
+CXX		=	g++ -std=c++14
 
 NAME		=	nanotekspice
 
