@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Error.hpp"
 #include "Readfile.hpp"
+#include "DefaultComponent.hpp"
 
 int main(int ac, char **av)
 {
@@ -24,4 +25,7 @@ int main(int ac, char **av)
 	}
 	else
 		std::cout << "kappa ta pas mis d'arguments" << std::endl;
+	std::unique_ptr<nts::IComponent> kappa = std::move(nts::DefaultComponent::createComponent("4001"));
+	std::cout << "salut" << std::endl;
+	kappa->dump();
 }
