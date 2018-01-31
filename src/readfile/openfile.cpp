@@ -77,6 +77,24 @@ void nts::Parser::setChipset(std::string type, std::string name)
 **	Parse and
 */
 
+void nts::Parser::linkSetter(std::string a, int a_value,
+			     std::string b, int b_value)
+{
+
+	for (std::list<std::unique_ptr<IComponent>>::const_iterator i = _list.begin();
+	     i != _list.end(); i++) {
+		if (i->getName() == b) {
+			IComponent tmp_b = i;
+			break ;
+		}
+	}
+	for (std::list<std::unique_ptr<IComponent>>::const_iterator i = _list.begin();
+	     i != _list.end(); i++) {
+		if (i->getName() == a)
+			i->setLink(a_value, tmp_b, b_value);
+	}
+}
+
 void nts::Parser::setLink(std::string a, std::string b)
 {
 	std::string a_chipset;

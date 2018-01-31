@@ -26,6 +26,7 @@ namespace nts {
 		void parseLine(std::string line, ParseWork a);
 		void setChipset(std::string, std::string);
 		void setLink(std::string, std::string);
+		void linkSetter(std::string, int, std::string, int);
 		void readFile(const std::string &line);
 		void checkLine(std::string line);
 		void setROM(std::string type, std::string name);
