@@ -25,21 +25,37 @@ void nts::readfile::parseLine(std::string line, nts::readfile::ParseWork a)
 	value = line.substr(i, line.length());
 	value.erase(std::remove(value.begin(), value.end(), '\t'), value.end());
 	value.erase(std::remove(value.begin(), value.end(), ' '), value.end());
-	try
-	{
-	(a == CHIPSET) ? setChipset(first, value) : setLink(first, value);
-	}
-	catch (const FileError &error)
-	{
+	try {
+		(a == CHIPSET) ? setChipset(first, value) : setLink(first, value);
+	} catch (const FileError &error) {
 		throw error;
 	}
 }
 
-void nts::readfile::setChipset(std::string type, std::string name)
+void nts::readfile::setROM(std::string type, std::string name)
 {
+	std::string value;
 
+	value = name.substr(name.find("("), name.length());
+	value.erase(std::remove(value.begin(), value.end(), '('), value.end());
+	value.erase(std::remove(value.begin(), value.end(), ')'), value.end());
 }
 
+void nts::readfile::setChipset(std::string type, std::string name)
+{
+	if ((int)name.find("(") > 1 && (int)name.find(")") > 1) {
+		try { setROM(type, name);
+		} catch (const FileError &error) {
+			throw error;
+		}
+		return ;
+	} else if (((int)name.find("(") > 1 && (int)name.find(")") < 1) ||
+		   ((int)name.find("(") < 1 && (int)name.find(")") > 1)){
+		throw FileError("Error in the file, check the chipset list");
+	} else {
+
+	}
+}
 void nts::readfile::setLink(std::string a, std::string b)
 {
 	std::string a_chipset;
@@ -53,8 +69,8 @@ void nts::readfile::setLink(std::string a, std::string b)
 	a_chipset = a.substr(0, i);
 	i++;
 	a_value = a.substr(i, a.length());
-	std::cout << a_chipset << ":";
-	std::cout << a_value << std::endl;
+//	std::cout << a_chipset << ":";
+//	std::cout << a_value << std::endl;
 	if (a_value.length() < 1)
 		throw FileError("Error in the file links : One of the chipset isn't linked to an pin");
 //	std::cout << a << std::endl;
@@ -78,19 +94,19 @@ void nts::readfile::checkLine(std::string line)
 {
 	static std::string temporary;
 
-try
-{
-	if (line[0] == '.')
-		temporary = line;
-	else if (temporary.compare(".links:") == 0)
-		parseLine(line, LINK);
-	else if (temporary == ".chipsets:")
-		parseLine(line, CHIPSET);
-}
-catch (const FileError &error)
-{
-	throw error;
-}
+	try
+	{
+		if (line[0] == '.')
+			temporary = line;
+		else if (temporary.compare(".links:") == 0)
+			parseLine(line, LINK);
+		else if (temporary == ".chipsets:")
+			parseLine(line, CHIPSET);
+	}
+	catch (const FileError &error)
+	{
+		throw error;
+	}
 }
 
 void nts::readfile::readFile(const std::string &file)
@@ -104,6 +120,6 @@ void nts::readfile::readFile(const std::string &file)
 	while (getline(fd, line)) {
 		line = line.substr(0, line.find("#"));
 		if (line.size() != 0)
-		checkLine(line);
+			checkLine(line);
 	}
 }
