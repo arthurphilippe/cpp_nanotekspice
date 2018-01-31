@@ -18,6 +18,7 @@ namespace nts {
 		static Tristate ORGate(Tristate a, Tristate b);
 		static Tristate NORGate(Tristate a, Tristate b);
 		static Tristate XORGate(Tristate a, Tristate b);
+		static Tristate NOTGate(Tristate a);
 	};
 }
 

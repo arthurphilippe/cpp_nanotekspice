@@ -113,3 +113,18 @@ Test(XORGate, LogicGatesAssertions) {
 	c = nts::LogicGates::XORGate(a, b);
 	cr_assert((c == nts::Tristate::UNDEFINED));
 }
+
+Test(NOTGate, LogicGatesAssertions) {
+	nts::Tristate a = nts::Tristate::TRUE;
+	nts::Tristate c = nts::LogicGates::NOTGate(a);
+
+	cr_assert((c == nts::Tristate::FALSE));
+
+	a = nts::Tristate::FALSE;
+	c = nts::LogicGates::NOTGate(a);
+	cr_assert((c == nts::Tristate::TRUE));
+
+	a = nts::Tristate::UNDEFINED;
+	c = nts::LogicGates::NOTGate(a);
+	cr_assert((c == nts::Tristate::UNDEFINED));
+}

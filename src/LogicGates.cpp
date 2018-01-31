@@ -44,3 +44,9 @@ nts::Tristate nts::LogicGates::XORGate(Tristate a, Tristate b)
 	return (a ^ b) ? TRUE : FALSE;
 }
 
+nts::Tristate nts::LogicGates::NOTGate(Tristate a)
+{
+	if (a == UNDEFINED)
+		return (UNDEFINED);
+	return (a == FALSE) ? TRUE : FALSE;
+}
