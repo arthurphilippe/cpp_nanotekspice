@@ -23,6 +23,8 @@
 #include "components/Ref4801Comp.hpp"
 #include "components/Input.hpp"
 #include "components/Output.hpp"
+#include "components/False.hpp"
+#include "components/True.hpp"
 
 void nts::DefaultComponent::dump() const
 {
@@ -50,6 +52,14 @@ std::unique_ptr<nts::IComponent> nts::DefaultComponent::createComponent(
 	}
 	else if (type.compare("output") == 0) {
 		std::unique_ptr<Output> comp(new Output(name));
+		ret = std::move(comp);
+	}
+	else if (type.compare("false") == 0) {
+		std::unique_ptr<False> comp(new False(name));
+		ret = std::move(comp);
+	}
+	else if (type.compare("true") == 0) {
+		std::unique_ptr<True> comp(new True(name));
 		ret = std::move(comp);
 	}
 	else if (type.compare("4001") == 0) {

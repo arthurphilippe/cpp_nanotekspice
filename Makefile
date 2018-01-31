@@ -28,6 +28,8 @@ SRCS		=	src/main.cpp				\
 			src/components/Ref4094Comp.cpp		\
 			src/components/Ref4514Comp.cpp		\
 			src/components/Ref4801Comp.cpp		\
+			src/components/False.cpp		\
+			src/components/True.cpp			\
 			src/components/Input.cpp		\
 			src/components/Output.cpp
 
