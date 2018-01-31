@@ -27,7 +27,8 @@ SRCS		=	src/main.cpp				\
 			src/components/Ref4081Comp.cpp		\
 			src/components/Ref4094Comp.cpp		\
 			src/components/Ref4514Comp.cpp		\
-			src/components/Ref4801Comp.cpp
+			src/components/Ref4801Comp.cpp		\
+			src/components/Input.cpp
 
 
 OBJS		=	$(SRCS:.cpp=.o)

@@ -21,7 +21,7 @@
 #include "components/Ref4094Comp.hpp"
 #include "components/Ref4514Comp.hpp"
 #include "components/Ref4801Comp.hpp"
-
+#include "components/Input.hpp"
 
 void nts::DefaultComponent::dump() const
 {
@@ -43,8 +43,11 @@ std::unique_ptr<nts::IComponent> nts::DefaultComponent::createComponent(
 {
 	std::unique_ptr<nts::IComponent> ret;
 
-	if (type.compare("4001") == 0) {
-		std::cout << "kappa" << std::endl;
+	if (type.compare("input") == 0) {
+		std::unique_ptr<Input> comp(new Input(value));
+		ret = std::move(comp);
+	}
+	else if (type.compare("4001") == 0) {
 		std::unique_ptr<Ref4001Comp> comp(new Ref4001Comp(value));
 		ret = std::move(comp);
 	}
