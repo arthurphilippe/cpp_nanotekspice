@@ -22,7 +22,9 @@ namespace nts {
 				std::size_t otherPin) override;
 		void dump() const override;
 		static std::unique_ptr<IComponent> createComponent(
-			const std::string &type, const std::string &value = "");
+			const std::string &type,
+			const std::string &value = "",
+			const std::string &param = "");
 		const std::string &getName() const override;
 	protected:
 		std::string			_name;
