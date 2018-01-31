@@ -25,7 +25,7 @@ namespace nts {
 		virtual void setLink(std::size_t pin, IComponent &other,
 					std::size_t otherPin) = 0;
 		virtual void dump() const = 0;
-		virtual const std::string &getName() const;
+		virtual const std::string &getName() const = 0;
 	protected:
 	private:
 	};

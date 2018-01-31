@@ -41,76 +41,63 @@ std::unique_ptr<nts::IComponent> nts::DefaultComponent::createComponent(
 {
 	std::unique_ptr<nts::IComponent> ret;
 
-	if (type == "4001")
-		[&ret] () {
-			std::unique_ptr<Ref4001Comp> comp;
+	if (type.compare("4001") == 0) {
+		std::cout << "kappa" << std::endl;
+			std::unique_ptr<Ref4001Comp> comp(new Ref4001Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4008")
-		[&ret] () {
-			std::unique_ptr<Ref4008Comp> comp;
+		}
+	else if (type.compare("4008") == 0) {
+			std::unique_ptr<Ref4008Comp> comp(new Ref4008Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4011")
-		[&ret] () {
-			std::unique_ptr<Ref4011Comp> comp;
+		}
+	else if (type.compare("4011") == 0) {
+			std::unique_ptr<Ref4011Comp> comp(new Ref4011Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4013")
-		[&ret] () {
-			std::unique_ptr<Ref4013Comp> comp;
+		}
+	else if (type.compare("4013") == 0) {
+			std::unique_ptr<Ref4013Comp> comp(new Ref4013Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4017")
-		[&ret] () {
-			std::unique_ptr<Ref4017Comp> comp;
+		}
+	else if (type.compare("4017") == 0) {
+			std::unique_ptr<Ref4017Comp> comp(new Ref4017Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4030")
-		[&ret] () {
-			std::unique_ptr<Ref4030Comp> comp;
+		}
+	else if (type.compare("4030") == 0) {
+			std::unique_ptr<Ref4030Comp> comp(new Ref4030Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4040")
-		[&ret] () {
-			std::unique_ptr<Ref4040Comp> comp;
+		}
+	else if (type.compare("4040") == 0) {
+			std::unique_ptr<Ref4040Comp> comp(new Ref4040Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4069")
-		[&ret] () {
-			std::unique_ptr<Ref4069Comp> comp;
+		}
+	else if (type.compare("4069") == 0) {
+			std::unique_ptr<Ref4069Comp> comp(new Ref4069Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4071")
-		[&ret] () {
-			std::unique_ptr<Ref4071Comp> comp;
+		}
+	else if (type.compare("4071") == 0) {
+			std::unique_ptr<Ref4071Comp> comp(new Ref4071Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4081")
-		[&ret] () {
-			std::unique_ptr<Ref4081Comp> comp;
+		}
+	else if (type.compare("4081") == 0) {
+			std::unique_ptr<Ref4081Comp> comp(new Ref4081Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4094")
-		[&ret] () {
-			std::unique_ptr<Ref4094Comp> comp;
+		}
+	else if (type.compare("4094") == 0) {
+			std::unique_ptr<Ref4094Comp> comp(new Ref4094Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4514")
-		[&ret] () {
-			std::unique_ptr<Ref4514Comp> comp;
+		}
+	else if (type.compare("4514") == 0) {
+			std::unique_ptr<Ref4514Comp> comp(new Ref4514Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "4801")
-		[&ret] () {
-			std::unique_ptr<Ref4801Comp> comp;
+		}
+	else if (type.compare("4801") == 0) {
+			std::unique_ptr<Ref4801Comp> comp(new Ref4801Comp);
 			ret = std::move(comp);
-		};
-	else if (type == "2716")
-		[&ret] () {
-			std::unique_ptr<Ref2716Comp> comp;
+		}
+	else if (type.compare("2716") == 0) {
+			std::unique_ptr<Ref2716Comp> comp(new Ref2716Comp);
 			ret = std::move(comp);
-		};
+		}
 	return ret;
 }
 
