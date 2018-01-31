@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2018
-// 
+//
 // File description:
-// 
+//
 //
 
 #ifndef READFILE_HPP_
@@ -27,9 +27,9 @@ namespace nts {
 		void readFile(const std::string &line);
 		void checkLine(std::string line);
 		void setROM(std::string type, std::string name);
-		std::list<unique_ptr<IComponent>> &getList();
+		std::list<std::unique_ptr<IComponent>> &getList();
 	private:
-		std::list<unique_ptr<IComponent>> _list;
+		std::list<std::unique_ptr<IComponent>> _list;
 		std::string fileName;
 	};
 };
