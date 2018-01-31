@@ -37,7 +37,9 @@ void nts::DefaultComponent::setLink(std::size_t pin, IComponent &other,
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::createComponent(
-	const std::string &type, const std::string &value)
+	const std::string &type,
+	const std::string &value,
+	const std::string &param)
 {
 	std::unique_ptr<nts::IComponent> ret;
 
@@ -95,8 +97,11 @@ std::unique_ptr<nts::IComponent> nts::DefaultComponent::createComponent(
 		ret = std::move(comp);
 	}
 	else if (type.compare("2716") == 0) {
-		std::unique_ptr<Ref2716Comp> comp(new Ref2716Comp);
+		std::unique_ptr<Ref2716Comp> comp(new Ref2716Comp(value));
 		ret = std::move(comp);
+	}
+	else {
+		// TODO: throw err!
 	}
 	return ret;
 }

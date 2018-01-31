@@ -7,9 +7,10 @@
 
 #include "components/Ref2716Comp.hpp"
 
-nts::Ref2716Comp::Ref2716Comp()
+nts::Ref2716Comp::Ref2716Comp(const std::string &param)
 {
 	_name.assign("2716");
+	(void) param;
 }
 
 nts::Tristate nts::Ref2716Comp::compute(std::size_t pin)
