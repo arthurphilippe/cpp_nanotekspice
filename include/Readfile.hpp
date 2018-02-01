@@ -33,10 +33,15 @@ namespace nts {
 		std::list<std::unique_ptr<IComponent>> &getList();
 	        bool argsHandler(int ac, char **av);
 		void argsChecker(const char *str);
+	        bool argsNameChecker(char **av);
 		IComponent *getComponent(const std::string &name);
+		void rmInputArgs(const std::string &);
 	private:
 		std::list<std::unique_ptr<IComponent>> _list;
 		std::string _fileName;
+		int _ac;
+		int _nbrInput;
+		std::vector<std::string> _vector;
 	};
 };
 

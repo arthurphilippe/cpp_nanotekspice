@@ -10,10 +10,10 @@
 #include "Error.hpp"
 
 nts::Parser::Parser(int ac, char **av)
-	: _fileName(av[1])
+	: _fileName(av[1]), _ac(ac), _nbrInput(0)
 {
-	readFile();
-	argsHandler(ac, av);
+		readFile();
+		argsHandler(ac, av);
 }
 
 std::list<std::unique_ptr<nts::IComponent>> &nts::Parser::getList()
@@ -39,19 +39,12 @@ int parserTester(int ac, char **av)
 	nts::IComponent *tmp;
 	if (ac > 1)
 	{
-		try
-		{
-			nts::Parser kappa(ac, av);
-			list = std::move(kappa.getList());
+		nts::Parser kappa(ac, av);
+/*			list = std::move(kappa.getList());
 			for (auto i = list.begin(); i != list.end(); i++) {
-				tmp = i->get();
-				tmp->dump();
-			}
-		}
-		catch (const FileError &error)
-		{
-			error.what();
-		}
+			tmp = i->get();
+			tmp->dump();
+			}*/
 	}
 	else
 		std::cout << "kappa ta pas mis d'arguments" << std::endl;
