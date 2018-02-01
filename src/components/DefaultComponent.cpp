@@ -28,6 +28,7 @@
 #include "components/Clock.hpp"
 #include "Error.hpp"
 
+
 void nts::DefaultComponent::dump() const
 {
 	auto link = _links.begin();
@@ -46,9 +47,22 @@ void nts::DefaultComponent::dump() const
 void nts::DefaultComponent::setLink(std::size_t pin, IComponent &other,
 					std::size_t otherPin)
 {
-	ComponentLink	newLink = {other, otherPin, pin};
+	ComponentLink newLink = {other, otherPin, pin, UNDEFINED};
 
 	_links.push_back(newLink);
+}
+
+nts::Tristate nts::DefaultComponent::getLinkByPin(size_t pin)
+{
+	auto link = _links.begin();
+
+	while (link != _links.end()) {
+		if (link->_pin == pin)
+			return link->_linked.compute(
+				link->_pairedPin);
+		link++;
+	}
+	return UNDEFINED;
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::createComponent(

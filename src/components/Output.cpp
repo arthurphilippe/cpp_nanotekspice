@@ -16,8 +16,8 @@ nts::Output::Output(const std::string &name)
 
 nts::Tristate nts::Output::compute(std::size_t pin)
 {
-	if (pin == 1) {
-		auto link = _links.begin();
+	auto link = _links.begin();
+	if (pin) {
 		_state = link->_linked.compute(link->_pairedPin);
 		std::cout << _name << "=";
 		if (_state == TRUE)
@@ -27,5 +27,5 @@ nts::Tristate nts::Output::compute(std::size_t pin)
 		else
 			std::cout << "U" << std::endl;
 	}
-	return UNDEFINED;
+	return _state;
 }

@@ -6,8 +6,6 @@
 */
 
 #include <iostream>
-#include "Error.hpp"
-#include "Readfile.hpp"
 #include "DefaultComponent.hpp"
 
 int main(int ac, char **av)
