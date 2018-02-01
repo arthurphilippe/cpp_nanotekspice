@@ -14,12 +14,6 @@
 	#include "IComponent.hpp"
 
 namespace nts {
-	struct ComponentLink {
-		IComponent 	&_linked;
-		size_t		_pairedPin;
-		size_t		_pin;
-	};
-
 	class DefaultComponent : public IComponent {
 	public:
 		virtual ~DefaultComponent() {};
@@ -32,9 +26,10 @@ namespace nts {
 			const std::string &value = "",
 			const std::string &param = "");
 		const std::string &getName() const override;
+		nts::Tristate getLinkByPin(size_t pin) override;
 	protected:
-		std::string			_name;
-		std::vector<ComponentLink>	_links;
+		std::string				_name;
+		std::vector<ComponentLink>		_links;
 	};
 }
 
