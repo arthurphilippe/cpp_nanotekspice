@@ -7,9 +7,11 @@
 
 #include "Readfile.hpp"
 
-nts::Parser::Parser(char *fileName)
-	: _fileName(fileName)
-{}
+nts::Parser::Parser(char **fileName)
+	: _fileName(fileName[1])
+{
+	readFile();
+}
 
 nts::Parser::Parser(std::string fileName)
 	: _fileName(fileName)

@@ -22,7 +22,6 @@ void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork a)
 	std::string first;
 	std::string value;
 
-	std::cout << line << std::endl;
 	if ((int)line.find("\t") < 1 && (int)line.find(" ") < 1)
 		throw FileError("Please, check the configuration file");
 	while (!(line[i] == ' ' || line[i] == '\0' || line[i] == '\t'))
@@ -31,11 +30,7 @@ void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork a)
 	value = line.substr(i, line.length());
 	value.erase(std::remove(value.begin(), value.end(), '\t'), value.end());
 	value.erase(std::remove(value.begin(), value.end(), ' '), value.end());
-	try {
-		(a == CHIPSET) ? setChipset(first, value) : setLink(first, value);
-	} catch (const FileError &error) {
-		throw error;
-	}
+	(a == CHIPSET) ? setChipset(first, value) : setLink(first, value);
 }
 
 /*
@@ -61,10 +56,7 @@ void nts::Parser::setChipset(const std::string &type, std::string &name)
 	if (name.length() < 1)
 		throw FileError("Error in the file, check the chipset list");
 	if ((int)name.find("(") > 1 && (int)name.find(")") > 1) {
-		try { setROM(type, name);
-		} catch (const FileError &error) {
-			throw error;
-		}
+		setROM(type, name);
 		return ;
 	} else if (((int)name.find("(") > 1 && (int)name.find(")") < 1) ||
 		   ((int)name.find("(") < 1 && (int)name.find(")") > 1)){
@@ -100,12 +92,9 @@ void nts::Parser::linkSetter(const std::string &a, const int &a_value,
 		if (tmp->getName() == a) {
 			tmp->setLink(a_value, *tmp_b, b_value);
 			verif = true;
-			std::cout << "kappa" << std::endl;
 			break;
 		}
 	}
-	std::cout << tmp->getName() << std::endl;
-	std::cout << verif << std::endl;
 	if (verif == false)
 		throw FileError("Error in the linkSettere");
 	tmp_b->setLink(b_value, *tmp, a_value);
@@ -167,13 +156,13 @@ void nts::Parser::checkLine(std::string line)
 /*
 **	Read the file from the filename given as argument
 */
-void nts::Parser::readFile(const std::string &file)
+void nts::Parser::readFile()
 {
-	std::ifstream fd(file.c_str());
+	std::ifstream fd(_fileName.c_str());
 	std::string line;
 
 	if (fd.is_open() == false) {
-		throw FileError("Received invalid file in argument");
+		throw FileError("Received invalid _fileName in argument");
 	}
 	while (getline(fd, line)) {
 		line = line.substr(0, line.find("#"));

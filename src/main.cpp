@@ -18,9 +18,7 @@ int main(int ac, char **av)
 	{
 		try
 		{
-			nts::Parser kappa(av[1]);
-
-		        kappa.readFile(av[1]);
+			nts::Parser kappa(av);
 			list = std::move(kappa.getList());
 			for (auto i = list.begin(); i != list.end(); i++) {
 				tmp = i->get();

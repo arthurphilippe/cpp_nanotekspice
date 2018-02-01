@@ -16,7 +16,7 @@
 namespace nts {
 	class Parser {
 	public:
-		Parser(char *fileNAme);
+		Parser(char **fileNAme);
 		Parser(std::string fileName);
 		~Parser() {}
 		enum ParseWork {
@@ -28,7 +28,7 @@ namespace nts {
 		void setLink(const std::string &, const std::string &);
 		void linkSetter(const std::string &, const int &,
 				const std::string &, const int &);
-		void readFile(const std::string &line);
+		void readFile();
 		void checkLine(std::string line);
 		void setROM(const std::string &type, std::string &name);
 		std::list<std::unique_ptr<IComponent>> &getList();
