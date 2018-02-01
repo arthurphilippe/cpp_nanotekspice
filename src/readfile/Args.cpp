@@ -13,7 +13,7 @@
 void nts::Parser::rmInputArgs(const std::string &name)
 {
 	for (auto i = _vector.begin(); i != _vector.end(); i++) {
-		std::cout << name << std::endl;
+//		std::cout << name << std::endl;
 		if (*i == name) {
 			std::cout << "lel" << std::endl;
 		}
