@@ -7,20 +7,30 @@
 
 #include <iostream>
 #include "Readfile.hpp"
+#include "Error.hpp"
 
-nts::Parser::Parser(char **fileName)
-	: _fileName(fileName[1])
+nts::Parser::Parser(int ac, char **av)
+	: _fileName(av[1])
 {
 	readFile();
+	argsHandler(ac, av);
 }
-
-nts::Parser::Parser(std::string fileName)
-	: _fileName(fileName)
-{}
 
 std::list<std::unique_ptr<nts::IComponent>> &nts::Parser::getList()
 {
 	return _list;
+}
+
+nts::IComponent *nts::Parser::getComponent(const std::string &name)
+{
+	nts::IComponent *tmp;
+
+	for (auto i = _list.begin(); i != _list.end(); i++) {
+		tmp = i->get();
+		if (tmp->getName() == name)
+			return tmp;
+	}
+	return nullptr;
 }
 
 int parserTester(int ac, char **av)
@@ -31,7 +41,7 @@ int parserTester(int ac, char **av)
 	{
 		try
 		{
-			nts::Parser kappa(av);
+			nts::Parser kappa(ac, av);
 			list = std::move(kappa.getList());
 			for (auto i = list.begin(); i != list.end(); i++) {
 				tmp = i->get();
