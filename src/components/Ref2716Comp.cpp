@@ -9,7 +9,6 @@
 
 nts::Ref2716Comp::Ref2716Comp(const std::string &name, const std::string &param)
 {
-	_name.assign("2716");
 	_name.assign(name);
 	(void) param;
 }

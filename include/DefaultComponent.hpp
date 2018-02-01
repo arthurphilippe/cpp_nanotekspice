@@ -14,6 +14,12 @@
 	#include "IComponent.hpp"
 
 namespace nts {
+	struct ComponentLink {
+		IComponent 	&_linked;
+		size_t		_pairedPin;
+		size_t		_pin;
+	};
+
 	class DefaultComponent : public IComponent {
 	public:
 		virtual ~DefaultComponent() {};

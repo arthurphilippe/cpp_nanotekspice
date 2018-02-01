@@ -11,8 +11,9 @@ NAME		=	nanotekspice
 
 RM		=	rm -vf
 
-SRCS		=	src/main.cpp				\
-			src/LogicGates.cpp			\
+MAIN		=	src/main.cpp
+
+SRCS		=	src/LogicGates.cpp			\
 			src/components/DefaultComponent.cpp	\
 			src/components/Ref4001Comp.cpp		\
 			src/components/Ref2716Comp.cpp		\
@@ -27,18 +28,27 @@ SRCS		=	src/main.cpp				\
 			src/components/Ref4081Comp.cpp		\
 			src/components/Ref4094Comp.cpp		\
 			src/components/Ref4514Comp.cpp		\
+			src/components/Ref4801Comp.cpp		\
+			src/components/True.cpp			\
+			src/components/False.cpp		\
+			src/components/Clock.cpp		\
+			src/components/Output.cpp\
+			src/components/Input.cpp		\
 			src/components/Ref4801Comp.cpp \
-			src/Error.cpp \
 			src/readfile/openfile.cpp	\
+			src/Error.cpp \
 			src/readfile/Parser.cpp
 
+OBJ_MAIN	=	$(MAIN:.cpp=.o)
 
 OBJS		=	$(SRCS:.cpp=.o)
 
 TEST		=	unit_tests.out
 
 SRCS_TEST	=	tests/test-LogicGates.cpp	\
-			src/LogicGates.cpp
+			tests/test-Clock.cpp
+
+SRCS_TEST	+=	$(OBJS)
 
 OBJS_TEST	=	$(SRCS_TEST:.cpp=.o)
 
@@ -47,26 +57,29 @@ CPPFLAGS	=	-W -Wextra -Wall -Iinclude/
 all: $(NAME)
 
 debug: CPPFLAGS += -ggdb
-debug: clean
+debug: fclean
 debug: $(NAME)
 
 tests: CPPFLAGS += -lcriterion
-tests: fclean
-tests: $(NAME) $(TEST)
+tests: clean
+tests: $(TEST)
 
-$(NAME): $(OBJS)
-	@$(CXX) $(OBJS) -o $(NAME)
+tests_run: tests
+	@./$(TEST)
+
+$(NAME): $(OBJ_MAIN) $(OBJS)
+	@$(CXX) $(OBJ_MAIN) $(OBJS) -o $(NAME)
 	@echo " --> $(NAME) built!"
 
 $(TEST): $(OBJS_TEST)
 	@$(CXX) $(OBJS_TEST) -o $(TEST) -lcriterion
-
+	@echo " --> $(TEST) built!"
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJS) $(OBJS_TEST)
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(TEST)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug tests
