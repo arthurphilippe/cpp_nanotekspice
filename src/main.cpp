@@ -10,37 +10,17 @@
 
 int main()
 {
-	std::unique_ptr<nts::IComponent> kappa = std::move(nts::DefaultComponent::createComponent("4001"));
-	std::cout << "salut" << std::endl;
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4001"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4008"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4011"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4013"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4017"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4030"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4040"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4069"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4071"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4081"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4094"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4514"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("4801"));
-	kappa->dump();
-	kappa = std::move(nts::DefaultComponent::createComponent("2716"));
-	kappa->dump();
-
-	// std::cout << kappa->getName() << std::endl;
+	std::unique_ptr<nts::IComponent> bouton =
+		std::move(nts::DefaultComponent::createComponent("input", "bouton"));
+	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
+	led->setLink(1, *bouton, 1);
+	bouton->setLink(1, *led, 1);
+	bouton->dump();
+	led->dump();
+	led->compute(1);
+	bouton->compute(3);
+	led->compute(1);
+	bouton->compute(2);
+	led->compute(1);
+	// std::cout << bouton->getName() << std::endl;
 }

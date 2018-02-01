@@ -7,12 +7,12 @@
 
 #include "components/Ref4001Comp.hpp"
 
-nts::Ref4001Comp::Ref4001Comp()
+nts::Ref4001Comp::Ref4001Comp(const std::string &name)
 {
-	_name.assign("4001");
+	_name.assign(name);
 }
 
 nts::Tristate nts::Ref4001Comp::compute(std::size_t pin)
 {
-	(void) pin;
+	(void) pin; return TRUE;
 }

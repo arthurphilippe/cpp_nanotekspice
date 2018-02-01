@@ -2,22 +2,24 @@
 ** EPITECH PROJECT, 2017
 ** nanotekspice
 ** File description:
-** comp
+** clock
 */
 
-#ifndef REF4030COMP_HPP_
-	#define REF4030COMP_HPP_
+#ifndef CLOCK_HPP_
+	#define CLOCK_HPP_
 
 	#include "DefaultComponent.hpp"
 
 namespace nts {
-	class Ref4030Comp : public DefaultComponent {
+	class Clock : public DefaultComponent {
 	public:
-		Ref4030Comp(const std::string &name);
+		Clock(const std::string &name);
 		virtual Tristate compute(std::size_t pin = 1) override;
 	protected:
+		static Tristate _state;
 	private:
 	};
 }
 
-#endif /* !REF4030COMP_HPP_ */
+
+#endif /* !CLOCK_HPP_ */

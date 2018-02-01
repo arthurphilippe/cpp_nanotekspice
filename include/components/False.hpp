@@ -2,22 +2,21 @@
 ** EPITECH PROJECT, 2017
 ** nanotekspice
 ** File description:
-** comp
+** true
 */
 
-#ifndef REF4030COMP_HPP_
-	#define REF4030COMP_HPP_
+#ifndef FALSE_HPP_
+	#define FALSE_HPP_
 
 	#include "DefaultComponent.hpp"
 
 namespace nts {
-	class Ref4030Comp : public DefaultComponent {
+	class False : public DefaultComponent {
 	public:
-		Ref4030Comp(const std::string &name);
+		False(const std::string &name);
 		virtual Tristate compute(std::size_t pin = 1) override;
 	protected:
 	private:
 	};
 }
-
-#endif /* !REF4030COMP_HPP_ */
+#endif /* !FALSE_HPP_ */

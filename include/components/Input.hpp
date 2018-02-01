@@ -2,22 +2,23 @@
 ** EPITECH PROJECT, 2017
 ** nanotekspice
 ** File description:
-** comp
+** input
 */
 
-#ifndef REF4030COMP_HPP_
-	#define REF4030COMP_HPP_
+#ifndef INPUT_HPP_
+	#define INPUT_HPP_
 
 	#include "DefaultComponent.hpp"
 
 namespace nts {
-	class Ref4030Comp : public DefaultComponent {
+	class Input : public DefaultComponent {
 	public:
-		Ref4030Comp(const std::string &name);
+		Input(const std::string &name);
 		virtual Tristate compute(std::size_t pin = 1) override;
 	protected:
+		Tristate _state;
 	private:
 	};
 }
 
-#endif /* !REF4030COMP_HPP_ */
+#endif /* !INPUT_HPP_ */
