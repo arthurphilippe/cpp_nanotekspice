@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Readfile.hpp"
+#include "Error.hpp"
 
 nts::Parser::Parser(char **fileName)
 	: _fileName(fileName[1])
