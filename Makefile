@@ -29,11 +29,14 @@ SRCS		=	src/LogicGates.cpp			\
 			src/components/Ref4094Comp.cpp		\
 			src/components/Ref4514Comp.cpp		\
 			src/components/Ref4801Comp.cpp		\
-			src/components/False.cpp		\
 			src/components/True.cpp			\
+			src/components/False.cpp		\
 			src/components/Clock.cpp		\
+			src/components/Output.cpp\
 			src/components/Input.cpp		\
-			src/components/Output.cpp
+			src/readfile/openfile.cpp	\
+			src/Error.cpp \
+			src/readfile/Parser.cpp
 
 OBJ_MAIN	=	$(MAIN:.cpp=.o)
 
