@@ -102,3 +102,48 @@ Test(Basic, 4030) {
 	i1->compute(2);
 	cr_assert((led->compute() == nts::TRUE));
 }
+
+Test(Basic, 4071) {
+	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
+	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));
+	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
+	auto chipset = std::move(nts::DefaultComponent::createComponent("4071", "chipset"));
+
+	led->setLink(1, *chipset, 10);
+	chipset->setLink(8, *i1, 1);
+	chipset->setLink(9, *i2, 1);
+	led->compute();
+	cr_assert((led->compute() == nts::UNDEFINED));
+	i1->compute(2);
+	i2->compute(2);
+	led->compute();
+	cr_assert((led->compute() == nts::TRUE));
+	i1->compute(3);
+	cr_assert((led->compute() == nts::TRUE));
+	i2->compute(3);
+	cr_assert((led->compute() == nts::FALSE));
+	i1->compute(2);
+	cr_assert((led->compute() == nts::TRUE));
+}
+
+Test(Basic, 4081) {
+	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
+	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));
+	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
+	auto chipset = std::move(nts::DefaultComponent::createComponent("4081", "chipset"));
+
+	led->setLink(1, *chipset, 10);
+	chipset->setLink(8, *i1, 1);
+	chipset->setLink(9, *i2, 1);
+	led->compute();
+	cr_assert((led->compute() == nts::UNDEFINED));
+	i1->compute(2);
+	i2->compute(2);
+	led->compute();
+	cr_assert((led->compute() == nts::TRUE));
+	i1->compute(3);
+	cr_assert((led->compute() == nts::FALSE));
+	i2->compute(3);
+	cr_assert((led->compute() == nts::FALSE));
+}
+
