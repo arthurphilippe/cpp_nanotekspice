@@ -16,13 +16,13 @@
 **	Parse the line given as parameter and run the according function
 **	from the second argument (ENUM)
 */
-
 void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork a)
 {
 	int i = 0;
 	std::string first;
 	std::string value;
 
+	std::cout << line << std::endl;
 	if ((int)line.find("\t") < 1 && (int)line.find(" ") < 1)
 		throw FileError("Please, check the configuration file");
 	while (!(line[i] == ' ' || line[i] == '\0' || line[i] == '\t'))
@@ -41,22 +41,22 @@ void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork a)
 /*
 **	Parse the 'Rom' type Chipset
 */
-void nts::Parser::setROM(std::string type, std::string name)
+void nts::Parser::setROM(const std::string &type, std::string &name)
 {
 	std::string value;
 
 	value = name.substr(name.find("("), name.length());
+	name = name.substr(0, name.find("("));
 	value.erase(std::remove(value.begin(), value.end(), '('), value.end());
 	value.erase(std::remove(value.begin(), value.end(), ')'), value.end());
 	_list.push_back(std::move(nts::DefaultComponent::
 				  createComponent(type, name, value)));
-
 }
 
 /*
 **	Parse the Chipset information
 */
-void nts::Parser::setChipset(std::string type, std::string name)
+void nts::Parser::setChipset(const std::string &type, std::string &name)
 {
 	if (name.length() < 1)
 		throw FileError("Error in the file, check the chipset list");
@@ -78,38 +78,40 @@ void nts::Parser::setChipset(std::string type, std::string name)
 /*
 **	Parse and
 */
-
-void nts::Parser::linkSetter(std::string a, int a_value,
-			     std::string b, int b_value)
+void nts::Parser::linkSetter(const std::string &a, const int &a_value,
+			     const std::string &b, const int &b_value)
 {
-//	std::unique_ptr<IComponent> tmp;
+	bool verif = false;
 	IComponent *tmp;
 	IComponent *tmp_b;
 
 	for (auto i = _list.begin(); i != _list.end(); i++) {
 		tmp_b = i->get();
 		if (tmp_b->getName() == b) {
+			verif = true;
 			break;
 		}
 	}
+	if (verif == false)
+		throw FileError("Error in the linkSetter");
+	verif = false;
 	for (auto i = _list.begin(); i != _list.end(); i++) {
 		tmp = i->get();
 		if (tmp->getName() == a) {
 			tmp->setLink(a_value, *tmp_b, b_value);
+			verif = true;
+			std::cout << "kappa" << std::endl;
 			break;
 		}
-/*		tmp = std::move(*i);
-		if (tmp->getName() == a) {
-		tmp->setLink(a_value, *tmp_b, b_value);
-		*i = std::move(tmp);
-		break;
-		}
-		*i = std::move(tmp);*/
 	}
+	std::cout << tmp->getName() << std::endl;
+	std::cout << verif << std::endl;
+	if (verif == false)
+		throw FileError("Error in the linkSettere");
 	tmp_b->setLink(b_value, *tmp, a_value);
 }
 
-void nts::Parser::setLink(std::string a, std::string b)
+void nts::Parser::setLink(const std::string &a, const std::string &b)
 {
 	std::string a_chipset;
 	std::string a_value;
@@ -123,7 +125,9 @@ void nts::Parser::setLink(std::string a, std::string b)
 	i++;
 	a_value = a.substr(i, a.length());
 	if (a_value.length() < 1)
-		throw FileError("Error in the file links : One of the chipset isn't linked to an pin");
+		throw FileError(
+			"Error in the file links : \
+One of the chipset isn't linked to an pin");
 	i = 0;
 	if ((i = b.find(":")) < 1)
 		throw FileError("Error in the file links");
@@ -131,15 +135,16 @@ void nts::Parser::setLink(std::string a, std::string b)
 	i++;
 	b_value = b.substr(i, b.length());
 	if (b_value.length() < 1)
-		throw FileError("Error in the file links : One of the chipset isn't linked to an pin");
-	linkSetter(a_chipset, std::stoi(a_value), b_chipset, std::stoi(b_value));
+		throw FileError("Error in the \
+file links : One of the chipset isn't linked to an pin");
+	linkSetter(a_chipset, std::stoi(a_value),
+		   b_chipset, std::stoi(b_value));
 }
 
 /*
 **	Check line if it's a description (chipset or links)
 **	and run the according function with the good param
 */
-
 void nts::Parser::checkLine(std::string line)
 {
 	static std::string temporary;
@@ -162,7 +167,6 @@ void nts::Parser::checkLine(std::string line)
 /*
 **	Read the file from the filename given as argument
 */
-
 void nts::Parser::readFile(const std::string &file)
 {
 	std::ifstream fd(file.c_str());

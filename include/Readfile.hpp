@@ -24,12 +24,13 @@ namespace nts {
 			LINK
 		};
 		void parseLine(std::string line, ParseWork a);
-		void setChipset(std::string, std::string);
-		void setLink(std::string, std::string);
-		void linkSetter(std::string, int, std::string, int);
+		void setChipset(const std::string &, std::string &);
+		void setLink(const std::string &, const std::string &);
+		void linkSetter(const std::string &, const int &,
+				const std::string &, const int &);
 		void readFile(const std::string &line);
 		void checkLine(std::string line);
-		void setROM(std::string type, std::string name);
+		void setROM(const std::string &type, std::string &name);
 		std::list<std::unique_ptr<IComponent>> &getList();
 	private:
 		std::list<std::unique_ptr<IComponent>> _list;
