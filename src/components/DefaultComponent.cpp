@@ -157,3 +157,8 @@ const std::string &nts::DefaultComponent::getName() const
 {
 	return _name;
 }
+
+const std::string &nts::DefaultComponent::getType() const
+{
+	return _type;
+}

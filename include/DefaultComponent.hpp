@@ -26,9 +26,11 @@ namespace nts {
 			const std::string &value = "",
 			const std::string &param = "");
 		const std::string &getName() const override;
+		const std::string &getType() const override;
 		nts::Tristate getLinkByPin(size_t pin) override;
 	protected:
 		std::string				_name;
+		std::string				_type;
 		std::vector<ComponentLink>		_links;
 	};
 }

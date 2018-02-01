@@ -12,6 +12,7 @@ nts::Output::Output(const std::string &name)
 	: _state(UNDEFINED)
 {
 	_name.assign(name);
+	_type.assign("output");
 }
 
 nts::Tristate nts::Output::compute(std::size_t pin)

@@ -11,6 +11,7 @@ nts::Input::Input(const std::string &name)
 	: _state(UNDEFINED)
 {
 	_name.assign(name);
+	_type.assign("input");
 }
 
 nts::Tristate nts::Input::compute(std::size_t pin)
