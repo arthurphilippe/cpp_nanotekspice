@@ -40,5 +40,5 @@ nts::Tristate nts::Ref4001Comp::compute(std::size_t pin)
 	}
 	auto a = getLinkByPin(pinA);
 	auto b = getLinkByPin(pinB);
-	return LogicGates::ANDGate(a, b);
+	return LogicGates::NORGate(a, b);
 }

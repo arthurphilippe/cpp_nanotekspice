@@ -52,7 +52,9 @@ Test(Basic, 4001) {
 	i1->compute(2);
 	i2->compute(2);
 	led->compute();
-	cr_assert((led->compute() == nts::TRUE));
+	cr_assert((led->compute() == nts::FALSE));
 	i1->compute(3);
 	cr_assert((led->compute() == nts::FALSE));
+	i2->compute(3);
+	cr_assert((led->compute() == nts::TRUE));
 }
