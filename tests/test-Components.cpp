@@ -59,11 +59,11 @@ Test(Basic, 4001) {
 	cr_assert((led->compute() == nts::TRUE));
 }
 
-Test(Basic, 4030) {
+Test(Basic, 4011) {
 	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
 	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));
 	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
-	auto chipset = std::move(nts::DefaultComponent::createComponent("4030", "chipset"));
+	auto chipset = std::move(nts::DefaultComponent::createComponent("4011", "chipset"));
 
 	led->setLink(1, *chipset, 10);
 	chipset->setLink(8, *i1, 1);
