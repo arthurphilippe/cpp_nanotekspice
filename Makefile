@@ -60,8 +60,6 @@ debug: CPPFLAGS += -ggdb
 debug: fclean
 debug: $(NAME)
 
-# tests: CPPFLAGS += -lcriterion
-tests: clean
 tests: $(TEST)
 
 tests_run: tests
