@@ -17,7 +17,8 @@ nts::Output::Output(const std::string &name)
 nts::Tristate nts::Output::compute(std::size_t pin)
 {
 	if (pin == 1) {
-		_state = _links[0]._linked.compute(_links[0]._pairedPin);
+		auto link = _links.begin();
+		_state = link->_linked.compute(link->_pairedPin);
 		std::cout << _name << "=";
 		if (_state == TRUE)
 			std::cout << "1" << std::endl;

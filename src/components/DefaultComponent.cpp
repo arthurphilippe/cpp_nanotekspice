@@ -29,7 +29,17 @@
 
 void nts::DefaultComponent::dump() const
 {
-	std::cout << "dump is not yet implemented" << std::endl;
+	auto link = _links.begin();
+
+	std::cout << "links for " << _name << ":" << std::endl;
+	while (link != _links.end()) {
+		std::cout << " pin: " << link->_pin;
+		std::cout << " --> " << link->_linked.getName();
+		std::cout << ":" << link->_pairedPin << std::endl;
+		link++;
+	}
+	std::cout << "end of links for " << _name << std::endl;
+	std::cout << "---------------------" << std::endl;
 }
 
 void nts::DefaultComponent::setLink(std::size_t pin, IComponent &other,

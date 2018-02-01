@@ -15,10 +15,9 @@ nts::Input::Input(const std::string &name)
 
 nts::Tristate nts::Input::compute(std::size_t pin)
 {
+	if (pin == 2)
+		_state = TRUE;
+	else if (pin == 3)
+		_state = FALSE;
 	return (pin == 1) ? _state : UNDEFINED;
-}
-
-void nts::Input::set(Tristate state)
-{
-	_state = state;
 }

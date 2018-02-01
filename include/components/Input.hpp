@@ -15,7 +15,6 @@ namespace nts {
 	public:
 		Input(const std::string &name);
 		virtual Tristate compute(std::size_t pin = 1) override;
-		virtual void set(Tristate state);
 	protected:
 		Tristate _state;
 	private:
