@@ -42,7 +42,8 @@ OBJS		=	$(SRCS:.cpp=.o)
 TEST		=	unit_tests.out
 
 SRCS_TEST	=	tests/test-LogicGates.cpp	\
-			tests/test-Clock.cpp
+			tests/test-Clock.cpp		\
+			tests/test-Components.cpp
 
 SRCS_TEST	+=	$(OBJS)
 
@@ -56,7 +57,7 @@ debug: CPPFLAGS += -ggdb
 debug: fclean
 debug: $(NAME)
 
-tests: CPPFLAGS += -lcriterion
+# tests: CPPFLAGS += -lcriterion
 tests: clean
 tests: $(TEST)
 
