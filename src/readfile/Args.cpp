@@ -10,14 +10,17 @@
 #include "Readfile.hpp"
 #include "Error.hpp"
 
-void nts::Parser::rmInputArgs(const std::string &name)
+bool nts::Parser::rmInputArgs(const std::string &name)
 {
 	for (auto i = _vector.begin(); i != _vector.end(); i++) {
-//		std::cout << name << std::endl;
 		if (*i == name) {
-			std::cout << "lel" << std::endl;
+			if (getComponent(name)->getType().compare("input") == 0) {
+				--_nbrInput;
+				return true;
+			}
 		}
 	}
+	throw FileError("Error : False Argument");
 }
 
 bool nts::Parser::argsNameChecker(char **av)
@@ -78,5 +81,8 @@ bool nts::Parser::argsHandler(int ac, char **av)
 			argsChecker(av[i]);
 			++i;
 		}
+	for (auto i = _vector.begin(); i != _vector.end(); i++) {
+		rmInputArgs(*i);
+	}
 	return true;
 }
