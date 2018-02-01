@@ -33,7 +33,7 @@ namespace nts {
 		std::list<std::unique_ptr<IComponent>> &getList();
 	private:
 		std::list<std::unique_ptr<IComponent>> _list;
-		std::string fileName;
+		std::string _fileName;
 	};
 };
 

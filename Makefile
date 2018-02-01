@@ -5,7 +5,7 @@
 ## tests
 ##
 
-CXX		=	g++ -std=c++14
+CXX		=	g++ -std=c++14 -ggdb
 
 NAME		=	nanotekspice
 
@@ -34,7 +34,6 @@ SRCS		=	src/LogicGates.cpp			\
 			src/components/Clock.cpp		\
 			src/components/Output.cpp\
 			src/components/Input.cpp		\
-			src/components/Ref4801Comp.cpp \
 			src/readfile/openfile.cpp	\
 			src/Error.cpp \
 			src/readfile/Parser.cpp

@@ -41,7 +41,6 @@ void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork a)
 /*
 **	Parse the 'Rom' type Chipset
 */
-
 void nts::Parser::setROM(std::string type, std::string name)
 {
 	std::string value;
@@ -49,12 +48,14 @@ void nts::Parser::setROM(std::string type, std::string name)
 	value = name.substr(name.find("("), name.length());
 	value.erase(std::remove(value.begin(), value.end(), '('), value.end());
 	value.erase(std::remove(value.begin(), value.end(), ')'), value.end());
+	_list.push_back(std::move(nts::DefaultComponent::
+				  createComponent(type, name, value)));
+
 }
 
 /*
 **	Parse the Chipset information
 */
-
 void nts::Parser::setChipset(std::string type, std::string name)
 {
 	if (name.length() < 1)
@@ -69,7 +70,8 @@ void nts::Parser::setChipset(std::string type, std::string name)
 		   ((int)name.find("(") < 1 && (int)name.find(")") > 1)){
 		throw FileError("Error in the file, check the chipset list");
 	} else {
-		_list.push_back(nts::DefaultComponent::createComponent(type, name));
+		_list.push_back(std::move(nts::DefaultComponent::
+					  createComponent(type, name)));
 	}
 }
 
@@ -80,18 +82,21 @@ void nts::Parser::setChipset(std::string type, std::string name)
 void nts::Parser::linkSetter(std::string a, int a_value,
 			     std::string b, int b_value)
 {
+	std::unique_ptr<IComponent> tmp;
+	IComponent *tmp_b;
 
-	for (std::list<std::unique_ptr<IComponent>>::const_iterator i = _list.begin();
-	     i != _list.end(); i++) {
-		if (i->getName() == b) {
-			IComponent tmp_b = i;
-			break ;
+	for (auto i = _list.begin(); i != _list.end(); i++) {
+		tmp_b = i->get();
+		if (tmp_b->getName() == b) {
+			break;
 		}
 	}
-	for (std::list<std::unique_ptr<IComponent>>::const_iterator i = _list.begin();
-	     i != _list.end(); i++) {
-		if (i->getName() == a)
-			i->setLink(a_value, tmp_b, b_value);
+	for (auto i = _list.begin(); i != _list.end(); i++) {
+		tmp = std::move(*i);
+		if (tmp->getName() == a) {
+			tmp->setLink(a_value, *tmp_b, b_value);
+		}
+		*i = std::move(tmp);
 	}
 }
 
@@ -118,6 +123,7 @@ void nts::Parser::setLink(std::string a, std::string b)
 	b_value = b.substr(i, b.length());
 	if (b_value.length() < 1)
 		throw FileError("Error in the file links : One of the chipset isn't linked to an pin");
+	linkSetter(a_chipset, std::stoi(a_value), b_chipset, std::stoi(b_value));
 }
 
 /*

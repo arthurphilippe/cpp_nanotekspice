@@ -8,12 +8,12 @@
 #include "Readfile.hpp"
 
 nts::Parser::Parser(char *fileName)
-{
-}
+	: _fileName(fileName)
+{}
 
 nts::Parser::Parser(std::string fileName)
-{
-}
+	: _fileName(fileName)
+{}
 
 std::list<std::unique_ptr<nts::IComponent>> &nts::Parser::getList()
 {
