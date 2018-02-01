@@ -12,25 +12,5 @@
 
 int main(int ac, char **av)
 {
-	std::list<std::unique_ptr<nts::IComponent>> list;
-	nts::IComponent *tmp;
-	if (ac > 1)
-	{
-		try
-		{
-			nts::Parser kappa(av);
-			list = std::move(kappa.getList());
-			for (auto i = list.begin(); i != list.end(); i++) {
-				tmp = i->get();
-				tmp->dump();
-			}
-		}
-		catch (const FileError &error)
-		{
-			error.what();
-		}
-	}
-	else
-		std::cout << "kappa ta pas mis d'arguments" << std::endl;
-
+	return 0;
 }
