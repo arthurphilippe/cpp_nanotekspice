@@ -34,6 +34,7 @@ namespace nts {
 					std::size_t otherPin) = 0;
 		virtual void dump() const = 0;
 		virtual const std::string &getName() const = 0;
+		virtual const std::string &getType() const = 0;
 		virtual Tristate getLinkByPin(size_t pin) = 0;
 	protected:
 	private:
