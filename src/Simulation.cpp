@@ -5,6 +5,7 @@
 ** simulation
 */
 
+#include <algorithm>
 #include <iostream>
 #include "DefaultComponent.hpp"
 #include "Simulation.hpp"
@@ -39,9 +40,39 @@ void nts::Simulation::run()
 	}
 }
 
-void nts::Simulation::display() const
+bool nts::Simulation::sortFunctor(const std::string &a, const std::string &b)
 {
-	std::cout << _output.str();
+	std::string name_a;
+	std::string name_b;
+	int ret;
+
+	name_a = a.substr(0, a.find("="));
+	name_b = b.substr(0, b.find("="));
+        ret = name_a.compare(name_b.c_str());
+	return (ret < 0);
+}
+
+void nts::Simulation::printSortedOutput()
+{
+	std::vector<std::string> _vector;
+	std::string tmp;
+	std::stringstream ss;
+	std::string tmp2;
+
+	tmp2 = _output.str();
+	ss << tmp2;
+	while (getline(ss, tmp)) {
+		_vector.push_back(tmp);
+	}
+        sort(_vector.begin(), _vector.end(), sortFunctor);
+	for (auto i = _vector.begin(); i != _vector.end(); i++) {
+		std::cout << *i << std::endl;
+	}
+}
+
+void nts::Simulation::display()
+{
+        printSortedOutput();
 }
 
 void nts::Simulation::loop()

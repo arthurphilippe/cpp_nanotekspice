@@ -19,13 +19,15 @@ namespace nts {
 		~Simulation();
 		void run();
 		void run(std::list<std::unique_ptr<IComponent>> &);
-		void display() const;
+		void display();
 		void loop();
+		void printSortedOutput();
 		const std::stringstream &getBuffer() const
 		{
 			return _output;
 		}
 	private:
+		static bool sortFunctor(const std::string &a, const std::string &b);
 		std::list<std::unique_ptr<IComponent>> *_components;
 		std::stringstream	_output;
 		void computeOutput(IComponent *comp);
