@@ -1,3 +1,3 @@
 language: C++
 dist: Artful
-script: make
+script: make CXX=clang++
