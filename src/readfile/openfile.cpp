@@ -44,8 +44,9 @@ void nts::Parser::setROM(const std::string &type, std::string &name)
 	name = name.substr(0, name.find("("));
 	value.erase(std::remove(value.begin(), value.end(), '('), value.end());
 	value.erase(std::remove(value.begin(), value.end(), ')'), value.end());
-	_list.push_back(std::move(nts::DefaultComponent::
-				  createComponent(type, name, value)));
+	auto tmpComp = nts::DefaultComponent::
+				 createComponent(type, name, value);
+	_list.push_back(std::move(tmpComp));
 }
 
 /*
@@ -69,8 +70,9 @@ ROM can have a value");
 		   ((int)name.find("(") < 1 && (int)name.find(")") > 1)){
 		throw FileError("Error in the file, check the chipset list");
 	} else {
-		_list.push_back(std::move(nts::DefaultComponent::
-					  createComponent(type, name)));
+		auto tmpComp = nts::DefaultComponent::createComponent(
+				type, name);
+		_list.push_back(std::move(tmpComp));
 		if (type.compare("input") == 0) {
 			++_nbrInput;
 		}
@@ -131,7 +133,6 @@ void nts::Parser::setLink(const std::string &a, const std::string &b)
 		throw FileError(
 			"Error in the file links : \
 One of the chipset isn't linked to an pin");
-	i = 0;
 	if ((i = b.find(":")) < 1)
 		throw FileError("Error in the file links");
 	b_chipset = b.substr(0, i);
@@ -185,5 +186,5 @@ void nts::Parser::readFile()
 	}
 	if (_ac - 2 != _nbrInput)
 		throw FileError("Error : Excepted for ALL of the inputs in the \
-arguments"); 
+arguments");
 }
