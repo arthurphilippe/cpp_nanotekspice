@@ -1,7 +1,7 @@
 language: C++
 dist: Artful
 compiler: clang
-script: make CXX=clang++
+script: scan-build make CXX=clang++
 notifications:
   slack: pingouin-compatriotes:tiug0tdPBzxQtUlljEWjpivt
   email:
