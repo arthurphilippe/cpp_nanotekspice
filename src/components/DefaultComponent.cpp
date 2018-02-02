@@ -26,6 +26,7 @@
 #include "components/False.hpp"
 #include "components/True.hpp"
 #include "components/Clock.hpp"
+#include "Error.hpp"
 
 
 void nts::DefaultComponent::dump() const
@@ -148,7 +149,8 @@ std::unique_ptr<nts::IComponent> nts::DefaultComponent::createComponent(
 		ret = std::move(comp);
 	}
 	else {
-		// TODO: throw err!
+		throw FileError("Error : Specified type in the configuration \
+file does not exist.");
 	}
 	return ret;
 }

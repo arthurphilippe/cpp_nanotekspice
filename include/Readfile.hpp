@@ -16,8 +16,7 @@
 namespace nts {
 	class Parser {
 	public:
-		Parser(char **fileNAme);
-		Parser(std::string fileName);
+		Parser(int ac, char **av);
 		~Parser() {}
 		enum ParseWork {
 			CHIPSET,
@@ -32,10 +31,20 @@ namespace nts {
 		void checkLine(std::string line);
 		void setROM(const std::string &type, std::string &name);
 		std::list<std::unique_ptr<IComponent>> &getList();
+	        bool argsHandler(int ac, char **av);
+		void argsChecker(const char *str);
+	        bool argsNameChecker(char **av);
+		IComponent *getComponent(const std::string &name);
+	        bool rmInputArgs(const std::string &);
 	private:
 		std::list<std::unique_ptr<IComponent>> _list;
 		std::string _fileName;
+		int _ac;
+		int _nbrInput;
+		std::vector<std::string> _vector;
 	};
 };
+
+int parserTester(int ac, char **av);
 
 #endif /* READFILE_HPP_ */
