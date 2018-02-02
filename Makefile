@@ -38,6 +38,7 @@ SRCS		=	src/LogicGates.cpp			\
 			src/Error.cpp				\
 			src/readfile/Parser.cpp			\
 			src/Simulation.cpp			\
+      src/readfile/Args.cpp
 
 OBJ_MAIN	=	$(MAIN:.cpp=.o)
 
@@ -46,15 +47,17 @@ OBJS		=	$(SRCS:.cpp=.o)
 TEST		=	unit_tests.out
 
 SRCS_TEST	=	tests/test-LogicGates.cpp	\
+			tests/test-Components.cpp \
 			tests/test-Clock.cpp		\
 			tests/test-Components.cpp	\
-			tests/test-Simulation.cpp
+			tests/test-Simulation.cpp \
+			tests/test-Args.cpp
 
 SRCS_TEST	+=	$(OBJS)
 
 OBJS_TEST	=	$(SRCS_TEST:.cpp=.o)
 
-CPPFLAGS	=	-W -Wextra -Wall -Iinclude/
+CPPFLAGS	=	-W -Wextra -Wall -Iinclude/ -std=c++17
 
 all: $(NAME)
 

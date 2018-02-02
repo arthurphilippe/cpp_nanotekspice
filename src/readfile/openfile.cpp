@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2018
-//
+// a
 // File description:
-//
+// a
 //
 
 #include <algorithm>
@@ -53,10 +53,17 @@ void nts::Parser::setROM(const std::string &type, std::string &name)
 */
 void nts::Parser::setChipset(const std::string &type, std::string &name)
 {
+	if (getComponent(name) != nullptr)
+		throw FileError("Error in the file, there are multiple re\
+definitions of an input");
 	if (name.length() < 1)
 		throw FileError("Error in the file, check the chipset list");
 	if ((int)name.find("(") > 1 && (int)name.find(")") > 1) {
-		setROM(type, name);
+		if (type.compare("2716") == 0)
+			setROM(type, name);
+		else
+			throw FileError("Error in the file, only the \
+ROM can have a value");
 		return ;
 	} else if (((int)name.find("(") > 1 && (int)name.find(")") < 1) ||
 		   ((int)name.find("(") < 1 && (int)name.find(")") > 1)){
@@ -64,6 +71,9 @@ void nts::Parser::setChipset(const std::string &type, std::string &name)
 	} else {
 		_list.push_back(std::move(nts::DefaultComponent::
 					  createComponent(type, name)));
+		if (type.compare("input") == 0) {
+			++_nbrInput;
+		}
 	}
 }
 
@@ -79,9 +89,11 @@ void nts::Parser::linkSetter(const std::string &a, const int &a_value,
 
 	for (auto i = _list.begin(); i != _list.end(); i++) {
 		tmp_b = i->get();
+		if (tmp_b == nullptr)
+			break ;
 		if (tmp_b->getName() == b) {
 			verif = true;
-			break;
+			break ;
 		}
 	}
 	if (verif == false)
@@ -89,10 +101,12 @@ void nts::Parser::linkSetter(const std::string &a, const int &a_value,
 	verif = false;
 	for (auto i = _list.begin(); i != _list.end(); i++) {
 		tmp = i->get();
+		if (tmp == nullptr)
+			break ;
 		if (tmp->getName() == a) {
 			tmp->setLink(a_value, *tmp_b, b_value);
 			verif = true;
-			break;
+			break ;
 		}
 	}
 	if (verif == false)
@@ -162,11 +176,14 @@ void nts::Parser::readFile()
 	std::string line;
 
 	if (fd.is_open() == false) {
-		throw FileError("Received invalid _fileName in argument");
+		throw FileError("Received invalid file name in argument");
 	}
 	while (getline(fd, line)) {
 		line = line.substr(0, line.find("#"));
 		if (line.size() != 0)
 			checkLine(line);
 	}
+	if (_ac - 2 != _nbrInput)
+		throw FileError("Error : Excepted for ALL of the inputs in the \
+arguments"); 
 }
