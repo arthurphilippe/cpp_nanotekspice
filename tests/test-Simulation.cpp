@@ -6,6 +6,7 @@
 */
 
 #include <iostream>
+#include <list>
 #include <criterion/criterion.h>
 #include <criterion/assert.h>
 #include "../include/IComponent.hpp"
@@ -37,8 +38,10 @@ Test(Basic, Sim) {
 	sim.run();
 	// std::cout << sim.getBuffer().str();
 	// std::cout << std::flush;
-	list[0]->compute(2);
-	list[1]->compute(2);
+	auto it = list.begin();
+	it->get()->compute(2);
+	++it;
+	it->get()->compute(2);
 	cr_assert((sim.getBuffer().str().compare("LED=U\n") == 0));
 	sim.run();
 	// std::cout << sim.getBuffer().str();
@@ -63,8 +66,10 @@ Test(First, Sim) {
 	list.push_back(std::move(i2));
 	list.push_back(std::move(led));
 	list.push_back(std::move(chipset));
-	list[0]->compute(2);
-	list[1]->compute(2);
+	auto it = list.begin();
+	it->get()->compute(2);
+	++it;
+	it->get()->compute(2);
 
 	nts::Simulation sim(list);
 	cr_assert((sim.getBuffer().str().compare("LED=1\n") == 0));
