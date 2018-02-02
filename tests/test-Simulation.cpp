@@ -16,7 +16,7 @@
 using criterion::logging::info;
 
 Test(Basic, Sim) {
-	std::vector<std::unique_ptr<nts::IComponent>> list;
+	std::list<std::unique_ptr<nts::IComponent>> list;
 
 	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
 	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));
@@ -47,7 +47,7 @@ Test(Basic, Sim) {
 }
 
 Test(First, Sim) {
-	std::vector<std::unique_ptr<nts::IComponent>> list;
+	std::list<std::unique_ptr<nts::IComponent>> list;
 
 	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
 	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));

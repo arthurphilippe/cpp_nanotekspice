@@ -37,7 +37,6 @@ namespace nts {
 	        bool argsNameChecker(char **av);
 		IComponent *getComponent(const std::string &name);
 	        bool rmInputArgs(const std::string &);
-		void sortChipsetList();
 		std::list<std::unique_ptr<IComponent>> _list;
 		std::string _fileName;
 		int _ac;

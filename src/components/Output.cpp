@@ -19,7 +19,7 @@ nts::Tristate nts::Output::compute(std::size_t pin)
 {
 	auto link = _links.begin();
 
-	if (pin) {
+	if (pin && link != _links.end()) {
 		_state = link->_linked.compute(link->_pairedPin);
 	}
 	return _state;

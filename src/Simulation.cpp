@@ -9,7 +9,7 @@
 #include "DefaultComponent.hpp"
 #include "Simulation.hpp"
 
-nts::Simulation::Simulation(std::vector<std::unique_ptr<IComponent>> &comps)
+nts::Simulation::Simulation(std::list<std::unique_ptr<nts::IComponent>> &comps)
 	: _components(&comps), _output()
 {
 	run();
@@ -19,7 +19,7 @@ nts::Simulation::Simulation(std::vector<std::unique_ptr<IComponent>> &comps)
 nts::Simulation::~Simulation()
 {}
 
-void nts::Simulation::run(std::vector<std::unique_ptr<IComponent>> &comps)
+void nts::Simulation::run(std::list<std::unique_ptr<nts::IComponent>> &comps)
 {
 	_components = &comps;
 	run();
