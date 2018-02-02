@@ -9,7 +9,24 @@
 #include "Error.hpp"
 #include "Readfile.hpp"
 #include "DefaultComponent.hpp"
+#include "Runtime.hpp"
 
+int main(int ac, char **av)
+{
+	(void) ac;
+	(void) av;
+
+	nts::Runtime test;
+
+	try {
+		test.run();
+	} catch (const RuntimeError &error) {
+		error.what();
+		return 84;
+	}
+}
+
+/*
 int main(int ac, char **av)
 {
 	try {
@@ -19,3 +36,4 @@ int main(int ac, char **av)
 	}
 	return 0;
 }
+*/
