@@ -8,6 +8,7 @@
 #ifndef RUNTIME_HPP_
 	# define RUNTIME_HPP_
 
+#include <map>
 #include "Readfile.hpp"
 #include "Simulation.hpp"
 
@@ -18,6 +19,8 @@ namespace nts {
 		~Runtime() {}
 		bool doCommand(std::string &command);
 		bool run();
+		void exitProgram();
+		std::map<std::string, void (nts::Runtime::*)(void)> _map;
 	private:
 		nts::Parser _args;
 		nts::Simulation _sim;
