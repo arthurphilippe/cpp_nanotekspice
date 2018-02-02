@@ -9,6 +9,8 @@
 #include "Readfile.hpp"
 #include "Error.hpp"
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wwrite-strings"
 Test(RealFile, Arguments) {
 	bool thrown = false;
         char *str[4] = {"kappa", "counter.nts",
@@ -41,3 +43,5 @@ Test(FalseFile, Arguments) {
 	}
 	cr_assert(thrown);
 }
+
+#pragma GCC diagnostic pop

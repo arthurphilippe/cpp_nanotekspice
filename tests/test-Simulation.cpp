@@ -6,6 +6,7 @@
 */
 
 #include <iostream>
+#include <list>
 #include <criterion/criterion.h>
 #include <criterion/assert.h>
 #include "../include/IComponent.hpp"
@@ -16,7 +17,7 @@
 using criterion::logging::info;
 
 Test(Basic, Sim) {
-	std::vector<std::unique_ptr<nts::IComponent>> list;
+	std::list<std::unique_ptr<nts::IComponent>> list;
 
 	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
 	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));
@@ -37,8 +38,10 @@ Test(Basic, Sim) {
 	sim.run();
 	// std::cout << sim.getBuffer().str();
 	// std::cout << std::flush;
-	list[0]->compute(2);
-	list[1]->compute(2);
+	auto it = list.begin();
+	it->get()->compute(2);
+	++it;
+	it->get()->compute(2);
 	cr_assert((sim.getBuffer().str().compare("LED=U\n") == 0));
 	sim.run();
 	// std::cout << sim.getBuffer().str();
@@ -47,7 +50,7 @@ Test(Basic, Sim) {
 }
 
 Test(First, Sim) {
-	std::vector<std::unique_ptr<nts::IComponent>> list;
+	std::list<std::unique_ptr<nts::IComponent>> list;
 
 	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
 	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));
@@ -63,8 +66,10 @@ Test(First, Sim) {
 	list.push_back(std::move(i2));
 	list.push_back(std::move(led));
 	list.push_back(std::move(chipset));
-	list[0]->compute(2);
-	list[1]->compute(2);
+	auto it = list.begin();
+	it->get()->compute(2);
+	++it;
+	it->get()->compute(2);
 
 	nts::Simulation sim(list);
 	cr_assert((sim.getBuffer().str().compare("LED=1\n") == 0));

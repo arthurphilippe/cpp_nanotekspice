@@ -22,21 +22,21 @@ namespace nts {
 			CHIPSET,
 			LINK
 		};
-		void parseLine(std::string line, ParseWork a);
-		void setChipset(const std::string &, std::string &);
-		void setLink(const std::string &, const std::string &);
+		std::list<std::unique_ptr<IComponent>> &getList();
+	private:
+				void checkLine(std::string line);
+		void setROM(const std::string &type, std::string &name);
 		void linkSetter(const std::string &, const int &,
 				const std::string &, const int &);
 		void readFile();
-		void checkLine(std::string line);
-		void setROM(const std::string &type, std::string &name);
-		std::list<std::unique_ptr<IComponent>> &getList();
-	        bool argsHandler(int ac, char **av);
+		void parseLine(std::string line, ParseWork a);
+		void setChipset(const std::string &, std::string &);
+		void setLink(const std::string &, const std::string &);
+		bool argsHandler(int ac, char **av);
 		void argsChecker(const char *str);
 	        bool argsNameChecker(char **av);
 		IComponent *getComponent(const std::string &name);
 	        bool rmInputArgs(const std::string &);
-	private:
 		std::list<std::unique_ptr<IComponent>> _list;
 		std::string _fileName;
 		int _ac;
