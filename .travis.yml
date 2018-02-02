@@ -1,4 +1,4 @@
 language: C++
 dist: Artful
 compiler: clang
-script: make
+script: make CXX=clang++
