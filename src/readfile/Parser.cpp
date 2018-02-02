@@ -37,17 +37,19 @@ nts::IComponent *nts::Parser::getComponent(const std::string &name)
 int parserTester(int ac, char **av)
 {
 	std::list<std::unique_ptr<nts::IComponent>> list;
-	nts::IComponent *tmp;
+
 	if (ac > 1)
 	{
 		nts::Parser kappa(ac, av);
 
 		nts::Simulation(kappa.getList());
-/*		list = std::move(kappa.getList());
-		for (auto i = list.begin(); i != list.end(); i++) {
-			tmp = i->get();
-			tmp->dump();
-		}
+/*
+  nts::IComponent *tmp;
+  list = std::move(kappa.getList());
+  for (auto i = list.begin(); i != list.end(); i++) {
+  tmp = i->get();
+  tmp->dump();
+  }
 */
 	}
 	else
