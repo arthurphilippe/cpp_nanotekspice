@@ -2,3 +2,9 @@ language: C++
 dist: Artful
 compiler: clang
 script: make CXX=clang++
+notifications:
+  slack: pingouin-compatriotes:tiug0tdPBzxQtUlljEWjpivt
+  email:
+    recipients:
+      - arthur.philippe@epitech.eu
+      - anthony.tram@epitech.eu
