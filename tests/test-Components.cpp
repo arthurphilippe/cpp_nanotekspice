@@ -18,9 +18,6 @@ Test(Basic, InputOutput) {
 	led->setLink(1, *bouton, 1);
 	bouton->setLink(1, *led, 1);
 
-	bouton->dump();
-	led->dump();
-
 	led->compute(1);
 	bouton->compute(3);
 	cr_assert(led->compute() == bouton->compute());
@@ -136,8 +133,8 @@ Test(Basic, 4081) {
 	chipset->setLink(8, *i1, 1);
 	chipset->setLink(9, *i2, 1);
 	led->compute();
-	cr_assert((led->compute() == nts::UNDEFINED));
 	i1->compute(2);
+	cr_assert((led->compute() == nts::UNDEFINED));
 	i2->compute(2);
 	led->compute();
 	cr_assert((led->compute() == nts::TRUE));
