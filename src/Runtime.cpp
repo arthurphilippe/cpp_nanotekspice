@@ -27,6 +27,15 @@ nts::Runtime::~Runtime()
 {
 }
 
+void nts::Runtime::callInputValueChanger(std::string &line)
+{
+	try {
+		_args.argsChecker(line.c_str());
+	} catch (const FileError &error) {
+		error.what();
+	}
+}
+
 void nts::Runtime::callDisplay()
 {
 	_sim.display();
@@ -56,6 +65,8 @@ void nts::Runtime::findCommand(const std::string &str)
 bool nts::Runtime::doCommand(std::string &command)
 {
 	if (command.length() > 0) {
+		if (command.find("=") > 0)
+			callInputValueChanger(command);
 	        findCommand(command);
 	}
 	return true;
