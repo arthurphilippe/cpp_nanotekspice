@@ -46,6 +46,7 @@ void nts::Runtime::callInputValueChanger(std::string &line)
 	} catch (const FileError &error) {
 		error.what();
 	}
+	_state = COMMAND_LAUNCHED;
 }
 
 void nts::Runtime::callDisplay()
