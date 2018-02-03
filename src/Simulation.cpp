@@ -48,7 +48,7 @@ bool nts::Simulation::sortFunctor(const std::string &a, const std::string &b)
 
 	name_a = a.substr(0, a.find("="));
 	name_b = b.substr(0, b.find("="));
-        ret = name_a.compare(name_b.c_str());
+	ret = name_a.compare(name_b.c_str());
 	return (ret < 0);
 }
 
@@ -64,7 +64,7 @@ void nts::Simulation::printSortedOutput()
 	while (getline(ss, tmp)) {
 		_vector.push_back(tmp);
 	}
-        sort(_vector.begin(), _vector.end(), sortFunctor);
+	sort(_vector.begin(), _vector.end(), sortFunctor);
 	for (auto i = _vector.begin(); i != _vector.end(); i++) {
 		std::cout << *i << std::endl;
 	}
@@ -72,7 +72,7 @@ void nts::Simulation::printSortedOutput()
 
 void nts::Simulation::display()
 {
-        printSortedOutput();
+	printSortedOutput();
 }
 
 void nts::Simulation::loop()

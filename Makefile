@@ -14,7 +14,7 @@ RM		=	rm -vf
 MAIN		=	src/main.cpp
 
 SRCS		=	src/LogicGates.cpp			\
-			src/components/DefaultComponent.cpp	\
+			src/DefaultComponent.cpp		\
 			src/components/Ref4001Comp.cpp		\
 			src/components/Ref2716Comp.cpp		\
 			src/components/Ref4008Comp.cpp		\
@@ -38,7 +38,7 @@ SRCS		=	src/LogicGates.cpp			\
 			src/Error.cpp				\
 			src/readfile/Parser.cpp			\
 			src/Simulation.cpp			\
-      src/readfile/Args.cpp
+			src/readfile/Args.cpp
 
 OBJ_MAIN	=	$(MAIN:.cpp=.o)
 
@@ -49,7 +49,7 @@ TEST		=	unit_tests.out
 SRCS_TEST	=	tests/test-LogicGates.cpp	\
 			tests/test-Clock.cpp		\
 			tests/test-Components.cpp	\
-			tests/test-Simulation.cpp \
+			tests/test-Simulation.cpp	\
 			tests/test-Args.cpp
 
 SRCS_TEST	+=	$(OBJS)
