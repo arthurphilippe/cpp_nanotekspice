@@ -12,27 +12,33 @@
 #include "Simulation.hpp"
 
 nts::Runtime::Runtime(int ac, char **av)
-try : _args(ac, av), _sim(_args.getList())
+try : _state(RUN), _args(ac, av), _sim(_args.getList())
       {
-	      _map["exit"] = &Runtime::exitProgram;
+	      _map["exite"] = &Runtime::exitProgram;
       }
 catch (const FileError &error)
 {
 	throw RuntimeError(error.getError());
 }
 
+nts::Runtime::~Runtime()
+{
+}
+
 void nts::Runtime::exitProgram()
 {
-	exit(0);
+	throw RuntimeError("exit");
 }
 
 void nts::Runtime::findCommand(const std::string &str)
-{
-	RunFuncPtr test = _map[str];
-	if (test != NULL)
-		return (this->*test)();
-	else
-		return ;
+{	
+	RunFuncPtr test;
+	if (str.length() > 0) {
+	        test = _map[str];
+		if (test != NULL)
+			return (this->*test)();
+	}
+	return ;
 }
 
 bool nts::Runtime::doCommand(std::string &command)
@@ -47,10 +53,12 @@ bool nts::Runtime::doCommand(std::string &command)
 bool nts::Runtime::run()
 {
 	std::string command;
-	while (true)
+	while (_state == RUN)
 	{
 		std::cout << ">";
 		getline(std::cin, command);
+		if (command.compare("exit") == 0)
+			return true;
 		if (std::cin.eof()) {
 			_map.clear();
 			throw RuntimeError("E O F : End Of File Received");

@@ -15,15 +15,20 @@
 namespace nts {
 	class Runtime {
 	public:
+		enum RunState {
+			RUN,
+			EXIT
+		};
 		Runtime(int ac, char **av);
-		~Runtime() {}
+		~Runtime();
 		bool doCommand(std::string &command);
 		bool run();
 		void exitProgram();
-		void findCommand(const std::string &str);
+	        void findCommand(const std::string &str);
 		typedef void (nts::Runtime::*RunFuncPtr)(void);
 		std::map<std::string, RunFuncPtr> _map;
 	private:
+		RunState _state;
 		nts::Parser _args;
 		nts::Simulation _sim;
 	};
