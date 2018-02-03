@@ -3,5 +3,4 @@ dist: Artful
 compiler: clang
 script: make CXX=clang++
 notifications:
-  slack: pingouin-compatriotes:tiug0tdPBzxQtUlljEWjpivt
   email: false
