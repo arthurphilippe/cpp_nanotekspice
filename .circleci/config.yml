@@ -11,8 +11,8 @@ jobs:
       - run:
           name: build unit tests
           command: make tests
-test:
-  post:
-    - run:
-        name: unit tests
-        command: ./unit_tests.out
+  test:
+    post:
+      - run:
+          name: unit tests
+          command: ./unit_tests.out
