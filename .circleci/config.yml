@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: arthurphilippe/criterion
+    steps:
+      - checkout
+      - run:
+          name: build
+          command: make
+      - run:
+          name: build unit tests
+          command: make tests
+      - run:
+          name: unit tests
+          command: ./unit_tests.out
