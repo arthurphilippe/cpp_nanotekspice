@@ -17,13 +17,16 @@ namespace nts {
 	public:
 		enum RunState {
 			RUN,
-			EXIT
+			UNKNOW_COMMAND,
+			COMMAND_LAUNCHED
 		};
 		Runtime(int ac, char **av);
 		~Runtime();
 		bool doCommand(std::string &command);
 		bool run();
 		void exitProgram();
+		void callLoop();
+		void callSimulate();
 		void callDisplay();
 		void callDump();
 		void callInputValueChanger(std::string &line);
