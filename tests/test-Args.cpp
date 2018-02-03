@@ -13,7 +13,7 @@
 #pragma GCC diagnostic ignored "-Wwrite-strings"
 Test(RealFile, Arguments) {
 	bool thrown = false;
-        char *str[4] = {"kappa", "counter.nts",
+        char *str[4] = {"kappa", "tests/counter.nts",
 			"reset=1",
 			NULL
 	};
