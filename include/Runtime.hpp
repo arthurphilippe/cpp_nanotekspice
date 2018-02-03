@@ -20,7 +20,7 @@ namespace nts {
 		bool doCommand(std::string &command);
 		bool run();
 		void exitProgram();
-		void Call(const std::string &str);
+		void findCommand(const std::string &str);
 		typedef void (nts::Runtime::*RunFuncPtr)(void);
 		std::map<std::string, RunFuncPtr> _map;
 	private:

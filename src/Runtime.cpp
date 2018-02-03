@@ -14,7 +14,7 @@
 nts::Runtime::Runtime(int ac, char **av)
 try : _args(ac, av), _sim(_args.getList())
       {
-	      _map["exits"] = &Runtime::exitProgram;
+	      _map["exit"] = &Runtime::exitProgram;
       }
 catch (const FileError &error)
 {
@@ -26,17 +26,20 @@ void nts::Runtime::exitProgram()
 	exit(0);
 }
 
-void nts::Runtime::Call(const std::string &str)
+void nts::Runtime::findCommand(const std::string &str)
 {
 	RunFuncPtr test = _map[str];
-	return (this->*test)();
+	if (test != NULL)
+		return (this->*test)();
+	else
+		return ;
 }
 
 bool nts::Runtime::doCommand(std::string &command)
 {
 	if (command.length() > 0) {
 		std::cout << "Received Command : " << command << std::endl;
-		Call(command);
+	        findCommand(command);
 	}
 	return true;
 }
