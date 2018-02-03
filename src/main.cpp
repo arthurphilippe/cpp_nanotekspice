@@ -41,6 +41,8 @@ int main(int ac, char **av)
 		test.run();
        	}
 	catch (const RuntimeError &error) {
+		if (error.getError().compare("exit") == 0)
+			return 0;
 		error.what();
 		return 84;
 	} 

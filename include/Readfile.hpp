@@ -23,8 +23,9 @@ namespace nts {
 			LINK
 		};
 		std::list<std::unique_ptr<IComponent>> &getList();
+		void listDump();
 	private:
-				void checkLine(std::string line);
+		void checkLine(std::string line);
 		void setROM(const std::string &type, std::string &name);
 		void linkSetter(const std::string &, const int &,
 				const std::string &, const int &);

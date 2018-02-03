@@ -14,7 +14,9 @@
 nts::Runtime::Runtime(int ac, char **av)
 try : _state(RUN), _args(ac, av), _sim(_args.getList())
       {
-	      _map["exite"] = &Runtime::exitProgram;
+	      _map["exit"] = &Runtime::exitProgram;
+	      _map["display"] = &Runtime::callDisplay;
+	      _map["dump"] = &Runtime::callDump;
       }
 catch (const FileError &error)
 {
@@ -23,6 +25,16 @@ catch (const FileError &error)
 
 nts::Runtime::~Runtime()
 {
+}
+
+void nts::Runtime::callDisplay()
+{
+	_sim.display();
+}
+
+void nts::Runtime::callDump()
+{
+	_args.listDump();
 }
 
 void nts::Runtime::exitProgram()
@@ -44,7 +56,6 @@ void nts::Runtime::findCommand(const std::string &str)
 bool nts::Runtime::doCommand(std::string &command)
 {
 	if (command.length() > 0) {
-		std::cout << "Received Command : " << command << std::endl;
 	        findCommand(command);
 	}
 	return true;
@@ -57,8 +68,6 @@ bool nts::Runtime::run()
 	{
 		std::cout << ">";
 		getline(std::cin, command);
-		if (command.compare("exit") == 0)
-			return true;
 		if (std::cin.eof()) {
 			_map.clear();
 			throw RuntimeError("E O F : End Of File Received");

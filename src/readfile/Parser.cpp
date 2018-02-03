@@ -27,6 +27,16 @@ std::list<std::unique_ptr<nts::IComponent>> &nts::Parser::getList()
 	return _list;
 }
 
+void nts::Parser::listDump()
+{
+	nts::IComponent *tmp;
+
+	for (auto i = _list.begin(); i != _list.end(); i++) {
+		tmp = i->get();		
+		tmp->dump();
+	}
+}
+
 nts::IComponent *nts::Parser::getComponent(const std::string &name)
 {
 	nts::IComponent *tmp;
