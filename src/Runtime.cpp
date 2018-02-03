@@ -18,7 +18,7 @@ try : _args(ac, av), _sim(_args.getList())
       }
 catch (const FileError &error)
 {
-        throw RuntimeError(error.getError());
+	throw RuntimeError(error.getError());
 }
 
 void nts::Runtime::exitProgram()
@@ -26,14 +26,17 @@ void nts::Runtime::exitProgram()
 	exit(0);
 }
 
+void nts::Runtime::Call(const std::string &str)
+{
+	RunFuncPtr test = _map[str];
+	return (this->*test)();
+}
+
 bool nts::Runtime::doCommand(std::string &command)
 {
 	if (command.length() > 0) {
 		std::cout << "Received Command : " << command << std::endl;
-		for (auto i = _map.begin(); i != _map.end(); i++) {
-			std::cout << i->first << std::endl;
-	
-		}
+		Call(command);
 	}
 	return true;
 }
@@ -44,10 +47,10 @@ bool nts::Runtime::run()
 	while (true)
 	{
 		std::cout << ">";
-	        getline(std::cin, command);
+		getline(std::cin, command);
 		if (std::cin.eof()) {
-			throw RuntimeError("E O F : End Of File Received");
 			_map.clear();
+			throw RuntimeError("E O F : End Of File Received");
 		}
 		doCommand(command);
 	}

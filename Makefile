@@ -57,7 +57,7 @@ SRCS_TEST	+=	$(OBJS)
 
 OBJS_TEST	=	$(SRCS_TEST:.cpp=.o)
 
-CPPFLAGS	=	-W -Wextra -Wall -Iinclude/ -std=c++17
+CPPFLAGS	=	-W -Wextra -Wall -Iinclude/ -std=c++14
 
 all: $(NAME)
 
