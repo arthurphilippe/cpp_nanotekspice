@@ -14,12 +14,12 @@
 nts::Runtime::Runtime(int ac, char **av)
 try : _state(RUN), _args(ac, av), _sim(_args.getList())
       {
-	      _map["exit"] = &Runtime::exitProgram;
-	      _map["display"] = &Runtime::callDisplay;
-	      _map["dump"] = &Runtime::callDump;
-	      _map["simulate"] = &Runtime::callSimulate;
-	      _map["loop"] = &Runtime::callLoop;
-      }
+		_map["exit"] = &Runtime::exitProgram;
+		_map["display"] = &Runtime::callDisplay;
+		_map["dump"] = &Runtime::callDump;
+		_map["simulate"] = &Runtime::callSimulate;
+		_map["loop"] = &Runtime::callLoop;
+	}
 catch (const FileError &error)
 {
 	throw RuntimeError(error.getError());
@@ -68,7 +68,7 @@ void nts::Runtime::findCommand(const std::string &str)
 {	
 	RunFuncPtr test;
 	if (str.length() > 0) {
-	        test = _map[str];
+		test = _map[str];
 		if (test != NULL) {
 			_state = COMMAND_LAUNCHED;
 			return (this->*test)();
@@ -98,7 +98,7 @@ bool nts::Runtime::run()
 		getline(std::cin, command);
 		if (std::cin.eof()) {
 			_map.clear();
-			throw RuntimeError("E O F : End Of File Received");
+			throw RuntimeError("exit");
 		}
 		if (!doCommand(command))
 			std::cerr << "nanotekspice: command not found: "
