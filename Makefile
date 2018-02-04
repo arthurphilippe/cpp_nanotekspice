@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-CXX		=	clang++
+CXX		=	g++
 
 NAME		=	nanotekspice
 
@@ -57,7 +57,7 @@ SRCS_TEST	+=	$(OBJS)
 
 OBJS_TEST	=	$(SRCS_TEST:.cpp=.o)
 
-CPPFLAGS	=	-W -Wextra -Wall -Iinclude/ -std=c++14
+CPPFLAGS	=	-W -Wextra -Wall -Iinclude/ -std=c++17
 
 all: $(NAME)
 
