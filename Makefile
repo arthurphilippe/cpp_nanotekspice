@@ -1,8 +1,8 @@
 ##
 ## EPITECH PROJECT, 2018
-## bs malloc
+## nanotekspice
 ## File description:
-## tests
+## Makefile
 ##
 
 CXX		=	clang++
