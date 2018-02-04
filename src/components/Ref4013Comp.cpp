@@ -10,7 +10,7 @@
 nts::Ref4013Comp::Ref4013Comp(const std::string &name)
 {
 	_name.assign(name);
-	_truthTable.push_back({TRUE, FALSE, FALSE, FALSE, FALSE});
+	_truthTable.push_back({TRUE, FALSE, FALSE, TRUE, FALSE});
 	_truthTable.push_back({TRUE, TRUE, FALSE, FALSE, TRUE});
 	_truthTable.push_back({FALSE, UNDEFINED, FALSE, FALSE, UNDEFINED});
 	_truthTable.push_back({UNDEFINED, UNDEFINED, TRUE, FALSE, TRUE});
@@ -18,13 +18,15 @@ nts::Ref4013Comp::Ref4013Comp(const std::string &name)
 	_truthTable.push_back({UNDEFINED, UNDEFINED, TRUE, TRUE, TRUE});
 }
 
-nts::Tristate nts::Ref4013Comp::flipFlop(Tristate clock, Tristate d,
+nts::Tristate nts::Ref4013Comp::flipFlop(Tristate change, Tristate d,
 	Tristate r, Tristate s)
 {
 	auto it = _truthTable.begin();
 
 	while (it != _truthTable.end()) {
-		if (r == it->r && s == it->s);
+		if (change == it->change && r == it->r && s == it->s) {
+			return it->q;
+		}
 		++it;
 	}
 }
