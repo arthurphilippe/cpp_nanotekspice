@@ -7,3 +7,4 @@ vgcore*
 .vscode/
 nanotekspice
 *.nts
+*#
