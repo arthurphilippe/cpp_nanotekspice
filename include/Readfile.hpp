@@ -23,8 +23,10 @@ namespace nts {
 			LINK
 		};
 		std::list<std::unique_ptr<IComponent>> &getList();
+		void listDump();
+		void argsChecker(const char *str);
 	private:
-				void checkLine(std::string line);
+		void checkLine(std::string line);
 		void setROM(const std::string &type, std::string &name);
 		void linkSetter(const std::string &, const int &,
 				const std::string &, const int &);
@@ -33,7 +35,6 @@ namespace nts {
 		void setChipset(const std::string &, std::string &);
 		void setLink(const std::string &, const std::string &);
 		bool argsHandler(int ac, char **av);
-		void argsChecker(const char *str);
 	        bool argsNameChecker(char **av);
 		IComponent *getComponent(const std::string &name);
 	        bool rmInputArgs(const std::string &);
