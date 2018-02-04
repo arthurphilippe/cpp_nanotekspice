@@ -40,6 +40,28 @@ nts::Ref4008Comp::completeAdder(Tristate a, Tristate b, Tristate c,
 
 nts::Tristate nts::Ref4008Comp::compute(std::size_t pin)
 {
-	(void) pin;
-	return (UNDEFINED);
+	auto a1 = getLinkByPin(7);
+	auto b1 = getLinkByPin(6);
+	auto c1 = getLinkByPin(9);
+	Tristate co;
+
+	auto s = completeAdder(a1, b1, c1, co);
+	if (pin == 10)
+		return s;
+	auto a2 = getLinkByPin(5);
+	auto b2 = getLinkByPin(4);
+	s = completeAdder(a2, b2, co, co);
+	if (pin == 11)
+		return s;
+	auto a3 = getLinkByPin(3);
+	auto b3 = getLinkByPin(2);
+	s = completeAdder(a3, b3, co, co);
+	if (pin == 12)
+		return s;
+	auto a4 = getLinkByPin(3);
+	auto b4 = getLinkByPin(2);
+	s = completeAdder(a4, b4, co, co);
+	if (pin == 13)
+		return s;
+	return co;
 }
