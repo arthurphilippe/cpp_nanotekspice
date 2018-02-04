@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+#include <unistd.h>
 #include "IComponent.hpp"
 #include "Runtime.hpp"
 #include "Error.hpp"
@@ -94,7 +95,8 @@ bool nts::Runtime::run()
 	std::string command;
 	while (true)
 	{
-		std::cout << ">";
+		if (isatty(fileno(stdin)))
+			std::cout << ">";
 		getline(std::cin, command);
 		if (std::cin.eof()) {
 			_map.clear();
