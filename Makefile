@@ -1,11 +1,11 @@
 ##
 ## EPITECH PROJECT, 2018
-## bs malloc
+## nanotekspice
 ## File description:
-## tests
+## Makefile
 ##
 
-CXX		=	g++
+CXX		=	clang++
 
 NAME		=	nanotekspice
 
@@ -38,7 +38,8 @@ SRCS		=	src/LogicGates.cpp			\
 			src/Error.cpp				\
 			src/readfile/Parser.cpp			\
 			src/Simulation.cpp			\
-			src/readfile/Args.cpp
+			src/readfile/Args.cpp			\
+			src/Runtime.cpp
 
 OBJ_MAIN	=	$(MAIN:.cpp=.o)
 
@@ -56,7 +57,7 @@ SRCS_TEST	+=	$(OBJS)
 
 OBJS_TEST	=	$(SRCS_TEST:.cpp=.o)
 
-CPPFLAGS	=	-W -Wextra -Wall -Iinclude/ -std=c++17
+CPPFLAGS	=	-W -Wextra -Wall -Iinclude/ -std=c++14
 
 all: $(NAME)
 
@@ -64,6 +65,7 @@ debug: CPPFLAGS += -ggdb
 debug: fclean
 debug: $(NAME)
 
+tests: CXX=g++
 tests: $(TEST)
 
 tests_run: tests
