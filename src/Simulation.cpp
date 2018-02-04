@@ -38,6 +38,11 @@ void nts::Simulation::run()
 			computeOutput(comp);
 		++it;
 	}
+	for (auto i = _components->begin() ; i != _components->end(); i++) {
+		comp = i->get();
+		if (comp->getType().compare("clock") == 0)
+			comp->compute(2);
+	}
 }
 
 bool nts::Simulation::sortFunctor(const std::string &a, const std::string &b)

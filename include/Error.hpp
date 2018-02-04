@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2018
-//
+// nanotekspice
 // File description:
-//
+// errors class headers
 //
 
 #ifndef ERROR_HPP_
