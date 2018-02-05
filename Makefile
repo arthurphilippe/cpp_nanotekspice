@@ -48,9 +48,10 @@ OBJS		=	$(SRCS:.cpp=.o)
 TEST		=	unit_tests.out
 
 SRCS_TEST	=	tests/test-LogicGates.cpp	\
+			tests/test-Parser.cpp		\
 			tests/test-Clock.cpp		\
 			tests/test-Components.cpp	\
-			tests/test-Simulation.cpp \
+			tests/test-Simulation.cpp	\
 			tests/test-Args.cpp
 
 SRCS_TEST	+=	$(OBJS)
