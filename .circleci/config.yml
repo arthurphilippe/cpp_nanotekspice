@@ -11,7 +11,7 @@ jobs:
       - run:
           name: build unit tests
           command: make tests
-  tests:
+  test:
     docker:
       - image: arthurphilippe/criterion
     steps:
