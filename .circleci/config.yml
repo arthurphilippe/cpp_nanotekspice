@@ -32,6 +32,7 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Unit Tests Execution
+          command: ./unit_tests.out
 
 workflows:
   version: 2
