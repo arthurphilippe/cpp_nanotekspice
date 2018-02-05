@@ -15,6 +15,7 @@ jobs:
     docker:
       - image: arthurphilippe/criterion
     steps:
+      - checkout
       - run:
           name: unit tests
-          command: ./unit_tests.out
+          command: make tests_run
