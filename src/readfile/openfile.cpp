@@ -153,8 +153,12 @@ void nts::Parser::checkLine(std::string line)
 {
 	static std::string temporary;
 
-	if (line[0] == '.')
-		temporary = line;
+	if (line[0] == '.') {
+		if (line.compare(".links:") == 0 || line.compare(".chipsets:") == 0)
+			temporary = line;
+		else
+			throw FileError("Error : .links or .chipsets not present");
+	}
 	else if (temporary.compare(".links:") == 0)
 		parseLine(line, LINK);
 	else if (temporary == ".chipsets:")
@@ -178,5 +182,5 @@ void nts::Parser::readFile()
 			checkLine(line);
 	}
 	if (_ac - 2 != _nbrInput)
-		throw FileError("Error : Check the configuratioon file and the arguments");
+		throw FileError("Error : Check the configuration file and the arguments");
 }

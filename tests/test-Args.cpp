@@ -29,7 +29,7 @@ Test(RealFileWithImpossibleValue, Arguments) {
 		thrown = true;
 	}
 	cr_assert(thrown);
-	std::cout << "\033[1;31m--> finished test 'Real File with Impossible Value'\033[0m\n" << std::endl;
+	std::cout << "\033[1;31m--> finished test 'Real File with Impossible Value'\n\033[0m" << std::endl;
 }
 
 
@@ -71,7 +71,7 @@ Test(FalseNameWithValue, Arguments) {
 		thrown = true;
 	}
 	cr_assert(thrown);
-	std::cout << "\033[1;31m--> finished test 'False Input Name with a True Value'\033[0m\n" << std::endl;
+	std::cout << "\033[1;31m--> finished test 'False Input Name with a True Value'\n\033[0m" << std::endl;
 }
 
 
