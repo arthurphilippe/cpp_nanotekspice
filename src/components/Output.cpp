@@ -24,3 +24,10 @@ nts::Tristate nts::Output::compute(std::size_t pin)
 	}
 	return _state;
 }
+
+bool nts::Output::isValid() const
+{
+	auto it = _links.begin();
+
+	return it != _links.end() ? true : false;
+}

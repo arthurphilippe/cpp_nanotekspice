@@ -164,3 +164,8 @@ const std::string &nts::DefaultComponent::getType() const
 {
 	return _type;
 }
+
+bool nts::DefaultComponent::isValid() const
+{
+	return true;
+}
