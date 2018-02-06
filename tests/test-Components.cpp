@@ -185,10 +185,26 @@ Test(Basic, 4013) {
 	chipset->setLink(5, *data, 1);
 	chipset->setLink(6, *set, 1);
 	clock->compute(3);
-	set->compute(0);
-	reset->compute(0);
+	set->compute(3);
+	reset->compute(3);
 	data->compute(2);
+	cr_assert((chipset->compute(1) == nts::UNDEFINED));
+	clock->compute(2);
+	cr_assert((chipset->compute(1) == nts::TRUE));
+	clock->compute(3);
 	chipset->compute(1);
-
-
+	clock->compute(2);
+	data->compute(3);
+	cr_assert((chipset->compute(1) == nts::FALSE));
+	data->compute(2);
+	cr_assert((chipset->compute(1) == nts::FALSE));
+	clock->compute(3);
+	set->compute(2);
+	cr_assert((chipset->compute(1) == nts::TRUE));
+	set->compute(3);
+	clock->compute(2);
+	cr_assert((chipset->compute(1) == nts::TRUE));
+	clock->compute(3);
+	reset->compute(2);
+	cr_assert((chipset->compute(1) == nts::FALSE));
 }
