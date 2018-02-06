@@ -7,7 +7,10 @@
 
 #include "components/Ref4013Comp.hpp"
 
+// Warning: default values are only the fruit of supposition.
 nts::Ref4013Comp::Ref4013Comp(const std::string &name)
+	: _prevClock1(FALSE), _prevClock2(FALSE),
+	_qnm11(UNDEFINED), _qnm12(UNDEFINED)
 {
 	_name.assign(name);
 	_truthTable.push_back({TRUE, FALSE, FALSE, TRUE, FALSE});
@@ -18,17 +21,30 @@ nts::Ref4013Comp::Ref4013Comp(const std::string &name)
 	_truthTable.push_back({UNDEFINED, UNDEFINED, TRUE, TRUE, TRUE});
 }
 
-nts::Tristate nts::Ref4013Comp::flipFlop(Tristate change, Tristate d,
-	Tristate r, Tristate s)
+nts::Tristate nts::Ref4013Comp::flipFlop(Tristate &prevClock, Tristate &qnm1)
 {
 	auto it = _truthTable.begin();
 
-	while (it != _truthTable.end()) {
-		if (change == it->change && r == it->r && s == it->s) {
-			return it->q;
-		}
-		++it;
+	if (_currR == FALSE && _currS == FALSE) {
+		dTypeLatch(prevClock, qnm1);
 	}
+	else {
+		// RS-type latch
+	}
+}
+
+nts::Tristate nts::Ref4013Comp::dTypeLatch(Tristate &prevClock, Tristate &qnm1)
+{
+	if (prevClock == FALSE && _currClk == FALSE) {
+		return qnm1;
+	}
+	else if (prevClock == FALSE && _currClk == TRUE) {
+		prevClock = TRUE;
+		qnm1 = _currD;
+	}
+	else
+		prevClock = FALSE;
+	return qnm1;
 }
 
 nts::Tristate nts::Ref4013Comp::compute(std::size_t pin)

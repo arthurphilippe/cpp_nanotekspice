@@ -25,14 +25,22 @@ namespace nts {
 			Tristate q;
 		};
 
-		Tristate _previous1;
-		Tristate _previous2;
-		Tristate _data1;
-		Tristate _data2;
-		Tristate _currPrev;
+		Tristate _prevClock1;
+		Tristate _prevClock2;
+
+		Tristate _qnm11;
+		Tristate _qnm12;
+
 		std::list<TruthStatement> _truthTable;
-		Tristate flipFlop(Tristate clock, Tristate d,
-			Tristate r, Tristate s);
+
+		Tristate _currClk;
+		Tristate _currD;
+		Tristate _currR;
+		Tristate _currS;
+
+		Tristate _q;
+		Tristate flipFlop(Tristate &prevClock, Tristate &qnm1);
+		Tristate dTypeLatch(Tristate &prevClock, Tristate &qnm1);
 	};
 }
 
