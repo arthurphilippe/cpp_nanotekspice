@@ -17,8 +17,20 @@ nts::Parser::Parser(int ac, char **av)
 		_fileName = av[1];
 		readFile();
 		argsHandler(ac, av);
+		isValid();
 	} else {
 		throw FileError("Error : False Arguments");
+	}
+}
+
+void nts::Parser::isValid() const
+{
+	IComponent *tmp;
+
+	for (auto i = _list.begin(); i != _list.end(); i++) {
+		tmp = i->get();
+		if (!tmp->isValid())
+			throw FileError("Error : Ouput not linked");
 	}
 }
 
