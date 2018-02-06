@@ -9,12 +9,17 @@
 #include <list>
 #include <criterion/criterion.h>
 #include <criterion/assert.h>
+#include <criterion/redirect.h>
 #include "../include/IComponent.hpp"
 #include "../include/DefaultComponent.hpp"
 #include "../include/Simulation.hpp"
 #include <criterion/logging.h>
 
-using criterion::logging::info;
+static void redirect_all_std(void)
+{
+	cr_redirect_stdout();
+	cr_redirect_stderr();
+}
 
 Test(Basic, Sim) {
 	std::list<std::unique_ptr<nts::IComponent>> list;
@@ -49,7 +54,7 @@ Test(Basic, Sim) {
 	cr_assert((sim.getBuffer().str().compare("LED=1\n") == 0));
 }
 
-Test(First, Sim) {
+Test(First, Sim, .init = redirect_all_std) {
 	std::list<std::unique_ptr<nts::IComponent>> list;
 
 	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));

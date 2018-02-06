@@ -11,27 +11,27 @@
 #include "DefaultComponent.hpp"
 #include "Runtime.hpp"
 /*
-int main(int ac, char **av)
-{
-	(void) ac;
-	(void) av;
+  int main(int ac, char **av)
+  {
+  (void) ac;
+  (void) av;
 
-	nts::Runtime test;
+  nts::Runtime test;
 
-	try {
-		parserTester(ac, av);
-	} catch (const FileError &error) {
-		error.what();
-	}
+  try {
+  parserTester(ac, av);
+  } catch (const FileError &error) {
+  error.what();
+  }
 
 	
-	try {
-		test.run();
-	} catch (const RuntimeError &error) {
-		error.what();
-		return 84;
-	}
-}
+  try {
+  test.run();
+  } catch (const RuntimeError &error) {
+  error.what();
+  return 84;
+  }
+  }
 */
 
 int main(int ac, char **av)
@@ -48,3 +48,4 @@ int main(int ac, char **av)
 	} 
 	return 0;
 }
+

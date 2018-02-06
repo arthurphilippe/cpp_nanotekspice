@@ -33,6 +33,9 @@ jobs:
       - run:
           name: Unit Tests Execution
           command: ./unit_tests.out
+      - run:
+          name: functionals tests
+          command: ./tests/functionals_tests.sh
 
 workflows:
   version: 2
