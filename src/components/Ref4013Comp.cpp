@@ -43,6 +43,8 @@ nts::Tristate nts::Ref4013Comp::dTypeLatch(Tristate &prevClock, Tristate &qnm1)
 	return qnm1;
 }
 
+// Warning: previous clock change maybe to agressive for the subject's liking
+// but is accurate from an electronic's standpoint.
 nts::Tristate nts::Ref4013Comp::rsTypeLatch(Tristate &qnm1)
 {
 	if (_currS == FALSE && _currR == TRUE) {
@@ -50,13 +52,19 @@ nts::Tristate nts::Ref4013Comp::rsTypeLatch(Tristate &qnm1)
 	}
 	else
 		qnm1 = TRUE;
+	_prevClock1 = getLinkByPin(3);
+	_prevClock2 = getLinkByPin(11);
 	return qnm1;
 
 }
 
+// Warning: previous clock change maybe to agressive for the subject's liking
+// but is accurate from an electronic's standpoint.
 nts::Tristate nts::Ref4013Comp::compute(std::size_t pin)
 {
 	Tristate &qnm1 = (pin == 1 || pin == 2) ? _qnm11 : _qnm12;
+	Tristate &prevClock = (pin == 1 || pin == 2)
+		? _prevClock1 : _prevClock2;
 	if (pin == 1 || pin == 2) {
 		_currClk = getLinkByPin(3);
 		_currR = getLinkByPin(4);
@@ -69,10 +77,13 @@ nts::Tristate nts::Ref4013Comp::compute(std::size_t pin)
 		_currD = getLinkByPin(9);
 		_currS = getLinkByPin(8);
 	}
-	else
+	else {
+		_prevClock1 = getLinkByPin(3);
+		_prevClock2 = getLinkByPin(11);
 		return UNDEFINED;
+	}
 	if (_currR == TRUE && _currS == TRUE)
 		return TRUE;
-	auto res = flipFlop(_currClk, qnm1);
+	auto res = flipFlop(prevClock, qnm1);
 	return (pin == 1 || pin == 13) ? res : LogicGates::NOTGate(res);
 }
