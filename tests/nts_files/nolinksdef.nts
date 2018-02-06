@@ -1,0 +1,21 @@
+# Admiral Business Machines 1954-2042
+# 12 bits counter
+
+.chipsets:
+clock		clock
+input		reset
+
+output		o0
+output		o1
+output		o2
+output		o3
+output		o4
+output		o5
+output		o6
+output		o7
+output		o8
+output		o9
+output		o10
+output		o11
+
+4040		counter

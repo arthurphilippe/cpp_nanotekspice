@@ -56,18 +56,9 @@ int parserTester(int ac, char **av)
 	if (ac > 1)
 	{
 		nts::Parser kappa(ac, av);
-
 		nts::Simulation(kappa.getList());
-/*
-  nts::IComponent *tmp;
-  list = std::move(kappa.getList());
-  for (auto i = list.begin(); i != list.end(); i++) {
-  tmp = i->get();
-  tmp->dump();
-  }
-*/
 	}
 	else
-		std::cout << "kappa ta pas mis d'arguments" << std::endl;
+		throw FileError("print_usage");
 	return 0;
 }
