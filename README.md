@@ -1,4 +1,4 @@
-# cpp_nanotekspice
+# NanoTekSpice
 Digital Electronics -- Epitech 2nd year
 
-[![Build Status](https://travis-ci.com/arthurphilippe/cpp_nanotekspice.svg?token=peYpHc5SXtbehxwoJxrt&branch=master)](https://travis-ci.com/arthurphilippe/cpp_nanotekspice)
+[![CircleCI](https://circleci.com/gh/arthurphilippe/cpp_nanotekspice.svg?style=svg&circle-token=4327e223e2431322139f7b4b92a0607b57070ee5)](https://circleci.com/gh/arthurphilippe/cpp_nanotekspice)

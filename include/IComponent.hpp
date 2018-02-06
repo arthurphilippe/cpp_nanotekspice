@@ -18,7 +18,6 @@ namespace nts {
 		FALSE = false
 	};
 
-
 	class IComponent {
 	public:
 		struct ComponentLink {
@@ -36,6 +35,7 @@ namespace nts {
 		virtual const std::string &getName() const = 0;
 		virtual const std::string &getType() const = 0;
 		virtual Tristate getLinkByPin(size_t pin) = 0;
+		virtual bool isValid() const = 0;
 	protected:
 	private:
 	};

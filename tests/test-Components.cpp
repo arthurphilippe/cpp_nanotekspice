@@ -35,6 +35,19 @@ Test(Basic, InputOutput) {
 
 }
 
+Test(Validity, InputOutput) {
+	auto bouton = std::move(nts::DefaultComponent::createComponent("input", "bouton"));
+	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
+
+	cr_assert((!led->isValid()));
+	cr_assert((bouton->isValid()));
+
+	led->setLink(1, *bouton, 1);
+	bouton->setLink(1, *led, 1);
+
+	cr_assert((led->isValid()));
+}
+
 Test(Basic, 4001) {
 	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
 	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));

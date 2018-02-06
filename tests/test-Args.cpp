@@ -29,7 +29,7 @@ Test(RealFileWithImpossibleValue, Arguments) {
 		thrown = true;
 	}
 	cr_assert(thrown);
-	std::cout << "\033[1;31m--> finished test 'Real File with Impossible Value'\n\033[0m" << std::endl;
+	std::cout << "\033[1;31m --> finished test 'Real File with Impossible Value'\n\033[0m" << std::endl;
 }
 
 
@@ -50,7 +50,7 @@ Test(NoArgs, Arguments) {
 		thrown = true;
 	}
 	cr_assert(thrown);
-	std::cout << "\033[1;31m--> finished test 'No Argument'\n\033[0m" << std::endl;
+	std::cout << "\033[1;31m --> finished test 'No Argument'\n\033[0m" << std::endl;
 }
 
 
@@ -71,7 +71,7 @@ Test(FalseNameWithValue, Arguments) {
 		thrown = true;
 	}
 	cr_assert(thrown);
-	std::cout << "\033[1;31m--> finished test 'False Input Name with a True Value'\n\033[0m" << std::endl;
+	std::cout << "\033[1;31m --> finished test 'False Input Name with a True Value'\n\033[0m" << std::endl;
 }
 
 
@@ -91,7 +91,7 @@ Test(NoArgumentAtAll, Arguments) {
 		thrown = true;
 	}
 	cr_assert(thrown);
-	std::cout << "\033[1;31m--> finished test 'No Argument At All'\n\033[0m" << std::endl;
+	std::cout << "\033[1;31m --> finished test 'No Argument At All'\n\033[0m" << std::endl;
 }
 
 
@@ -112,7 +112,7 @@ Test(RealNameWithEgal, Arguments) {
 		thrown = true;
 	}
 	cr_assert(thrown);
-	std::cout << "\033[1;31m--> finished test 'False Input Name without Value'\n\033[0m" << std::endl;
+	std::cout << "\033[1;31m --> finished test 'False Input Name without Value'\n\033[0m" << std::endl;
 }
 
 
@@ -133,14 +133,14 @@ Test(FalseName, Arguments) {
 		thrown = true;
 	}
 	cr_assert(thrown);
-	std::cout << "\033[1;31m--> finished test 'False Input Name without Value'\n\033[0m" << std::endl;
+	std::cout << "\033[1;31m --> finished test 'False Input Name without Value'\n\033[0m" << std::endl;
 }
 
 
 Test(RealFile, Arguments) {
 	std::cout << "\033[1;31m:: Testing 'Real File with Good Argument'\033[0m" << std::endl;
 	bool thrown = false;
-        char *str[4] = {"kappa", "tests/counter.nts",
+        char *str[4] = {"kappa", "tests/nts_files/counter.nts",
 			"reset=1",
 			NULL
 	};
@@ -154,7 +154,7 @@ Test(RealFile, Arguments) {
 		thrown = true;
 	}
 	cr_assert(!thrown);
-	std::cout << "\033[1;31m--> finished test 'Real File with Good Argument'\033[0m\n" << std::endl;
+	std::cout << "\033[1;31m --> finished test 'Real File with Good Argument'\n\033[0m" << std::endl;
 }
 
 Test(FalseFile, Arguments) {
@@ -171,7 +171,7 @@ Test(FalseFile, Arguments) {
 		thrown = true;
 	}
 	cr_assert(thrown);
-		std::cout << "\033[1;31m--> finished test 'False Configuration File with Good Argument'\033[0m\n" << std::endl;
+		std::cout << "\033[1;31m --> finished test 'False Configuration File with Good Argument'\n\033[0m" << std::endl;
 }
 
 #pragma GCC diagnostic pop
