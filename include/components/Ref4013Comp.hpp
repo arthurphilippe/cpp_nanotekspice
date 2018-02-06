@@ -41,6 +41,7 @@ namespace nts {
 		Tristate _q;
 		Tristate flipFlop(Tristate &prevClock, Tristate &qnm1);
 		Tristate dTypeLatch(Tristate &prevClock, Tristate &qnm1);
+		Tristate rsTypeLatch(Tristate &qnm1);
 	};
 }
 
