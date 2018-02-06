@@ -171,3 +171,40 @@ Test(Basic, 4069) {
 	cr_assert((led->compute() == nts::TRUE));
 }
 
+Test(Basic, 4013) {
+	auto clock = std::move(nts::DefaultComponent::createComponent("input", "clock"));
+	auto set = std::move(nts::DefaultComponent::createComponent("input", "set"));
+	auto reset = std::move(nts::DefaultComponent::createComponent("input", "reset"));
+	auto data = std::move(nts::DefaultComponent::createComponent("input", "data"));
+	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
+	auto chipset = std::move(nts::DefaultComponent::createComponent("4013", "chipset"));
+
+	led->setLink(1, *chipset, 1);
+	chipset->setLink(3, *clock, 1);
+	chipset->setLink(4, *reset, 1);
+	chipset->setLink(5, *data, 1);
+	chipset->setLink(6, *set, 1);
+	clock->compute(3);
+	set->compute(3);
+	reset->compute(3);
+	data->compute(2);
+	cr_assert((chipset->compute(1) == nts::UNDEFINED));
+	clock->compute(2);
+	cr_assert((chipset->compute(1) == nts::TRUE));
+	clock->compute(3);
+	chipset->compute(1);
+	clock->compute(2);
+	data->compute(3);
+	cr_assert((chipset->compute(1) == nts::FALSE));
+	data->compute(2);
+	cr_assert((chipset->compute(1) == nts::FALSE));
+	clock->compute(3);
+	set->compute(2);
+	cr_assert((chipset->compute(1) == nts::TRUE));
+	set->compute(3);
+	clock->compute(2);
+	cr_assert((chipset->compute(1) == nts::TRUE));
+	clock->compute(3);
+	reset->compute(2);
+	cr_assert((chipset->compute(1) == nts::FALSE));
+}

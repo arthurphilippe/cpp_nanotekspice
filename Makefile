@@ -14,7 +14,7 @@ RM		=	rm -vf
 MAIN		=	src/main.cpp
 
 SRCS		=	src/LogicGates.cpp			\
-			src/components/DefaultComponent.cpp	\
+			src/DefaultComponent.cpp		\
 			src/components/Ref4001Comp.cpp		\
 			src/components/Ref2716Comp.cpp		\
 			src/components/Ref4008Comp.cpp		\
