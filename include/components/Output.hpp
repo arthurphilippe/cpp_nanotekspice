@@ -15,6 +15,7 @@ namespace nts {
 	public:
 		Output(const std::string &name);
 		virtual Tristate compute(std::size_t pin = 1) override;
+		virtual bool isValid() const override;
 	protected:
 		Tristate _state;
 	private:

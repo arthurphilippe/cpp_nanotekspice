@@ -19,8 +19,6 @@ nts::Tristate nts::LogicGates::NANDGate(Tristate a, Tristate b)
 	if (a == UNDEFINED || b == UNDEFINED)
 		return UNDEFINED;
 	return (a && b) ? FALSE : TRUE;
-	if (!(a && b))
-		return TRUE;
 }
 
 nts::Tristate nts::LogicGates::ORGate(Tristate a, Tristate b)
