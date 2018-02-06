@@ -7,14 +7,20 @@
 
 #include <criterion/criterion.h>
 #include <criterion/assert.h>
+#include <criterion/redirect.h>
 #include "Error.hpp"
 #include "Readfile.hpp"
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wwrite-strings"
 
-Test(NoDefOfchipsets, Parser) {
-	std::cout << "\033[1;31m:: Testing 'No Chipset'\033[0m" << std::endl;
+static void redirect_all_std(void)
+{
+	cr_redirect_stdout();
+	cr_redirect_stderr();
+}
+
+Test(NoDefOfchipsets, Parser, .init = redirect_all_std) {
 	bool verify = false;
 	char *str[4] = {"nanotekspice", "tests/nts_files/nochipsetdef.nts", "a=1", NULL};
 	try {
@@ -24,11 +30,9 @@ Test(NoDefOfchipsets, Parser) {
 		error.what();
 	}
 	cr_assert(verify);
-	std::cout << "\033[1;31m--> finished test 'No Chipset'\n\033[0m" << std::endl;
 }
 
-Test(ChipError, Parser) {
-	std::cout << "\033[1;31m:: Testing 'Chipset Error'\033[0m" << std::endl;
+Test(ChipError, Parser, .init = redirect_all_std) {
 	bool verify = false;
 	char *str[4] = {"nanotekspice", "tests/nts_files/chiperror.nts", "a=1", NULL};
 	try {
@@ -38,11 +42,9 @@ Test(ChipError, Parser) {
 		error.what();
 	}
 	cr_assert(verify);
-	std::cout << "\033[1;31m--> finished test 'Chipset Error'\n\033[0m" << std::endl;
 }
 
-Test(ChipError2, Parser) {
-	std::cout << "\033[1;31m:: Testing 'Chipset Error 2'\033[0m" << std::endl;
+Test(ChipError2, Parser, .init = redirect_all_std) {
 	bool verify = false;
 	char *str[4] = {"nanotekspice", "tests/nts_files/chipseterror2.nts", "a=1", NULL};
 	try {
@@ -52,12 +54,10 @@ Test(ChipError2, Parser) {
 		error.what();
 	}
 	cr_assert(verify);
-	std::cout << "\033[1;31m--> finished test 'Chipset Error 2'\n\033[0m" << std::endl;
 }
 
 
-Test(NoDefOfchipsetsbutchipPresent, Parser) {
-	std::cout << "\033[1;31m:: Testing 'No Definition Chipset'\033[0m" << std::endl;
+Test(NoDefOfchipsetsbutchipPresent, Parser, .init = redirect_all_std) {
 	bool verify = false;
 	char *str[4] = {"nanotekspice", "tests/nts_files/nodefchip.nts", "a=1", NULL};
 	try {
@@ -67,12 +67,10 @@ Test(NoDefOfchipsetsbutchipPresent, Parser) {
 		error.what();
 	}
 	cr_assert(verify);
-	std::cout << "\033[1;31m--> finished test 'No Definition Chipset'\n\033[0m" << std::endl;
 }
 
 
-Test(NoLink, Parser) {
-	std::cout << "\033[1;31m:: Testing 'No Definition link'\033[0m" << std::endl;
+Test(NoLink, Parser, .init = redirect_all_std) {
 	bool verify = false;
 	char *str[4] = {"nanotekspice", "tests/nts_files/nolink.nts", "a=1", NULL};
 	try {
@@ -82,11 +80,9 @@ Test(NoLink, Parser) {
 		error.what();
 	}
 	cr_assert(verify);
-	std::cout << "\033[1;31m--> finished test 'No Definition link'\n\033[0m" << std::endl;
 }
 
-Test(ErrorLink, Parser) {
-	std::cout << "\033[1;31m:: Testing 'Error Link'\033[0m" << std::endl;
+Test(ErrorLink, Parser, .init = redirect_all_std) {
 	bool verify = false;
 	char *str[4] = {"nanotekspice", "tests/nts_files/errorlink.nts", "a=1", NULL};
 	try {
@@ -96,11 +92,9 @@ Test(ErrorLink, Parser) {
 		error.what();
 	}
 	cr_assert(verify);
-	std::cout << "\033[1;31m--> finished test 'Error Link'\n\033[0m" << std::endl;
 }
 
-Test(ErrorLink2, Parser) {
-	std::cout << "\033[1;31m:: Testing 'Error Link Number 2'\033[0m" << std::endl;
+Test(ErrorLink2, Parser, .init = redirect_all_std) {
 	bool verify = false;
 	char *str[4] = {"nanotekspice", "tests/nts_files/errorlink2.nts", "a=1", NULL};
 	try {
@@ -110,18 +104,14 @@ Test(ErrorLink2, Parser) {
 		error.what();
 	}
 	cr_assert(verify);
-	std::cout << "\033[1;31m--> finished test 'Error Link Number 2'\n\033[0m" << std::endl;
 }
 
 /*
-Test(sampleTest, Parser) {
-	std::cout << "\033[1;31m:: Testing 'ALLAHU'\033[0m" << std::endl;
-	std::cout << "\033[1;31m--> finished test 'ALLAHU'\n\033[0m" << std::endl;
+Test(sampleTest, Parser, .init = redirect_all_std) {
 }
 */
 
-Test(EmptyFile, Parser) {
-	std::cout << "\033[1;31m:: Testing 'Empty Configuration File'\033[0m" << std::endl;
+Test(EmptyFile, Parser, .init = redirect_all_std) {
 	bool verify = false;
 	char *str[4] = {"nanotekspice", "tests/nts_files/empty.nts", "a=1", NULL};
 	try {
@@ -131,11 +121,9 @@ Test(EmptyFile, Parser) {
 		error.what();
 	}
 	cr_assert(verify);
-	std::cout << "\033[1;31m--> finished test 'Empty Configuration File'\n\033[0m" << std::endl;
 }
 
-Test(NoDefOflinks, Parser) {
-	std::cout << "\033[1;31m:: Testing 'No Definition of .links'\033[0m" << std::endl;
+Test(NoDefOflinks, Parser, .init = redirect_all_std) {
 	bool verify = false;
 	char *str[4] = {"nanotekspice", "tests/nts_files/nolinksdef.nts", "a=1", NULL};
 	try {
@@ -145,7 +133,6 @@ Test(NoDefOflinks, Parser) {
 		error.what();
 	}
 	cr_assert(verify);
-	std::cout << "\033[1;31m--> finished test 'No Definition of .links'\n\033[0m" << std::endl;
 }
 
 
