@@ -19,6 +19,26 @@ static void redirect_all_std(void)
 	cr_redirect_stderr();
 }
 
+
+Test(NoOuputLink, Arguments, .init = redirect_all_std) {
+	bool thrown = false;
+	char *str[4] = {"kappa", "tests/nts_files/nooutputlink.nts",
+			"reset=1",
+			NULL
+	};
+	try
+	{
+		parserTester(3, str);
+	}
+	catch (const FileError &error)
+	{
+		error.what();
+		thrown = true;
+	}
+	cr_assert(thrown);
+}
+
+
 Test(RealFileWithImpossibleValue, Arguments, .init = redirect_all_std) {
 	bool thrown = false;
 	char *str[4] = {"kappa", "tests/counter.nts",

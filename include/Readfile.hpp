@@ -26,6 +26,7 @@ namespace nts {
 		void listDump();
 		void argsChecker(const char *str);
 	private:
+		void isValid() const;
 		void checkLine(std::string line);
 		void setROM(const std::string &type, std::string &name);
 		void linkSetter(const std::string &, const int &,
