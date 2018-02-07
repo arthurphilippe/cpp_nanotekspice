@@ -19,7 +19,7 @@ nts::Parser::Parser(int ac, char **av)
 		argsHandler(ac, av);
 		isValid();
 	} else {
-		throw FileError("Error : False Arguments");
+		throw FileError("print_usage");
 	}
 }
 
