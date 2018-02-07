@@ -5,34 +5,24 @@
 ** main
 */
 
+#include <fstream>
 #include <iostream>
 #include "Error.hpp"
 #include "Readfile.hpp"
 #include "DefaultComponent.hpp"
 #include "Runtime.hpp"
-/*
-  int main(int ac, char **av)
-  {
-  (void) ac;
-  (void) av;
 
-  nts::Runtime test;
+static void print_usage()
+{
+	std::ifstream s("help.txt");
+	std::string tmp;
 
-  try {
-  parserTester(ac, av);
-  } catch (const FileError &error) {
-  error.what();
-  }
-
-	
-  try {
-  test.run();
-  } catch (const RuntimeError &error) {
-  error.what();
-  return 84;
-  }
-  }
-*/
+	if (s.is_open()) {
+		while (getline(s, tmp)) {
+			std::cout << tmp << std::endl;
+		}
+	}
+}
 
 int main(int ac, char **av)
 {
@@ -43,8 +33,12 @@ int main(int ac, char **av)
 	catch (const RuntimeError &error) {
 		if (error.getError().compare("exit") == 0)
 			return 0;
-		error.what();
-		return 84;
+		else if (error.getError().compare("print_usage") == 0)
+			print_usage();
+		else {
+			error.what();
+			return 84;
+		}
 	} 
 	return 0;
 }
