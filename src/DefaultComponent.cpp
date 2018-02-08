@@ -81,7 +81,7 @@ std::unique_ptr<nts::IComponent> nts::DefaultComponent::createComponent(
 		std::unique_ptr<Ref2716Comp> comp(new Ref2716Comp(name, param));
 		ret = std::move(comp);
 	} else if (it != _genesisMap.end()) {
-		ret = std::move(_genesisMap[type](name));
+		ret = _genesisMap[type](name);
 	} else {
 		throw FileError("Error : Specified type in the configuration \
 file does not exist.");
