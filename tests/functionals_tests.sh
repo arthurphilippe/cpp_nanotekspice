@@ -4,10 +4,10 @@
 RET=0
 
 function diff_test {
-	RES=$(diff $1 $2)
+	diff $1 $2 &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "NOK"
-		RET=1
+		diff $1 $2
 	else
 		echo "OK"
 	fi
@@ -52,5 +52,6 @@ display
 EOF
 
 diff_test tests/logs/test2.log tests/logs/test2.txt
+diff_test tests/logs/test1.log tests/logs/test2.txt
 
 exit $RET
