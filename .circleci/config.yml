@@ -11,6 +11,9 @@ jobs:
       - run:
           name: Build Unit Tests Suites
           command: make tests
+      - run:
+          name: Tidy up
+          command: find -name "*.o" -delete -print
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
