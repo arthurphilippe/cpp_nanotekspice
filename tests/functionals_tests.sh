@@ -16,7 +16,7 @@ function diff_test {
 mkdir tests/logs/ -p
 
 echo -n ":: Running simple xor test... "
-./nanotekspice tests/xor.nts a=0 b=0 > tests/logs/test1.log << EOF
+./nanotekspice tests/xor.nts a=0 b=0 &> tests/logs/test1.log << EOF
 a=1
 simulate
 display
@@ -30,7 +30,7 @@ diff_test tests/logs/test1.log tests/logs/test1.txt
 
 echo -n ":: Running D latch test... "
 
-./nanotekspice tests/nts_files/d_latch.nts data=0 set=0 reset=1 > tests/logs/test2.log << EOF
+./nanotekspice tests/nts_files/d_latch.nts data=0 set=0 reset=1 &> tests/logs/test2.log << EOF
 reset=0
 simulate
 display
