@@ -131,131 +131,131 @@ std::unique_ptr<nts::IComponent> nts::DefaultComponent::create2716(
 	const std::string &value)
 {
 	std::unique_ptr<Ref2716Comp> comp(new Ref2716Comp(name, value));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4001(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4001Comp> comp(new Ref4001Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4008(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4008Comp> comp(new Ref4008Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4011(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4011Comp> comp(new Ref4011Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4013(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4013Comp> comp(new Ref4013Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4017(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4017Comp> comp(new Ref4017Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4030(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4030Comp> comp(new Ref4030Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4040(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4040Comp> comp(new Ref4040Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4069(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4069Comp> comp(new Ref4069Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4071(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4071Comp> comp(new Ref4071Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4081(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4081Comp> comp(new Ref4081Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4094(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4094Comp> comp(new Ref4094Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4514(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4514Comp> comp(new Ref4514Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create4801(
 	const std::string &name)
 {
 	std::unique_ptr<Ref4801Comp> comp(new Ref4801Comp(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::createTrue(
 	const std::string &name)
 {
 	std::unique_ptr<True> comp(new True(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::createFalse(
 	const std::string &name)
 {
 	std::unique_ptr<False> comp(new False(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::createInput(
 	const std::string &name)
 {
 	std::unique_ptr<Input> comp(new Input(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::createOutput(
 	const std::string &name)
 {
 	std::unique_ptr<Output> comp(new Output(name));
-	return (std::move(comp));
+	return (comp);
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::createClock(
 	const std::string &name)
 {
 	std::unique_ptr<Clock> comp(new Clock(name));
-	return (std::move(comp));
+	return (comp);
 }
