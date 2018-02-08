@@ -18,7 +18,7 @@ function diff_test {
 mkdir tests/logs/ -p
 
 echo -n ":: Running simple xor test... "
-./nanotekspice tests/xor.nts a=0 b=0 &> tests/logs/test1.log << EOF
+./nanotekspice tests/nts_files/xor.nts a=0 b=0 &> tests/logs/test1.log << EOF
 a=1
 simulate
 display
