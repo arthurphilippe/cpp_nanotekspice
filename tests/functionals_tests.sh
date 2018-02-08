@@ -4,11 +4,12 @@
 RET=0
 
 function diff_test {
-	diff $1 $2 &> /dev/null
+	diff $1 $2 -q &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "NOK"
 		RET=1
-		diff $1 $2
+		diff $1 $2 --color=auto
+		echo "##########"
 	else
 		echo "OK"
 	fi
