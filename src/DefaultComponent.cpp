@@ -76,83 +76,13 @@ std::unique_ptr<nts::IComponent> nts::DefaultComponent::createComponent(
 
 	if (_genesisMap.size() == 0)
 		populateGenesisMap();
-	if (type.compare("input") == 0) {
-		std::unique_ptr<Input> comp(new Input(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("output") == 0) {
-		std::unique_ptr<Output> comp(new Output(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("false") == 0) {
-		std::unique_ptr<False> comp(new False(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("true") == 0) {
-		std::unique_ptr<True> comp(new True(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("clock") == 0) {
-		std::unique_ptr<Clock> comp(new Clock(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4001") == 0) {
-		std::unique_ptr<Ref4001Comp> comp(new Ref4001Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4008") == 0) {
-		std::unique_ptr<Ref4008Comp> comp(new Ref4008Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4011") == 0) {
-		std::unique_ptr<Ref4011Comp> comp(new Ref4011Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4013") == 0) {
-		std::unique_ptr<Ref4013Comp> comp(new Ref4013Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4017") == 0) {
-		std::unique_ptr<Ref4017Comp> comp(new Ref4017Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4030") == 0) {
-		std::unique_ptr<Ref4030Comp> comp(new Ref4030Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4040") == 0) {
-		std::unique_ptr<Ref4040Comp> comp(new Ref4040Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4069") == 0) {
-		std::unique_ptr<Ref4069Comp> comp(new Ref4069Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4071") == 0) {
-		std::unique_ptr<Ref4071Comp> comp(new Ref4071Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4081") == 0) {
-		std::unique_ptr<Ref4081Comp> comp(new Ref4081Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4094") == 0) {
-		std::unique_ptr<Ref4094Comp> comp(new Ref4094Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4514") == 0) {
-		std::unique_ptr<Ref4514Comp> comp(new Ref4514Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("4801") == 0) {
-		std::unique_ptr<Ref4801Comp> comp(new Ref4801Comp(name));
-		ret = std::move(comp);
-	}
-	else if (type.compare("2716") == 0) {
+	auto it = _genesisMap.find(type);
+	if (type.compare("2716") == 0) {
 		std::unique_ptr<Ref2716Comp> comp(new Ref2716Comp(name, param));
 		ret = std::move(comp);
-	}
-	else {
+	} else if (it != _genesisMap.end()) {
+		ret = std::move(_genesisMap[type](name));
+	} else {
 		throw FileError("Error : Specified type in the configuration \
 file does not exist.");
 	}
@@ -177,6 +107,23 @@ bool nts::DefaultComponent::isValid() const
 void nts::DefaultComponent::populateGenesisMap()
 {
 	_genesisMap["4001"] = nts::DefaultComponent::create4001;
+	_genesisMap["4008"] = nts::DefaultComponent::create4008;
+	_genesisMap["4011"] = nts::DefaultComponent::create4011;
+	_genesisMap["4013"] = nts::DefaultComponent::create4013;
+	_genesisMap["4017"] = nts::DefaultComponent::create4017;
+	_genesisMap["4030"] = nts::DefaultComponent::create4030;
+	_genesisMap["4040"] = nts::DefaultComponent::create4040;
+	_genesisMap["4069"] = nts::DefaultComponent::create4069;
+	_genesisMap["4071"] = nts::DefaultComponent::create4071;
+	_genesisMap["4081"] = nts::DefaultComponent::create4081;
+	_genesisMap["4094"] = nts::DefaultComponent::create4094;
+	_genesisMap["4514"] = nts::DefaultComponent::create4514;
+	_genesisMap["4801"] = nts::DefaultComponent::create4801;
+	_genesisMap["input"] = nts::DefaultComponent::createInput;
+	_genesisMap["output"] = nts::DefaultComponent::createOutput;
+	_genesisMap["clock"] = nts::DefaultComponent::createClock;
+	_genesisMap["true"] = nts::DefaultComponent::createTrue;
+	_genesisMap["false"] = nts::DefaultComponent::createFalse;
 }
 
 std::unique_ptr<nts::IComponent> nts::DefaultComponent::create2716(
