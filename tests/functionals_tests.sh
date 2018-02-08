@@ -9,7 +9,8 @@ function diff_test {
 		echo "NOK"
 		RET=1
 		diff $1 $2 --color=auto
-		echo "##########"
+		echo "***"
+		echo
 	else
 		echo "OK"
 	fi
