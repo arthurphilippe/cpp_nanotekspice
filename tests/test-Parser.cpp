@@ -106,11 +106,6 @@ Test(ErrorLink2, Parser, .init = redirect_all_std) {
 	cr_assert(verify);
 }
 
-/*
-Test(sampleTest, Parser, .init = redirect_all_std) {
-}
-*/
-
 Test(EmptyFile, Parser, .init = redirect_all_std) {
 	bool verify = false;
 	char *str[4] = {"nanotekspice", "tests/nts_files/empty.nts", "a=1", NULL};
