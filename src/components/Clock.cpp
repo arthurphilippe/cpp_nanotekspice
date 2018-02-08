@@ -13,6 +13,7 @@ nts::Tristate nts::Clock::_state = TRUE;
 nts::Clock::Clock(const std::string &name)
 {
 	_name.assign(name);
+	_type.assign("clock");
 }
 
 nts::Tristate nts::Clock::compute(std::size_t pin)
