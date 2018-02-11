@@ -1,5 +1,4 @@
 #!/bin/bash
-# echo -e "dump\nreset=1\ndisplay" | ./nanotekspice tests/counter.nts reset=1
 
 RET=0
 
