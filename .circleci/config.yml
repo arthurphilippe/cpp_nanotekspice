@@ -1,4 +1,7 @@
 version: 2
+machine:
+  environment:
+    LD_LIBRARY_PATH:/usr/local/lib
 jobs:
   build:
     docker:
