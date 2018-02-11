@@ -12,6 +12,20 @@ function diff_test {
 		echo "***"
 		echo
 	else
+		if [ $3 -ne $4 ]; then
+			echo "KO"
+			echo "Expected return status $3 but got status $4"
+		else
+			echo "OK"
+		fi
+	fi
+}
+
+function ret_test {
+	if [ $1 -ne $2 ]; then
+		echo "KO"
+		echo "Expected return status $1 but got status $2"
+	else
 		echo "OK"
 	fi
 }
@@ -28,8 +42,7 @@ simulate
 display
 EOF
 
-diff_test tests/logs/test1.log tests/logs/test1.txt
-# RES=$(diff tests/logs/test1.log tests/logs/test1.txt)
+diff_test tests/logs/test1.log tests/logs/test1.txt $? 0
 
 echo -n ":: Running D latch test... "
 
@@ -54,6 +67,18 @@ simulate
 display
 EOF
 
-diff_test tests/logs/test2.log tests/logs/test2.txt
+diff_test tests/logs/test2.log tests/logs/test2.txt $? 0
+
+echo -n ":: Running invalid links test... "
+
+./nanotekspice tests/nts_files/errorlink2.nts reset=1 &> /dev/null
+
+ret_test $? 84
+
+echo -n ":: Running invalid chipset test... "
+
+./nanotekspice tests/nts_files/chipseterror2.nts &> /dev/null
+
+ret_test $? 84
 
 exit $RET
