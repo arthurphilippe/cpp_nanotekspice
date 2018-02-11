@@ -13,7 +13,7 @@ jobs:
           command: make tests
       - run:
           name: Tidy up
-          command: find -name "*.o" -delete -print
+          command: make clean
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
