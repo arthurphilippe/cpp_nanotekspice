@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: arthurphilippe/epitest:1.0.1
+      - image: epitechcontent/epitest-docker
     steps:
       - checkout
       - run:
