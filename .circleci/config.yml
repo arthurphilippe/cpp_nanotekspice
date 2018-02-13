@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: epitechcontent/epitest-docker
+      - image: arthurphilippe/epitech-c-cpp-plain
     steps:
       - checkout
       - run:
@@ -20,7 +20,7 @@ jobs:
             - ~
   build_clang:
     docker:
-      - image: arthurphilippe/clang
+      - image: arthurphilippe/epitech-c-cpp-plain
     steps:
       - checkout
       - run:
@@ -29,7 +29,7 @@ jobs:
 
   test:
     docker:
-      - image: arthurphilippe/epitest:1.0.1
+      - image: arthurphilippe/epitech-c-cpp-plain
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -42,10 +42,20 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  commit:
     jobs:
       - build
       - test:
           requires:
             - build
       - build_clang
+  # planned:
+  #   triggers:
+  #     - schedule:
+  #       cron: "30 9 * * *"
+  #       filters:
+  #         branches:
+  #           only:
+  #             - master
+  #   jobs:
+  #     -
