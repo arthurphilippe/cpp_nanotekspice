@@ -7,10 +7,10 @@ jobs:
       - checkout
       - run:
           name: Build Project
-          command: make
+          command: make -j
       - run:
           name: Build Unit Tests Suites
-          command: make tests
+          command: make tests -j
       - run:
           name: Tidy up
           command: make clean
@@ -25,7 +25,7 @@ jobs:
       - checkout
       - run:
           name: Build Project Using clang
-          command: make CXX=clang++ CPPFLAGS=-W\ -Wextra\ -Wall\ -Werror\ -Iinclude/\ -std=c++17
+          command: make CXX=clang++ CPPFLAGS=-W\ -Wextra\ -Wall\ -Werror\ -Iinclude/\ -std=c++17 -j
 
   test:
     docker:

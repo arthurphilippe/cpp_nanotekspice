@@ -60,6 +60,11 @@ OBJS_TEST	=	$(SRCS_TEST:.cpp=.o)
 
 CPPFLAGS	=	-W -Wextra -Wall -Iinclude/ -std=c++17
 
+%.o: %.cpp
+	@printf "[\033[0;32massembly\033[0m]....%s\n" $<
+	@$(CXX) -c -o $@ $< $(CPPFLAGS)
+
+
 all: $(NAME)
 
 debug: CPPFLAGS += -ggdb
@@ -73,17 +78,21 @@ tests_run: tests
 	@./$(TEST)
 
 $(NAME): $(OBJ_MAIN) $(OBJS)
+	@printf "[\033[0;36mlinkage\033[0m].....%s\n" $(NAME)
 	@$(CXX) $(OBJ_MAIN) $(OBJS) -o $(NAME)
-	@echo " --> $(NAME) built!"
+	@echo -e " --> complete!"
 
 $(TEST): $(OBJS_TEST)
+	@printf "[\033[0;36mlinkage\033[0m].....%s\n" $(TEST)
 	@$(CXX) $(OBJS_TEST) -o $(TEST) -lcriterion
-	@echo " --> $(TEST) built!"
+	@echo -e " --> complete!"
 clean:
-	@$(RM) $(OBJS) $(OBJ_MAIN) $(OBJS_TEST)
+	@echo -en "[\033[0;31mdeletion\033[0m]...." ; $(RM) $(OBJ_MAIN) $(OBJS) $(OBJS_TEST) | wc -l | tr -d '\n'
+	@echo " of $(NAME)'s objects"
 
 fclean: clean
-	@$(RM) $(NAME) $(TEST)
+	@$(RM) $(NAME) $(TEST) > /dev/null
+	@echo -e "[\033[0;31mdeletion\033[0m]....$(NAME)"
 
 re: fclean all
 
