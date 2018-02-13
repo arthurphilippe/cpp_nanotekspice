@@ -36,9 +36,9 @@ namespace nts {
 		void setChipset(const std::string &, std::string &);
 		void setLink(const std::string &, const std::string &);
 		bool argsHandler(int ac, char **av);
-	        bool argsNameChecker(char **av);
+		bool argsNameChecker(char **av);
 		IComponent *getComponent(const std::string &name);
-	        bool rmInputArgs(const std::string &);
+		bool rmInputArgs(const std::string &);
 		std::list<std::unique_ptr<IComponent>> _list;
 		std::string _fileName;
 		int _ac;

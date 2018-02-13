@@ -27,9 +27,10 @@ namespace nts {
 			return _output;
 		}
 	private:
-		static bool sortFunctor(const std::string &a, const std::string &b);
+		static bool sortFunctor(const std::string &a,
+					const std::string &b);
 		std::list<std::unique_ptr<IComponent>> *_components;
-		std::stringstream	_output;
+		std::stringstream _output;
 		void computeOutput(IComponent *comp);
 	};
 }
