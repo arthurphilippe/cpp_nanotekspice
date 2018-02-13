@@ -20,7 +20,7 @@ jobs:
             - ~
   build_clang:
     docker:
-      - image: arthurphilippe/epitech-c-cpp-plain
+      - image: arthurphilippe/clang
     steps:
       - checkout
       - run:
