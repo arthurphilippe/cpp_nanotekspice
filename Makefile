@@ -83,9 +83,9 @@ $(NAME): $(OBJ_MAIN) $(OBJS)
 	@printf "[\033[0;36mlinked\033[0m]......%s\n" $(NAME)
 
 $(TEST): $(OBJS_TEST)
-	@printf "[\033[0;36mlinkage\033[0m].....%s\n" $(TEST)
+	@printf "[\033[0;36mlinking\033[0m].....%s\r" $(TEST)
 	@$(CXX) $(OBJS_TEST) -o $(TEST) -lcriterion
-	@echo -e " --> complete!"
+	@printf "[\033[0;36mlinked\033[0m]......%s\n" $(TEST)
 clean:
 	@echo -en "[\033[0;31mdeletion\033[0m]...." ; $(RM) $(OBJ_MAIN) $(OBJS) $(OBJS_TEST) | wc -l | tr -d '\n'
 	@echo " of $(NAME)'s objects"
