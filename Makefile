@@ -61,9 +61,9 @@ OBJS_TEST	=	$(SRCS_TEST:.cpp=.o)
 CPPFLAGS	=	-W -Wextra -Wall -Iinclude/ -std=c++17
 
 %.o: %.cpp
-	@printf "[\033[0;32massembly\033[0m]....%s\n" $<
+	@printf "[\033[0;36mcompiling\033[0m]...%s\r" $<
 	@$(CXX) -c -o $@ $< $(CPPFLAGS)
-
+	@printf "[\033[0;32mcompiled\033[0m]....%s\n" $<
 
 all: $(NAME)
 
@@ -78,9 +78,9 @@ tests_run: tests
 	@./$(TEST)
 
 $(NAME): $(OBJ_MAIN) $(OBJS)
-	@printf "[\033[0;36mlinkage\033[0m].....%s\n" $(NAME)
+	@printf "[\033[0;36mlinking\033[0m].....%s\r" $(NAME)
 	@$(CXX) $(OBJ_MAIN) $(OBJS) -o $(NAME)
-	@echo -e " --> complete!"
+	@printf "[\033[0;36mlinked\033[0m]......%s\n" $(NAME)
 
 $(TEST): $(OBJS_TEST)
 	@printf "[\033[0;36mlinkage\033[0m].....%s\n" $(TEST)
