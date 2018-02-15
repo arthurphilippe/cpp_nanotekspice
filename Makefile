@@ -63,7 +63,7 @@ CPPFLAGS	=	-W -Wextra -Wall -Iinclude/ -std=c++17
 %.o: %.cpp
 	@printf "[\033[0;36mcompiling\033[0m]...%s\r" $<
 	@$(CXX) -c -o $@ $< $(CPPFLAGS)
-	@printf "[\033[0;32mcompiled\033[0m]....%s\n" $<
+	@printf "[\033[0;32mcompiled\033[0m]....%s                    \n" $<
 
 all: $(NAME)
 
