@@ -102,9 +102,10 @@ bool nts::Runtime::run()
 			_map.clear();
 			throw RuntimeError("exit");
 		}
-		if (!doCommand(command))
+		if (!doCommand(command)) {
 			std::cerr << "nanotekspice: command not found: ";
 			std::cerr << command << std::endl;
+		}
 	}
 	return true;
 }

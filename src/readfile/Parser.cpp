@@ -67,6 +67,7 @@ std::unique_ptr<nts::IComponent> &nts::Parser::getComponent(
 		if ((*i)->getName() == name)
 			return *i;
 	}
+	return *(_list.begin());
 }
 
 int parserTester(int ac, char **av)
