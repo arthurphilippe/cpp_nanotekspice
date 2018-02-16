@@ -68,7 +68,7 @@ definitions of an input");
 ROM can have a value");
 		return ;
 	} else if (((int)name.find("(") > 1 && (int)name.find(")") < 1) ||
-		   ((int)name.find("(") < 1 && (int)name.find(")") > 1)){
+			((int)name.find("(") < 1 && (int)name.find(")") > 1)){
 		throw FileError("Error in the file, check the chipset list");
 	} else {
 		auto tmpComp = nts::ComponentFactory::createComponent(
@@ -84,7 +84,7 @@ ROM can have a value");
 **	Parse and
 */
 void nts::Parser::linkSetter(const std::string &a, const int &a_value,
-			     const std::string &b, const int &b_value)
+				const std::string &b, const int &b_value)
 {
 	bool verif = false;
 	IComponent *tmp;
@@ -184,5 +184,6 @@ void nts::Parser::readFile()
 			checkLine(line);
 	}
 	if (_ac - 2 != _nbrInput)
-		throw FileError("Error : Check the configuration file and the arguments");
+		throw FileError("Error : Check the configuration file and\
+ the arguments");
 }
