@@ -10,10 +10,11 @@
 #include "../include/DefaultComponent.hpp"
 #include "../include/components/Output.hpp"
 #include "../include/components/Input.hpp"
+#include "ComponentFactory.hpp"
 
 Test(Basic, InputOutput) {
-	auto bouton = std::move(nts::DefaultComponent::createComponent("input", "bouton"));
-	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
+	auto bouton = std::move(nts::ComponentFactory::createComponent("input", "bouton"));
+	auto led = std::move(nts::ComponentFactory::createComponent("output", "LED"));
 
 	led->setLink(1, *bouton, 1);
 	bouton->setLink(1, *led, 1);
@@ -36,8 +37,8 @@ Test(Basic, InputOutput) {
 }
 
 Test(Validity, InputOutput) {
-	auto bouton = std::move(nts::DefaultComponent::createComponent("input", "bouton"));
-	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
+	auto bouton = std::move(nts::ComponentFactory::createComponent("input", "bouton"));
+	auto led = std::move(nts::ComponentFactory::createComponent("output", "LED"));
 
 	cr_assert((!led->isValid()));
 	cr_assert((bouton->isValid()));
@@ -49,10 +50,10 @@ Test(Validity, InputOutput) {
 }
 
 Test(Basic, 4001) {
-	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
-	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));
-	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
-	auto chipset = std::move(nts::DefaultComponent::createComponent("4001", "chipset"));
+	auto i1 = std::move(nts::ComponentFactory::createComponent("input", "i1"));
+	auto i2 = std::move(nts::ComponentFactory::createComponent("input", "i2"));
+	auto led = std::move(nts::ComponentFactory::createComponent("output", "LED"));
+	auto chipset = std::move(nts::ComponentFactory::createComponent("4001", "chipset"));
 
 	led->setLink(1, *chipset, 10);
 	chipset->setLink(8, *i1, 1);
@@ -70,10 +71,10 @@ Test(Basic, 4001) {
 }
 
 Test(Basic, 4011) {
-	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
-	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));
-	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
-	auto chipset = std::move(nts::DefaultComponent::createComponent("4011", "chipset"));
+	auto i1 = std::move(nts::ComponentFactory::createComponent("input", "i1"));
+	auto i2 = std::move(nts::ComponentFactory::createComponent("input", "i2"));
+	auto led = std::move(nts::ComponentFactory::createComponent("output", "LED"));
+	auto chipset = std::move(nts::ComponentFactory::createComponent("4011", "chipset"));
 
 	led->setLink(1, *chipset, 10);
 	chipset->setLink(8, *i1, 1);
@@ -91,10 +92,10 @@ Test(Basic, 4011) {
 }
 
 Test(Basic, 4030) {
-	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
-	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));
-	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
-	auto chipset = std::move(nts::DefaultComponent::createComponent("4030", "chipset"));
+	auto i1 = std::move(nts::ComponentFactory::createComponent("input", "i1"));
+	auto i2 = std::move(nts::ComponentFactory::createComponent("input", "i2"));
+	auto led = std::move(nts::ComponentFactory::createComponent("output", "LED"));
+	auto chipset = std::move(nts::ComponentFactory::createComponent("4030", "chipset"));
 
 	led->setLink(1, *chipset, 10);
 	chipset->setLink(8, *i1, 1);
@@ -114,10 +115,10 @@ Test(Basic, 4030) {
 }
 
 Test(Basic, 4071) {
-	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
-	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));
-	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
-	auto chipset = std::move(nts::DefaultComponent::createComponent("4071", "chipset"));
+	auto i1 = std::move(nts::ComponentFactory::createComponent("input", "i1"));
+	auto i2 = std::move(nts::ComponentFactory::createComponent("input", "i2"));
+	auto led = std::move(nts::ComponentFactory::createComponent("output", "LED"));
+	auto chipset = std::move(nts::ComponentFactory::createComponent("4071", "chipset"));
 
 	led->setLink(1, *chipset, 10);
 	chipset->setLink(8, *i1, 1);
@@ -137,10 +138,10 @@ Test(Basic, 4071) {
 }
 
 Test(Basic, 4081) {
-	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
-	auto i2 = std::move(nts::DefaultComponent::createComponent("input", "i2"));
-	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
-	auto chipset = std::move(nts::DefaultComponent::createComponent("4081", "chipset"));
+	auto i1 = std::move(nts::ComponentFactory::createComponent("input", "i1"));
+	auto i2 = std::move(nts::ComponentFactory::createComponent("input", "i2"));
+	auto led = std::move(nts::ComponentFactory::createComponent("output", "LED"));
+	auto chipset = std::move(nts::ComponentFactory::createComponent("4081", "chipset"));
 
 	led->setLink(1, *chipset, 10);
 	chipset->setLink(8, *i1, 1);
@@ -158,9 +159,9 @@ Test(Basic, 4081) {
 }
 
 Test(Basic, 4069) {
-	auto i1 = std::move(nts::DefaultComponent::createComponent("input", "i1"));
-	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
-	auto chipset = std::move(nts::DefaultComponent::createComponent("4069", "chipset"));
+	auto i1 = std::move(nts::ComponentFactory::createComponent("input", "i1"));
+	auto led = std::move(nts::ComponentFactory::createComponent("output", "LED"));
+	auto chipset = std::move(nts::ComponentFactory::createComponent("4069", "chipset"));
 
 	led->setLink(1, *chipset, 13);
 	chipset->setLink(12, *i1, 1);
@@ -172,12 +173,12 @@ Test(Basic, 4069) {
 }
 
 Test(Basic, 4013) {
-	auto clock = std::move(nts::DefaultComponent::createComponent("input", "clock"));
-	auto set = std::move(nts::DefaultComponent::createComponent("input", "set"));
-	auto reset = std::move(nts::DefaultComponent::createComponent("input", "reset"));
-	auto data = std::move(nts::DefaultComponent::createComponent("input", "data"));
-	auto led = std::move(nts::DefaultComponent::createComponent("output", "LED"));
-	auto chipset = std::move(nts::DefaultComponent::createComponent("4013", "chipset"));
+	auto clock = std::move(nts::ComponentFactory::createComponent("input", "clock"));
+	auto set = std::move(nts::ComponentFactory::createComponent("input", "set"));
+	auto reset = std::move(nts::ComponentFactory::createComponent("input", "reset"));
+	auto data = std::move(nts::ComponentFactory::createComponent("input", "data"));
+	auto led = std::move(nts::ComponentFactory::createComponent("output", "LED"));
+	auto chipset = std::move(nts::ComponentFactory::createComponent("4013", "chipset"));
 
 	led->setLink(1, *chipset, 1);
 	chipset->setLink(3, *clock, 1);

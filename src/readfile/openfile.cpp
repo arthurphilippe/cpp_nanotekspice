@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include "ComponentFactory.hpp"
 #include "Readfile.hpp"
 #include "Error.hpp"
 
@@ -44,8 +45,8 @@ void nts::Parser::setROM(const std::string &type, std::string &name)
 	name = name.substr(0, name.find("("));
 	value.erase(std::remove(value.begin(), value.end(), '('), value.end());
 	value.erase(std::remove(value.begin(), value.end(), ')'), value.end());
-	auto tmpComp = nts::DefaultComponent::
-				 createComponent(type, name, value);
+	auto tmpComp = nts::ComponentFactory::createComponent(type, name,
+								value);
 	_list.push_back(std::move(tmpComp));
 }
 
@@ -70,7 +71,7 @@ ROM can have a value");
 		   ((int)name.find("(") < 1 && (int)name.find(")") > 1)){
 		throw FileError("Error in the file, check the chipset list");
 	} else {
-		auto tmpComp = nts::DefaultComponent::createComponent(
+		auto tmpComp = nts::ComponentFactory::createComponent(
 				type, name);
 		_list.push_back(std::move(tmpComp));
 		if (type.compare("input") == 0) {
