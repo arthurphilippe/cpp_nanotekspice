@@ -37,7 +37,7 @@ void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork a)
 /*
 **	Parse the 'Rom' type Chipset
 */
-void nts::Parser::setROM(const std::string &type, std::string &name)
+void nts::Parser::setRom(const std::string &type, std::string &name)
 {
 	std::string value;
 
@@ -62,10 +62,10 @@ definitions of an input");
 		throw FileError("Error in the file, check the chipset list");
 	if ((int)name.find("(") > 1 && (int)name.find(")") > 1) {
 		if (type.compare("2716") == 0)
-			setROM(type, name);
+			setRom(type, name);
 		else
 			throw FileError("Error in the file, only the \
-ROM can have a value");
+Rom can have a value");
 		return ;
 	} else if (((int)name.find("(") > 1 && (int)name.find(")") < 1) ||
 			((int)name.find("(") < 1 && (int)name.find(")") > 1)){

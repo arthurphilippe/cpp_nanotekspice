@@ -28,7 +28,7 @@ namespace nts {
 	private:
 		void isValid() const;
 		void checkLine(std::string line);
-		void setROM(const std::string &type, std::string &name);
+		void setRom(const std::string &type, std::string &name);
 		void linkSetter(const std::string &, const int &,
 				const std::string &, const int &);
 		void readFile();
