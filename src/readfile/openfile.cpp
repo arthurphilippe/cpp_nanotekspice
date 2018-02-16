@@ -81,7 +81,7 @@ ROM can have a value");
 }
 
 /*
-**	Parse and
+**	Parse and link
 */
 void nts::Parser::linkSetter(const std::string &a, const int &a_value,
 				const std::string &b, const int &b_value)

@@ -12,7 +12,7 @@
 #include "Simulation.hpp"
 
 nts::Simulation::Simulation(std::list<std::unique_ptr<nts::IComponent>> &comps)
-	: _components(&comps), _output()
+	: _components(comps), _output()
 {
 	run();
 	display();
@@ -21,24 +21,18 @@ nts::Simulation::Simulation(std::list<std::unique_ptr<nts::IComponent>> &comps)
 nts::Simulation::~Simulation()
 {}
 
-void nts::Simulation::run(std::list<std::unique_ptr<nts::IComponent>> &comps)
-{
-	_components = &comps;
-	run();
-}
-
 void nts::Simulation::run()
 {
-	auto it = _components->begin();
+	auto it = _components.begin();
 
 	_output.str("");
-	while (it != _components->end()) {
+	while (it != _components.end()) {
 		std::unique_ptr<IComponent> &comp = *it;
 		if (comp->getType().compare("output") == 0)
 			computeOutput(comp);
 		++it;
 	}
-	for (auto i = _components->begin() ; i != _components->end(); ++i) {
+	for (auto i = _components.begin() ; i != _components.end(); ++i) {
 		std::unique_ptr<IComponent> &comp = *i;
 		if (comp->getType().compare("clock") == 0)
 			comp->compute(2);
