@@ -25,11 +25,8 @@ nts::Parser::Parser(int ac, char **av)
 
 void nts::Parser::isValid() const
 {
-	IComponent *tmp;
-
 	for (auto i = _list.begin(); i != _list.end(); i++) {
-		tmp = i->get();
-		if (!tmp->isValid())
+		if (!(*i)->isValid())
 			throw FileError("Error : Ouput not linked");
 	}
 }
@@ -41,11 +38,8 @@ std::list<std::unique_ptr<nts::IComponent>> &nts::Parser::getList()
 
 void nts::Parser::listDump()
 {
-	nts::IComponent *tmp;
-
 	for (auto i = _list.begin(); i != _list.end(); i++) {
-		tmp = i->get();
-		tmp->dump();
+		(*i)->dump();
 	}
 }
 
