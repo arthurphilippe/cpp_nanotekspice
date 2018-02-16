@@ -49,6 +49,4 @@ namespace nts {
 	};
 };
 
-int parserTester(int ac, char **av);
-
 #endif /* READFILE_HPP_ */
