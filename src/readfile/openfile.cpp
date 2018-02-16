@@ -128,7 +128,7 @@ void nts::Parser::setLink(const std::string &a, const std::string &b)
 	if ((i = a.find(":")) < 1)
 		throw FileError("Error in the file links");
 	a_chipset = a.substr(0, i);
-	i++;
+	i += 1;
 	a_value = a.substr(i, a.length());
 	if (a_value.length() < 1)
 		throw FileError(
@@ -137,13 +137,13 @@ One of the chipset isn't linked to an pin");
 	if ((i = b.find(":")) < 1)
 		throw FileError("Error in the file links");
 	b_chipset = b.substr(0, i);
-	i++;
+	i += 1;
 	b_value = b.substr(i, b.length());
 	if (b_value.length() < 1)
 		throw FileError("Error in the \
 file links : One of the chipset isn't linked to an pin");
 	linkSetter(a_chipset, std::stoi(a_value),
-		   b_chipset, std::stoi(b_value));
+			b_chipset, std::stoi(b_value));
 }
 
 /*
