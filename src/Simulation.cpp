@@ -7,6 +7,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include "DefaultComponent.hpp"
 #include "Simulation.hpp"
 
@@ -28,18 +29,17 @@ void nts::Simulation::run(std::list<std::unique_ptr<nts::IComponent>> &comps)
 
 void nts::Simulation::run()
 {
-	auto		it = _components->begin();
-	IComponent	*comp;
+	auto it = _components->begin();
 
 	_output.str("");
 	while (it != _components->end()) {
-		comp = it->get();
+		std::unique_ptr<IComponent> &comp = *it;
 		if (comp->getType().compare("output") == 0)
 			computeOutput(comp);
 		++it;
 	}
-	for (auto i = _components->begin() ; i != _components->end(); i++) {
-		comp = i->get();
+	for (auto i = _components->begin() ; i != _components->end(); ++i) {
+		std::unique_ptr<IComponent> &comp = *i;
 		if (comp->getType().compare("clock") == 0)
 			comp->compute(2);
 	}
@@ -87,7 +87,7 @@ void nts::Simulation::loop()
 	}
 }
 
-void nts::Simulation::computeOutput(IComponent *comp)
+void nts::Simulation::computeOutput(std::unique_ptr<IComponent> &comp)
 {
 	auto state = comp->compute();
 

@@ -31,7 +31,7 @@ namespace nts {
 					const std::string &b);
 		std::list<std::unique_ptr<IComponent>> *_components;
 		std::stringstream _output;
-		void computeOutput(IComponent *comp);
+		void computeOutput(std::unique_ptr<IComponent> &comp);
 	};
 }
 

@@ -44,21 +44,29 @@ void nts::Parser::listDump()
 	nts::IComponent *tmp;
 
 	for (auto i = _list.begin(); i != _list.end(); i++) {
-		tmp = i->get();		
+		tmp = i->get();
 		tmp->dump();
 	}
 }
 
-nts::IComponent *nts::Parser::getComponent(const std::string &name)
+bool nts::Parser::isComponentInList(const std::string &name)
 {
-	nts::IComponent *tmp;
+	bool found = false;
 
 	for (auto i = _list.begin(); i != _list.end(); i++) {
-		tmp = i->get();
-		if (tmp->getName() == name)
-			return tmp;
+		if ((*i)->getName() == name)
+			found = true;
 	}
-	return nullptr;
+	return found;
+}
+
+std::unique_ptr<nts::IComponent> &nts::Parser::getComponent(
+	const std::string &name)
+{
+	for (auto i = _list.begin(); i != _list.end(); i++) {
+		if ((*i)->getName() == name)
+			return *i;
+	}
 }
 
 int parserTester(int ac, char **av)

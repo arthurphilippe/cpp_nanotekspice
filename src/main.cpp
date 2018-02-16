@@ -29,7 +29,7 @@ int main(int ac, char **av)
 	try {
 		nts::Runtime test(ac, av);
 		test.run();
-       	}
+	}
 	catch (const RuntimeError &error) {
 		if (error.getError().compare("exit") == 0)
 			return 0;
@@ -39,7 +39,7 @@ int main(int ac, char **av)
 			error.what();
 			return 84;
 		}
-	} 
+	}
 	return 0;
 }
 

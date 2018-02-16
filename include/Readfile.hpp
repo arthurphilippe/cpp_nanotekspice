@@ -37,7 +37,9 @@ namespace nts {
 		void setLink(const std::string &, const std::string &);
 		bool argsHandler(int ac, char **av);
 		bool argsNameChecker(char **av);
-		IComponent *getComponent(const std::string &name);
+		bool isComponentInList(const std::string &name);
+		std::unique_ptr<nts::IComponent> &getComponent(
+			const std::string &name);
 		bool rmInputArgs(const std::string &);
 		std::list<std::unique_ptr<IComponent>> _list;
 		std::string _fileName;

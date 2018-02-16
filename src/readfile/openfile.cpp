@@ -55,7 +55,7 @@ void nts::Parser::setROM(const std::string &type, std::string &name)
 */
 void nts::Parser::setChipset(const std::string &type, std::string &name)
 {
-	if (getComponent(name) != nullptr)
+	if (isComponentInList(name))
 		throw FileError("Error in the file, there are multiple re\
 definitions of an input");
 	if (name.length() < 1)
@@ -83,6 +83,7 @@ ROM can have a value");
 /*
 **	Parse and
 */
+// SUBDIVIDE!!!
 void nts::Parser::linkSetter(const std::string &a, const int &a_value,
 				const std::string &b, const int &b_value)
 {
