@@ -69,7 +69,6 @@ namespace nts{
 				const std::string &name);
 			static std::unique_ptr<IComponent> createClock(
 				const std::string &name);
-
 	};
 }
 
