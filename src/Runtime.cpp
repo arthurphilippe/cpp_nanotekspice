@@ -82,7 +82,7 @@ bool nts::Runtime::doCommand(std::string &command)
 {
 	_state = RUN;
 	if (command.length() > 0) {
-		if ((int)command.find("=") > 0)
+		if ((int) command.find("=") > 0)
 			callInputValueChanger(command);
 		else
 			findCommand(command);
