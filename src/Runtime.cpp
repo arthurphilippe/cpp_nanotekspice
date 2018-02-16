@@ -69,7 +69,7 @@ void nts::Runtime::findCommand(const std::string &str)
 {
 	RunFuncPtr test;
 	if (str.length() > 0) {
-		if (_map.find("str") == _map.end())
+		if (_map.find(str) == _map.end())
 			return;
 		test = _map[str];
 		_state = COMMAND_LAUNCHED;
