@@ -32,7 +32,6 @@ namespace nts {
 		void callDump();
 		void callInputValueChanger(std::string &line);
 		void findCommand(const std::string &str);
-		// typedef void (nts::Runtime::*RunFuncPtr)(void);
 		typedef std::function<void(void)> RunFuncPtr;
 		std::map<std::string, RunFuncPtr> _map;
 	private:
