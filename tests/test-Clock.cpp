@@ -11,14 +11,14 @@
 #include "../include/components/Clock.hpp"
 
 Test(BasicTest, Clock) {
-	auto clock = nts::DefaultComponent::createComponent("clock", "main");
+	auto clock = nts::ComponentFactory::createComponent("clock", "main");
 	auto state = clock->compute(1);
 
 	cr_assert(state == nts::TRUE);
 }
 
 Test(Flip, Clock) {
-	auto clock = nts::DefaultComponent::createComponent("clock", "main");
+	auto clock = nts::ComponentFactory::createComponent("clock", "main");
 	auto state = clock->compute(1);
 
 	cr_assert(state == nts::TRUE);

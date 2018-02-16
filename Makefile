@@ -34,6 +34,7 @@ SRCS		=	src/LogicGates.cpp			\
 			src/components/Clock.cpp		\
 			src/components/Output.cpp		\
 			src/components/Input.cpp		\
+			src/ComponentFactory.cpp		\
 			src/readfile/openfile.cpp		\
 			src/Error.cpp				\
 			src/readfile/Parser.cpp			\
