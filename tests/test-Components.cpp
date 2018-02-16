@@ -10,6 +10,7 @@
 #include "../include/DefaultComponent.hpp"
 #include "../include/components/Output.hpp"
 #include "../include/components/Input.hpp"
+#include "ComponentFactory.hpp"
 
 Test(Basic, InputOutput) {
 	auto bouton = std::move(nts::ComponentFactory::createComponent("input", "bouton"));

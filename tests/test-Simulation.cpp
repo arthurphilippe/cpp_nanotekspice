@@ -13,6 +13,7 @@
 #include "../include/IComponent.hpp"
 #include "../include/DefaultComponent.hpp"
 #include "../include/Simulation.hpp"
+#include "ComponentFactory.hpp"
 #include <criterion/logging.h>
 
 static void redirect_all_std(void)

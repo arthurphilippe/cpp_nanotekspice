@@ -7,6 +7,7 @@
 
 #include <criterion/criterion.h>
 #include <criterion/assert.h>
+#include "ComponentFactory.hpp"
 #include "../include/DefaultComponent.hpp"
 #include "../include/components/Clock.hpp"
 
