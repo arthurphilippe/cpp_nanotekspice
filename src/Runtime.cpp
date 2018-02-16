@@ -15,11 +15,11 @@
 nts::Runtime::Runtime(int ac, char **av)
 try : _state(RUN), _args(ac, av), _sim(_args.getList())
 {
-	_map["exit"] = &Runtime::exitProgram;
-	_map["display"] = &Runtime::callDisplay;
-	_map["dump"] = &Runtime::callDump;
-	_map["simulate"] = &Runtime::callSimulate;
-	_map["loop"] = &Runtime::callLoop;
+	_map["exit"] = std::bind(&Runtime::exitProgram, this);
+	_map["display"] = std::bind(&Runtime::callDisplay, this);
+	_map["dump"] = std::bind(&Runtime::callDump, this);
+	_map["simulate"] = std::bind(&Runtime::callSimulate, this);
+	_map["loop"] = std::bind(&Runtime::callLoop, this);
 }
 catch (const FileError &error)
 {
@@ -69,13 +69,13 @@ void nts::Runtime::findCommand(const std::string &str)
 {
 	RunFuncPtr test;
 	if (str.length() > 0) {
+		if (_map.find("str") == _map.end())
+			return;
 		test = _map[str];
-		if (test != NULL) {
-			_state = COMMAND_LAUNCHED;
-			return (this->*test)();
-		}
+		_state = COMMAND_LAUNCHED;
+		test();
 	}
-	return ;
+	return;
 }
 
 bool nts::Runtime::doCommand(std::string &command)

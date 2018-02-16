@@ -1,12 +1,12 @@
-//
-// EPITECH PROJECT, 2018
-//
-// File description:
-//
-//
+/*
+** EPITECH PROJECT, 2018
+** cpp_nanotekspice
+** File description:
+** Readfile
+*/
 
 #ifndef READFILE_HPP_
-	# define READFILE_HPP_
+	#define READFILE_HPP_
 
 #include <list>
 #include <memory>
