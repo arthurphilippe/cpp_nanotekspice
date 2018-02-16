@@ -18,7 +18,6 @@ namespace nts {
 		Simulation(std::list<std::unique_ptr<IComponent>> &);
 		~Simulation();
 		void run();
-		void run(std::list<std::unique_ptr<IComponent>> &);
 		void display();
 		void loop();
 		void printSortedOutput();
@@ -29,9 +28,9 @@ namespace nts {
 	private:
 		static bool sortFunctor(const std::string &a,
 					const std::string &b);
-		std::list<std::unique_ptr<IComponent>> *_components;
+		std::list<std::unique_ptr<IComponent>> &_components;
 		std::stringstream _output;
-		void computeOutput(IComponent *comp);
+		void computeOutput(std::unique_ptr<IComponent> &comp);
 	};
 }
 

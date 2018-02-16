@@ -10,6 +10,8 @@
 #include "Readfile.hpp"
 #include "Error.hpp"
 
+int parserTester(int ac, char **av);
+
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wwrite-strings"
 

@@ -52,14 +52,14 @@ void nts::Parser::argsChecker(const char *str)
 	std::string chipset;
 	std::string value;
 	int tokenPlace;
-	IComponent *tmp;
 
 	tokenPlace = arg.find("=");
 	chipset = arg.substr(0, tokenPlace);
 	value = arg.substr(tokenPlace + 1, arg.length());
 	if (value.compare("1") != 0 && value.compare("0") != 0)
 		throw FileError("Error : Check the value !");
-	if ((tmp = getComponent(chipset)) != nullptr) {
+	if (isComponentInList(chipset)) {
+		auto &tmp = getComponent(chipset);
 		if (value.compare("0") == 0)
 			tmp->compute(3);
 		else

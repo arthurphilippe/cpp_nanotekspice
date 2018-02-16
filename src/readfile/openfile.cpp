@@ -37,7 +37,7 @@ void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork a)
 /*
 **	Parse the 'Rom' type Chipset
 */
-void nts::Parser::setROM(const std::string &type, std::string &name)
+void nts::Parser::setRom(const std::string &type, std::string &name)
 {
 	std::string value;
 
@@ -55,17 +55,17 @@ void nts::Parser::setROM(const std::string &type, std::string &name)
 */
 void nts::Parser::setChipset(const std::string &type, std::string &name)
 {
-	if (getComponent(name) != nullptr)
+	if (isComponentInList(name))
 		throw FileError("Error in the file, there are multiple re\
 definitions of an input");
 	if (name.length() < 1)
 		throw FileError("Error in the file, check the chipset list");
 	if ((int)name.find("(") > 1 && (int)name.find(")") > 1) {
 		if (type.compare("2716") == 0)
-			setROM(type, name);
+			setRom(type, name);
 		else
 			throw FileError("Error in the file, only the \
-ROM can have a value");
+Rom can have a value");
 		return ;
 	} else if (((int)name.find("(") > 1 && (int)name.find(")") < 1) ||
 			((int)name.find("(") < 1 && (int)name.find(")") > 1)){
@@ -81,39 +81,16 @@ ROM can have a value");
 }
 
 /*
-**	Parse and
+**	Parse and link
 */
 void nts::Parser::linkSetter(const std::string &a, const int &a_value,
 				const std::string &b, const int &b_value)
 {
-	bool verif = false;
-	IComponent *tmp;
-	IComponent *tmp_b;
-
-	for (auto i = _list.begin(); i != _list.end(); i++) {
-		tmp_b = i->get();
-		if (tmp_b == nullptr)
-			break ;
-		if (tmp_b->getName() == b) {
-			verif = true;
-			break ;
-		}
-	}
-	if (verif == false)
+	if (!isComponentInList(a) || !isComponentInList(b))
 		throw FileError("Error in the linkSetter");
-	verif = false;
-	for (auto i = _list.begin(); i != _list.end(); i++) {
-		tmp = i->get();
-		if (tmp == nullptr)
-			break ;
-		if (tmp->getName() == a) {
-			tmp->setLink(a_value, *tmp_b, b_value);
-			verif = true;
-			break ;
-		}
-	}
-	if (verif == false)
-		throw FileError("Error in the linkSettere");
+	auto &tmp = getComponent(a);
+	auto &tmp_b = getComponent(b);
+	tmp->setLink(a_value, *tmp_b, b_value);
 	tmp_b->setLink(b_value, *tmp, a_value);
 }
 

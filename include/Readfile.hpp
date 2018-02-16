@@ -1,12 +1,12 @@
-//
-// EPITECH PROJECT, 2018
-//
-// File description:
-//
-//
+/*
+** EPITECH PROJECT, 2018
+** cpp_nanotekspice
+** File description:
+** Readfile
+*/
 
 #ifndef READFILE_HPP_
-	# define READFILE_HPP_
+	#define READFILE_HPP_
 
 #include <list>
 #include <memory>
@@ -28,7 +28,7 @@ namespace nts {
 	private:
 		void isValid() const;
 		void checkLine(std::string line);
-		void setROM(const std::string &type, std::string &name);
+		void setRom(const std::string &type, std::string &name);
 		void linkSetter(const std::string &, const int &,
 				const std::string &, const int &);
 		void readFile();
@@ -37,7 +37,9 @@ namespace nts {
 		void setLink(const std::string &, const std::string &);
 		bool argsHandler(int ac, char **av);
 		bool argsNameChecker(char **av);
-		IComponent *getComponent(const std::string &name);
+		bool isComponentInList(const std::string &name);
+		std::unique_ptr<nts::IComponent> &getComponent(
+			const std::string &name);
 		bool rmInputArgs(const std::string &);
 		std::list<std::unique_ptr<IComponent>> _list;
 		std::string _fileName;
@@ -46,7 +48,5 @@ namespace nts {
 		std::vector<std::string> _vector;
 	};
 };
-
-int parserTester(int ac, char **av);
 
 #endif /* READFILE_HPP_ */

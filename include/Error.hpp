@@ -6,7 +6,7 @@
 //
 
 #ifndef ERROR_HPP_
-	# define ERROR_HPP_
+	#define ERROR_HPP_
 
 #include <iostream>
 #include <exception>
