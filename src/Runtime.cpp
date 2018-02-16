@@ -96,7 +96,7 @@ bool nts::Runtime::run()
 	while (true)
 	{
 		if (isatty(fileno(stdin)))
-			std::cout << ">";
+			std::cout << "> ";
 		getline(std::cin, command);
 		if (std::cin.eof()) {
 			_map.clear();
