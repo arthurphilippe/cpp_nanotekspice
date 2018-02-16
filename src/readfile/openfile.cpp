@@ -155,7 +155,8 @@ void nts::Parser::checkLine(std::string line)
 	static std::string temporary;
 
 	if (line[0] == '.') {
-		if (line.compare(".links:") == 0 || line.compare(".chipsets:") == 0)
+		if (line.compare(".links:") == 0
+			|| line.compare(".chipsets:") == 0)
 			temporary = line;
 		else
 			throw FileError("Error : .links or .chipsets not present");
