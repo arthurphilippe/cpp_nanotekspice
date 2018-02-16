@@ -83,38 +83,14 @@ ROM can have a value");
 /*
 **	Parse and
 */
-// SUBDIVIDE!!!
 void nts::Parser::linkSetter(const std::string &a, const int &a_value,
 				const std::string &b, const int &b_value)
 {
-	bool verif = false;
-	IComponent *tmp;
-	IComponent *tmp_b;
-
-	for (auto i = _list.begin(); i != _list.end(); i++) {
-		tmp_b = i->get();
-		if (tmp_b == nullptr)
-			break ;
-		if (tmp_b->getName() == b) {
-			verif = true;
-			break ;
-		}
-	}
-	if (verif == false)
+	if (!isComponentInList(a) || !isComponentInList(b))
 		throw FileError("Error in the linkSetter");
-	verif = false;
-	for (auto i = _list.begin(); i != _list.end(); i++) {
-		tmp = i->get();
-		if (tmp == nullptr)
-			break ;
-		if (tmp->getName() == a) {
-			tmp->setLink(a_value, *tmp_b, b_value);
-			verif = true;
-			break ;
-		}
-	}
-	if (verif == false)
-		throw FileError("Error in the linkSettere");
+	auto &tmp = getComponent(a);
+	auto &tmp_b = getComponent(b);
+	tmp->setLink(a_value, *tmp_b, b_value);
 	tmp_b->setLink(b_value, *tmp, a_value);
 }
 
