@@ -40,6 +40,27 @@ jobs:
           name: Functional Tests Execution
           command: ./tests/functionals_tests.sh
 
+  epitest:
+    docker:
+      - image: epitechcontent/epitest-docker
+    steps:
+      - checkout
+      - run:
+          name: Build Project
+          command: make -j 4
+      - run:
+          name: Build Unit Tests Suites
+          command: make tests -j 4
+      - run:
+          name: Tidy up
+          command: make clean
+      - run:
+          name: Unit Tests Execution
+          command: ./unit_tests.out
+      - run:
+          name: Functional Tests Execution
+          command: ./tests/functionals_tests.sh
+
 workflows:
   version: 2
   commit:
@@ -49,13 +70,13 @@ workflows:
           requires:
             - build
       - build_clang
-  # planned:
-  #   triggers:
-  #     - schedule:
-  #       cron: "30 9 * * *"
-  #       filters:
-  #         branches:
-  #           only:
-  #             - master
-  #   jobs:
-  #     -
+  planned:
+    triggers:
+      - schedule:
+        cron: "00 22 * * *"
+        filters:
+          branches:
+            only:
+              - master
+    jobs:
+      - epitest
