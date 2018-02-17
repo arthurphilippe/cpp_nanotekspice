@@ -73,10 +73,10 @@ workflows:
   planned:
     triggers:
       - schedule:
-        cron: "00 22 * * *"
-        filters:
-          branches:
-            only:
-              - master
+          cron: "0 22 * * *"
+          filters:
+            branches:
+              only:
+                - master
     jobs:
       - epitest
