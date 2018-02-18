@@ -45,9 +45,8 @@ void nts::Parser::setRom(const std::string &type, std::string &name)
 	name = name.substr(0, name.find("("));
 	value.erase(std::remove(value.begin(), value.end(), '('), value.end());
 	value.erase(std::remove(value.begin(), value.end(), ')'), value.end());
-	auto tmpComp = nts::ComponentFactory::createComponent(type, name,
-								value);
-	_list.push_back(std::move(tmpComp));
+	auto comp = nts::ComponentFactory::createComponent(type, name, value);
+	_list.push_back(std::move(comp));
 }
 
 /*
