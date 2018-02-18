@@ -17,6 +17,7 @@ bool g_int_signal_rcvd(false);
 
 static void sig_handler(int signum)
 {
+	(void) signum;
 	g_int_signal_rcvd = true;
 }
 
