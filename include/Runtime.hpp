@@ -32,7 +32,7 @@ namespace nts {
 		void callDump();
 		void callInputValueChanger(std::string &line);
 		void findCommand(const std::string &str);
-		typedef std::function<void(void)> RunFuncPtr;
+		using RunFuncPtr = std::function<void(void)>;
 		std::map<std::string, RunFuncPtr> _map;
 	private:
 		RunState _state;
