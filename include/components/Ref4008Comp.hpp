@@ -8,7 +8,7 @@
 #ifndef REF4008COMP_HPP_
 	#define REF4008COMP_HPP_
 
-	#include <list>
+	#include <vector>
 	#include "DefaultComponent.hpp"
 
 namespace nts {
@@ -24,7 +24,7 @@ namespace nts {
 		Ref4008Comp(const std::string &name);
 		virtual Tristate compute(std::size_t pin = 1) override;
 	private:
-		std::list<TruthStatement> _truthTable;
+		std::vector<TruthStatement> _truthTable;
 		Tristate completeAdder(Tristate, Tristate, Tristate,
 					Tristate &);
 	};
