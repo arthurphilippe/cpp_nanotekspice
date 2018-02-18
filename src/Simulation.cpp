@@ -8,14 +8,29 @@
 #include <algorithm>
 #include <iostream>
 #include <memory>
+#include <signal.h>
+#include "Error.hpp"
 #include "DefaultComponent.hpp"
 #include "Simulation.hpp"
+
+bool g_int_signal_rcvd(false);
+
+static void sig_handler(int signum)
+{
+	g_int_signal_rcvd = true;
+}
 
 nts::Simulation::Simulation(std::list<std::unique_ptr<nts::IComponent>> &comps)
 	: _components(comps), _output()
 {
 	run();
 	display();
+
+	struct sigaction sa;
+	sa.sa_handler = sig_handler;
+	sa.sa_flags = SA_RESTART;
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+		throw RuntimeError("Error: Sigaction");
 }
 
 nts::Simulation::~Simulation()
@@ -76,7 +91,8 @@ void nts::Simulation::display()
 
 void nts::Simulation::loop()
 {
-	while (true) {
+	g_int_signal_rcvd = 0;
+	while (!g_int_signal_rcvd) {
 		run();
 	}
 }
