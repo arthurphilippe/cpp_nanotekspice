@@ -22,7 +22,7 @@ void nts::Simulation::sigIntHandler(int signum)
 	std::cout << std::endl;
 }
 
-nts::Simulation::Simulation(std::list<std::unique_ptr<nts::IComponent>> &comps)
+nts::Simulation::Simulation(std::vector<std::unique_ptr<nts::IComponent>> &comps)
 	: _components(comps), _output()
 {
 	run();
