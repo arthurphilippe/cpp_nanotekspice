@@ -31,7 +31,7 @@ void nts::Parser::isValid() const
 	}
 }
 
-std::list<std::unique_ptr<nts::IComponent>> &nts::Parser::getList()
+std::vector<std::unique_ptr<nts::IComponent>> &nts::Parser::getList()
 {
 	return _list;
 }
@@ -66,7 +66,7 @@ std::unique_ptr<nts::IComponent> &nts::Parser::getComponent(
 
 int parserTester(int ac, char **av)
 {
-	std::list<std::unique_ptr<nts::IComponent>> list;
+	std::vector<std::unique_ptr<nts::IComponent>> list;
 
 	if (ac > 1)
 	{
