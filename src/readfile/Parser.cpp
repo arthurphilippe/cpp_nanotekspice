@@ -36,7 +36,7 @@ std::vector<std::unique_ptr<nts::IComponent>> &nts::Parser::getList()
 	return _list;
 }
 
-void nts::Parser::listDump()
+void nts::Parser::listDump() const
 {
 	for (auto i = _list.begin(); i != _list.end(); i++) {
 		(*i)->dump();
