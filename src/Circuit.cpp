@@ -53,7 +53,59 @@ void nts::Circuit::Parser::_parseLine(const std::string &line)
 	if (_currMode == CHIPSET)
 		_setChipset(first, value);
 	else
-		_setLink(first, value);
+		_parseLink(first, value);
+}
+
+void nts::Circuit::Parser::_parseLink(const std::string &a,
+					const std::string &b)
+{
+	std::string a_chipset;
+	std::string a_value;
+	std::string b_chipset;
+	std::string b_value;
+	int i = 0;
+
+	if ((i = a.find(":")) < 1)
+		throw FileError("Error in the file links");
+	a_chipset = a.substr(0, i);
+	i += 1;
+	a_value = a.substr(i, a.length());
+	if (a_value.length() < 1)
+		throw FileError(
+			"Error in the file links : \
+One of the chipset isn't linked to an pin");
+	if ((i = b.find(":")) < 1)
+		throw FileError("Error in the file links");
+	b_chipset = b.substr(0, i);
+	i += 1;
+	b_value = b.substr(i, b.length());
+	if (b_value.length() < 1)
+		throw FileError("Error: links: \
+One of the chipset isn't linked to an pin");
+	_setLink(a_chipset, std::stoi(a_value),
+			b_chipset, std::stoi(b_value));
+
+}
+
+void nts::Circuit::Parser::_setLink(const std::string &a, const int &a_value,
+				const std::string &b, const int &b_value)
+{
+	if (!_isComponentInList(a) || !_isComponentInList(b))
+		throw FileError("Error: _setLink: missing component");
+	auto &tmp = _getComponent(a);
+	auto &tmp_b = _getComponent(b);
+	tmp->setLink(a_value, *tmp_b, b_value);
+	tmp_b->setLink(b_value, *tmp, a_value);
+}
+
+std::unique_ptr<nts::IComponent> &nts::Circuit::Parser::_getComponent(
+	const std::string &name)
+{
+	for (auto i = _components.begin(); i != _components.end(); i++) {
+		if ((*i)->getName() == name)
+			return *i;
+	}
+	return *(_components.begin());
 }
 
 bool nts::Circuit::Parser::_isComponentInList(const std::string &name)

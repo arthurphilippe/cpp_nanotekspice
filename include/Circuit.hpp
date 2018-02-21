@@ -54,9 +54,13 @@ private:
 	void _parseLine(const std::string &line);
 	void _setChipset(const std::string &type,
 					const std::string &name);
-	void _setLink(const std::string &a, const std::string &b);
+	void _parseLink(const std::string &a, const std::string &b);
+	void _setLink(const std::string &a, const int &a_value,
+			const std::string &b, const int &b_value);
+	std::unique_ptr<nts::IComponent> &_getComponent(
+		const std::string &name);
 	bool _isComponentInList(const std::string &name);
 	void _setRom(const std::string &type, std::string name);
-}
+};
 
 #endif /* !CIRCUIT_HPP_ */
