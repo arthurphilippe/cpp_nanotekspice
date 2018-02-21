@@ -1,16 +1,16 @@
-//
-// EPITECH PROJECT, 2018
-// a
-// File description:
-// a
-//
+/*
+** EPITECH PROJECT, 2018
+** cpp_nanotekspice
+** File description:
+** Parser
+*/
 
 #include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <memory>
 #include <vector>
-#include "Readfile.hpp"
+#include "Parser.hpp"
 #include "Error.hpp"
 #include "Simulation.hpp"
 #include "ComponentFactory.hpp"
@@ -30,7 +30,7 @@ nts::Parser::Parser(int ac, char **av)
 
 void nts::Parser::isValid() const
 {
-	for (auto i = _list.begin(); i != _list.end(); i++) {
+	for (auto i = _list.begin(); i != _list.end(); ++i) {
 		if (!(*i)->isValid())
 			throw FileError("Error : Ouput not linked");
 	}
@@ -41,7 +41,7 @@ std::list<std::unique_ptr<nts::IComponent>> &nts::Parser::getList()
 	return _list;
 }
 
-void nts::Parser::listDump()
+void nts::Parser::listDump() const
 {
 	for (auto i = _list.begin(); i != _list.end(); i++) {
 		(*i)->dump();
@@ -236,10 +236,10 @@ void nts::Parser::readFile()
 
 bool nts::Parser::rmInputArgs(const std::string &name)
 {
-	for (auto i = _vector.begin(); i != _vector.end(); i++) {
+	for (auto i = _vector.begin(); i != _vector.end(); i += 1) {
 		if (*i == name) {
-			if (getComponent(name)->getType().compare("input") == 0) {
-				--_nbrInput;
+			if (!getComponent(name)->getType().compare("input")) {
+				_nbrInput -= 1;;
 				return true;
 			}
 		}
@@ -262,7 +262,7 @@ bool nts::Parser::argsNameChecker(char **av)
 		_vector.push_back(tmp);
 		i++;
 	}
-	for (auto k = _vector.begin(); k != _vector.end(); k++) {
+	for (auto k = _vector.begin(); k != _vector.end(); k += 1) {
 		if (count(_vector.begin(), _vector.end(), *k) != 1)
 			throw FileError("Error : Check the argument \
 there are multiple definitions of an input !");

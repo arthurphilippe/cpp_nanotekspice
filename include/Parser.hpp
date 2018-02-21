@@ -23,7 +23,7 @@ namespace nts {
 			LINK
 		};
 		std::list<std::unique_ptr<IComponent>> &getList();
-		void listDump();
+		void listDump() const;
 		void argsChecker(const char *str);
 	private:
 		void isValid() const;
