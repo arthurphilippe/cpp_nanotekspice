@@ -87,13 +87,13 @@ int parserTester(int ac, char **av)
 **	Parse the line given as parameter and run the according function
 **	from the second argument (ENUM)
 */
-void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork a)
+void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork mode)
 {
 	int i = 0;
 	std::string first;
 	std::string value;
 
-	if ((int)line.find("\t") < 1 && (int)line.find(" ") < 1)
+	if ((int) line.find("\t") < 1 && (int) line.find(" ") < 1)
 		throw FileError("Please, check the configuration file");
 	while (!(line[i] == ' ' || line[i] == '\0' || line[i] == '\t'))
 		++i;
@@ -101,7 +101,10 @@ void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork a)
 	value = line.substr(i, line.length());
 	value.erase(std::remove(value.begin(), value.end(), '\t'), value.end());
 	value.erase(std::remove(value.begin(), value.end(), ' '), value.end());
-	(a == CHIPSET) ? setChipset(first, value) : setLink(first, value);
+	if (mode == CHIPSET)
+		setChipset(first, value);
+	else
+		setLink(first, value);
 }
 
 /*
@@ -198,18 +201,19 @@ file links : One of the chipset isn't linked to an pin");
 */
 void nts::Parser::checkLine(std::string line)
 {
-	static std::string temporary;
+	static std::string lastMode;
 
 	if (line[0] == '.') {
-		if (line.compare(".links:") == 0
-			|| line.compare(".chipsets:") == 0)
-			temporary = line;
+		if (line == ".links:"
+			|| line == ".chipsets:")
+			lastMode = line;
 		else
-			throw FileError("Error : .links or .chipsets not present");
+			throw FileError(
+				"Error : .links or .chipsets not present");
 	}
-	else if (temporary.compare(".links:") == 0)
+	else if (lastMode == ".links:")
 		parseLine(line, LINK);
-	else if (temporary == ".chipsets:")
+	else if (lastMode == ".chipsets:")
 		parseLine(line, CHIPSET);
 }
 
