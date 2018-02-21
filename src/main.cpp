@@ -31,9 +31,7 @@ int main(int ac, char **av)
 		test.run();
 	}
 	catch (const RuntimeError &error) {
-		if (error.getError().compare("exit") == 0)
-			return 0;
-		else if (error.getError().compare("print_usage") == 0)
+		if (error.getError() == "print_usage")
 			print_usage();
 		else {
 			error.what();

@@ -19,7 +19,8 @@ namespace nts {
 		enum RunState {
 			RUN,
 			UNKNOW_COMMAND,
-			COMMAND_LAUNCHED
+			COMMAND_LAUNCHED,
+			EXIT
 		};
 		Runtime(int ac, char **av);
 		~Runtime();

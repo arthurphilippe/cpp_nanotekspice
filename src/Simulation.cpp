@@ -8,14 +8,31 @@
 #include <algorithm>
 #include <iostream>
 #include <memory>
+#include <csignal>
+#include "Error.hpp"
 #include "DefaultComponent.hpp"
 #include "Simulation.hpp"
 
-nts::Simulation::Simulation(std::list<std::unique_ptr<nts::IComponent>> &comps)
+bool nts::Simulation::_intSignalRecieved(false);
+
+void nts::Simulation::sigIntHandler(int signum)
+{
+	(void) signum;
+	_intSignalRecieved = true;
+	std::cout << std::endl;
+}
+
+nts::Simulation::Simulation(std::vector<std::unique_ptr<nts::IComponent>> &comps)
 	: _components(comps), _output()
 {
 	run();
 	display();
+
+	struct sigaction sa;
+	sa.sa_handler = sigIntHandler;
+	sa.sa_flags = SA_RESTART;
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+		throw RuntimeError("Error: Sigaction");
 }
 
 nts::Simulation::~Simulation()
@@ -76,9 +93,9 @@ void nts::Simulation::display()
 
 void nts::Simulation::loop()
 {
-	while (true) {
+	_intSignalRecieved = false;
+	while (!_intSignalRecieved)
 		run();
-	}
 }
 
 void nts::Simulation::computeOutput(std::unique_ptr<IComponent> &comp)

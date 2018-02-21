@@ -6,7 +6,7 @@
 */
 
 #include <iostream>
-#include <list>
+#include <vector>
 #include <criterion/criterion.h>
 #include <criterion/assert.h>
 #include <criterion/redirect.h>
@@ -23,7 +23,7 @@ static void redirect_all_std(void)
 }
 
 Test(Basic, Sim) {
-	std::list<std::unique_ptr<nts::IComponent>> list;
+	std::vector<std::unique_ptr<nts::IComponent>> list;
 
 	auto i1 = std::move(nts::ComponentFactory::createComponent("input", "i1"));
 	auto i2 = std::move(nts::ComponentFactory::createComponent("input", "i2"));
@@ -56,7 +56,7 @@ Test(Basic, Sim) {
 }
 
 Test(First, Sim, .init = redirect_all_std) {
-	std::list<std::unique_ptr<nts::IComponent>> list;
+	std::vector<std::unique_ptr<nts::IComponent>> list;
 
 	auto i1 = std::move(nts::ComponentFactory::createComponent("input", "i1"));
 	auto i2 = std::move(nts::ComponentFactory::createComponent("input", "i2"));

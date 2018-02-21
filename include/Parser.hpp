@@ -8,7 +8,7 @@
 #ifndef READFILE_HPP_
 	#define READFILE_HPP_
 
-#include <list>
+#include <vector>
 #include <memory>
 #include "DefaultComponent.hpp"
 #include "IComponent.hpp"
@@ -22,7 +22,7 @@ namespace nts {
 			CHIPSET,
 			LINK
 		};
-		std::list<std::unique_ptr<IComponent>> &getList();
+		std::vector<std::unique_ptr<IComponent>> &getList();
 		void listDump() const;
 		void argsChecker(const char *str);
 	private:
@@ -41,7 +41,7 @@ namespace nts {
 		std::unique_ptr<nts::IComponent> &getComponent(
 			const std::string &name);
 		bool rmInputArgs(const std::string &);
-		std::list<std::unique_ptr<IComponent>> _list;
+		std::vector<std::unique_ptr<IComponent>> _list;
 		std::string _fileName;
 		int _ac;
 		int _nbrInput;

@@ -62,7 +62,7 @@ void nts::Runtime::callDump()
 
 void nts::Runtime::exitProgram()
 {
-	throw RuntimeError("exit");
+	_state = EXIT;
 }
 
 void nts::Runtime::findCommand(const std::string &str)
@@ -87,22 +87,20 @@ bool nts::Runtime::doCommand(std::string &command)
 		else
 			findCommand(command);
 	}
-	return (_state == COMMAND_LAUNCHED) ? (true) : (false);
+	return (_state == UNKNOW_COMMAND) ? (false) : (true);
 }
 
 bool nts::Runtime::run()
 {
 	std::string command;
-	while (true)
+	while (_state != EXIT)
 	{
 		if (isatty(fileno(stdin)))
 			std::cout << "> ";
 		getline(std::cin, command);
-		if (std::cin.eof()) {
-			_map.clear();
-			throw RuntimeError("exit");
-		}
-		if (!doCommand(command)) {
+		if (std::cin.eof())
+			_state = EXIT;
+		if (command.length() && !doCommand(command)) {
 			std::cerr << "nanotekspice: command not found: ";
 			std::cerr << command << std::endl;
 		}
