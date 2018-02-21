@@ -35,11 +35,9 @@ SRCS		=	src/LogicGates.cpp			\
 			src/components/Output.cpp		\
 			src/components/Input.cpp		\
 			src/ComponentFactory.cpp		\
-			src/readfile/openfile.cpp		\
 			src/Error.cpp				\
-			src/readfile/Parser.cpp			\
+			src/Parser.cpp			\
 			src/Simulation.cpp			\
-			src/readfile/Args.cpp			\
 			src/Runtime.cpp
 
 OBJ_MAIN	=	$(MAIN:.cpp=.o)

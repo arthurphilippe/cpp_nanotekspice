@@ -1,17 +1,87 @@
-//
-// EPITECH PROJECT, 2018
-// a
-// File description:
-// a
-//
+/*
+** EPITECH PROJECT, 2018
+** cpp_nanotekspice
+** File description:
+** Parser
+*/
 
 #include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "ComponentFactory.hpp"
-#include "Readfile.hpp"
+#include <vector>
+#include "Parser.hpp"
 #include "Error.hpp"
+#include "Simulation.hpp"
+#include "ComponentFactory.hpp"
+
+nts::Parser::Parser(int ac, char **av)
+	: _ac(ac), _nbrInput(0)
+{
+	if (ac > 1) {
+		_fileName = av[1];
+		readFile();
+		argsHandler(ac, av);
+		isValid();
+	} else {
+		throw FileError("print_usage");
+	}
+}
+
+void nts::Parser::isValid() const
+{
+	for (auto i = _list.begin(); i != _list.end(); ++i) {
+		if (!(*i)->isValid())
+			throw FileError("Error : Ouput not linked");
+	}
+}
+
+std::vector<std::unique_ptr<nts::IComponent>> &nts::Parser::getList()
+{
+	return _list;
+}
+
+void nts::Parser::listDump() const
+{
+	for (auto i = _list.begin(); i != _list.end(); i++) {
+		(*i)->dump();
+	}
+}
+
+bool nts::Parser::isComponentInList(const std::string &name)
+{
+	bool found = false;
+
+	for (auto i = _list.begin(); i != _list.end(); i++) {
+		if ((*i)->getName() == name)
+			found = true;
+	}
+	return found;
+}
+
+std::unique_ptr<nts::IComponent> &nts::Parser::getComponent(
+	const std::string &name)
+{
+	for (auto i = _list.begin(); i != _list.end(); i++) {
+		if ((*i)->getName() == name)
+			return *i;
+	}
+	return *(_list.begin());
+}
+
+int parserTester(int ac, char **av)
+{
+	std::vector<std::unique_ptr<nts::IComponent>> list;
+
+	if (ac > 1)
+	{
+		nts::Parser kappa(ac, av);
+		nts::Simulation(kappa.getList());
+	}
+	else
+		throw FileError("print_usage");
+	return 0;
+}
 
 /*
 **	Parse the line given as parameter and run the according function
@@ -162,4 +232,80 @@ void nts::Parser::readFile()
 	if (_ac - 2 != _nbrInput)
 		throw FileError("Error : Check the configuration file and\
  the arguments");
+}
+
+bool nts::Parser::rmInputArgs(const std::string &name)
+{
+	for (auto i = _vector.begin(); i != _vector.end(); i += 1) {
+		if (*i == name) {
+			if (!getComponent(name)->getType().compare("input")) {
+				_nbrInput -= 1;;
+				return true;
+			}
+		}
+	}
+	throw FileError("Error : False Argument");
+}
+
+bool nts::Parser::argsNameChecker(char **av)
+{
+	int tokenPlace;
+	int i = 2;
+	std::string tmp;
+
+	while (av[i]) {
+		tmp = av[i];
+		tokenPlace = tmp.find("=");
+		if (tokenPlace < 1)
+			throw FileError("Error : Check the argument !");
+		tmp = tmp.substr(0, tokenPlace);
+		_vector.push_back(tmp);
+		i++;
+	}
+	for (auto k = _vector.begin(); k != _vector.end(); k += 1) {
+		if (count(_vector.begin(), _vector.end(), *k) != 1)
+			throw FileError("Error : Check the argument \
+there are multiple definitions of an input !");
+	}
+	return (true);
+}
+
+void nts::Parser::argsChecker(const char *str)
+{
+	std::string arg(str);
+	std::string chipset;
+	std::string value;
+	int tokenPlace;
+
+	tokenPlace = arg.find("=");
+	chipset = arg.substr(0, tokenPlace);
+	value = arg.substr(tokenPlace + 1, arg.length());
+	if (value.compare("1") != 0 && value.compare("0") != 0)
+		throw FileError("Error : Check the value !");
+	if (isComponentInList(chipset)) {
+		auto &tmp = getComponent(chipset);
+		if (value.compare("0") == 0)
+			tmp->compute(3);
+		else
+			tmp->compute(2);
+	} else {
+		throw FileError("Error : Check the input name !");
+	}
+}
+
+bool nts::Parser::argsHandler(int ac, char **av)
+{
+	int i = 2;
+
+	if (ac < i + 1)
+		throw FileError("Error : Please provide inputs's value");
+	if (argsNameChecker(av) == true)
+		while (av[i]) {
+			argsChecker(av[i]);
+			++i;
+		}
+	for (auto i = _vector.begin(); i != _vector.end(); i++) {
+		rmInputArgs(*i);
+	}
+	return true;
 }
