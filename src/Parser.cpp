@@ -234,8 +234,8 @@ void nts::Parser::readFile()
 			checkLine(line);
 	}
 	if (_ac - 2 != _nbrInput)
-		throw FileError("Error : Check the configuration file and\
- the arguments");
+		throw FileError("Error: difference in the number of inputs in\
+ the arguments and configuration file");
 }
 
 bool nts::Parser::rmInputArgs(const std::string &name)
