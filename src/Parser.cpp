@@ -120,9 +120,6 @@ bool nts::Parser::_isComponentInList(const std::string &name)
 {
 	bool found = false;
 
-	std::cout << "looking for " << name << std::endl;
-	if (!_components.size())
-		return false;
 	for (auto i = _components.begin(); i != _components.end(); i++) {
 		if ((*i)->getName() == name)
 			found = true;

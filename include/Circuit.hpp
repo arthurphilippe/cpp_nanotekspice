@@ -34,9 +34,9 @@ private:
 	class ArgsHandler;
 private:
 	std::string _name;
+	componentList _components;
 	nts::Parser _initialiser;
 	nts::ArgsHandler _setter;
-	componentList _components;
 };
 
 #endif /* !CIRCUIT_HPP_ */

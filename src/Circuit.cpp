@@ -18,6 +18,7 @@
 
 nts::Circuit::Circuit(int ac, char **av)
 	: _name(av[1]),
+	_components(),
 	_initialiser(_name, _components),
 	_setter(ac, av, _components, _initialiser.getInputCount())
 {}
