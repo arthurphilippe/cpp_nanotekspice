@@ -15,79 +15,29 @@
 #include "Simulation.hpp"
 #include "ComponentFactory.hpp"
 
-nts::Parser::Parser(int ac, char **av)
-	: _ac(ac), _nbrInput(0)
+nts::Parser::Parser(const std::string &circuitName,
+				componentList &components)
+	: _circuitName(circuitName),
+		_components(components),
+		_inputCount(0)
 {
-	if (ac > 1) {
-		_fileName = av[1];
-		readFile();
-		argsHandler(ac, av);
-		isValid();
-	} else {
-		throw FileError("print_usage");
+	populateList();
+}
+
+void nts::Parser::_updateMode(
+	const std::string &line)
+{
+	if (line[0] == '.') {
+		if (line == ".links:" || line == ".chipsets:")
+			_currMode = line == ".links:" ? LINK : CHIPSET;
+		else
+			throw FileError(
+				"Error : .links or .chipsets not present");
+
 	}
 }
 
-void nts::Parser::isValid() const
-{
-	for (auto i = _list.begin(); i != _list.end(); ++i) {
-		if (!(*i)->isValid())
-			throw FileError("Error : Ouput not linked");
-	}
-}
-
-std::vector<std::unique_ptr<nts::IComponent>> &nts::Parser::getList()
-{
-	return _list;
-}
-
-void nts::Parser::listDump() const
-{
-	for (auto i = _list.begin(); i != _list.end(); i++) {
-		(*i)->dump();
-	}
-}
-
-bool nts::Parser::isComponentInList(const std::string &name)
-{
-	bool found = false;
-
-	for (auto i = _list.begin(); i != _list.end(); i++) {
-		if ((*i)->getName() == name)
-			found = true;
-	}
-	return found;
-}
-
-std::unique_ptr<nts::IComponent> &nts::Parser::getComponent(
-	const std::string &name)
-{
-	for (auto i = _list.begin(); i != _list.end(); i++) {
-		if ((*i)->getName() == name)
-			return *i;
-	}
-	return *(_list.begin());
-}
-
-int parserTester(int ac, char **av)
-{
-	std::vector<std::unique_ptr<nts::IComponent>> list;
-
-	if (ac > 1)
-	{
-		nts::Parser kappa(ac, av);
-		nts::Simulation(kappa.getList());
-	}
-	else
-		throw FileError("print_usage");
-	return 0;
-}
-
-/*
-**	Parse the line given as parameter and run the according function
-**	from the second argument (ENUM)
-*/
-void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork mode)
+void nts::Parser::_parseLine(const std::string &line)
 {
 	int i = 0;
 	std::string first;
@@ -101,72 +51,21 @@ void nts::Parser::parseLine(std::string line, nts::Parser::ParseWork mode)
 	value = line.substr(i, line.length());
 	value.erase(std::remove(value.begin(), value.end(), '\t'), value.end());
 	value.erase(std::remove(value.begin(), value.end(), ' '), value.end());
-	if (mode == CHIPSET)
-		setChipset(first, value);
+	if (_currMode == CHIPSET)
+		_setChipset(first, value);
 	else
-		setLink(first, value);
+		_parseLink(first, value);
 }
 
-/*
-**	Parse the 'Rom' type Chipset
-*/
-void nts::Parser::setRom(const std::string &type, std::string &name)
+bool nts::Parser::_isModeTitleLine(const std::string &line)
 {
-	std::string value;
-
-	value = name.substr(name.find("("), name.length());
-	name = name.substr(0, name.find("("));
-	value.erase(std::remove(value.begin(), value.end(), '('), value.end());
-	value.erase(std::remove(value.begin(), value.end(), ')'), value.end());
-	auto comp = nts::ComponentFactory::createComponent(type, name, value);
-	_list.push_back(std::move(comp));
+	if (line[0] == '.')
+		return true;
+	return false;
 }
 
-/*
-**	Parse the Chipset information
-*/
-void nts::Parser::setChipset(const std::string &type, std::string &name)
-{
-	if (isComponentInList(name))
-		throw FileError("Error in the file, there are multiple re\
-definitions of an input");
-	if (name.length() < 1)
-		throw FileError("Error in the file, check the chipset list");
-	if ((int)name.find("(") > 1 && (int)name.find(")") > 1) {
-		if (type.compare("2716") == 0)
-			setRom(type, name);
-		else
-			throw FileError("Error in the file, only the \
-Rom can have a value");
-		return ;
-	} else if (((int)name.find("(") > 1 && (int)name.find(")") < 1) ||
-			((int)name.find("(") < 1 && (int)name.find(")") > 1)){
-		throw FileError("Error in the file, check the chipset list");
-	} else {
-		auto tmpComp = nts::ComponentFactory::createComponent(
-				type, name);
-		_list.push_back(std::move(tmpComp));
-		if (type.compare("input") == 0) {
-			++_nbrInput;
-		}
-	}
-}
-
-/*
-**	Parse and link
-*/
-void nts::Parser::linkSetter(const std::string &a, const int &a_value,
-				const std::string &b, const int &b_value)
-{
-	if (!isComponentInList(a) || !isComponentInList(b))
-		throw FileError("Error in the linkSetter");
-	auto &tmp = getComponent(a);
-	auto &tmp_b = getComponent(b);
-	tmp->setLink(a_value, *tmp_b, b_value);
-	tmp_b->setLink(b_value, *tmp, a_value);
-}
-
-void nts::Parser::setLink(const std::string &a, const std::string &b)
+void nts::Parser::_parseLink(const std::string &a,
+					const std::string &b)
 {
 	std::string a_chipset;
 	std::string a_value;
@@ -189,127 +88,102 @@ One of the chipset isn't linked to an pin");
 	i += 1;
 	b_value = b.substr(i, b.length());
 	if (b_value.length() < 1)
-		throw FileError("Error in the \
-file links : One of the chipset isn't linked to an pin");
-	linkSetter(a_chipset, std::stoi(a_value),
+		throw FileError("Error: links: \
+One of the chipset isn't linked to an pin");
+	_setLink(a_chipset, std::stoi(a_value),
 			b_chipset, std::stoi(b_value));
+
 }
 
-/*
-**	Check line if it's a description (chipset or links)
-**	and run the according function with the good param
-*/
-void nts::Parser::checkLine(std::string line)
+void nts::Parser::_setLink(const std::string &a, const int &a_value,
+				const std::string &b, const int &b_value)
 {
-	static std::string lastMode;
+	if (!_isComponentInList(a) || !_isComponentInList(b))
+		throw FileError("Error: _setLink: missing component");
+	auto &tmp = _getComponent(a);
+	auto &tmp_b = _getComponent(b);
+	tmp->setLink(a_value, *tmp_b, b_value);
+	tmp_b->setLink(b_value, *tmp, a_value);
+}
 
-	if (line[0] == '.') {
-		if (line == ".links:"
-			|| line == ".chipsets:")
-			lastMode = line;
-		else
-			throw FileError(
-				"Error : .links or .chipsets not present");
+std::unique_ptr<nts::IComponent> &nts::Parser::_getComponent(
+	const std::string &name)
+{
+	for (auto i = _components.begin(); i != _components.end(); i++) {
+		if ((*i)->getName() == name)
+			return *i;
 	}
-	else if (lastMode == ".links:")
-		parseLine(line, LINK);
-	else if (lastMode == ".chipsets:")
-		parseLine(line, CHIPSET);
+	return *(_components.begin());
 }
 
-/*
-**	Read the file from the filename given as argument
-*/
-void nts::Parser::readFile()
+bool nts::Parser::_isComponentInList(const std::string &name)
 {
-	std::ifstream fd(_fileName.c_str());
+	bool found = false;
+
+	std::cout << "looking for " << name << std::endl;
+	if (!_components.size())
+		return false;
+	for (auto i = _components.begin(); i != _components.end(); i++) {
+		if ((*i)->getName() == name)
+			found = true;
+	}
+	return found;
+}
+
+void nts::Parser::_setChipset(const std::string &type,
+					const std::string &name)
+{
+	if (_isComponentInList(name))
+		throw FileError("Error in the file, there are multiple re\
+definitions of an input");
+	if (name.length() < 1)
+		throw FileError("Error in the file, check the chipset list");
+	if ((int) name.find("(") > 1 && (int) name.find(")") > 1) {
+		if (type.compare("2716") == 0)
+			_setRom(type, name);
+		else
+			throw FileError("Error in the file, only the \
+Rom can have a value");
+		return ;
+	} else if (((int) name.find("(") > 1 && (int) name.find(")") < 1) ||
+			((int) name.find("(") < 1 && (int) name.find(")") > 1)){
+		throw FileError("Error in the file, check the chipset list");
+	} else {
+		auto tmpComp = nts::ComponentFactory::createComponent(
+				type, name);
+		_components.push_back(std::move(tmpComp));
+		if (type == "input") {
+			++_inputCount;
+		}
+	}
+
+}
+
+void nts::Parser::_setRom(const std::string &type, std::string name)
+{
+	std::string value;
+
+	value = name.substr(name.find("("), name.length());
+	name = name.substr(0, name.find("("));
+	value.erase(std::remove(value.begin(), value.end(), '('), value.end());
+	value.erase(std::remove(value.begin(), value.end(), ')'), value.end());
+	auto comp = nts::ComponentFactory::createComponent(type, name, value);
+	_components.push_back(std::move(comp));
+}
+
+void nts::Parser::populateList()
+{
+	std::ifstream file(_circuitName.c_str());
 	std::string line;
 
-	if (fd.is_open() == false) {
+	if (!file.is_open()) {
 		throw FileError("Received invalid file name in argument");
 	}
-	while (getline(fd, line)) {
+	while (getline(file, line)) {
 		line = line.substr(0, line.find("#"));
-		if (line.size() != 0)
-			checkLine(line);
+		if (line.size() && _isModeTitleLine(line))
+			_updateMode(line);
+		else if (line.size())
+			_parseLine(line);
 	}
-	if (_ac - 2 != _nbrInput)
-		throw FileError("Error: difference in the number of inputs in\
- the arguments and configuration file");
-}
-
-bool nts::Parser::rmInputArgs(const std::string &name)
-{
-	for (auto i = _vector.begin(); i != _vector.end(); i += 1) {
-		if (*i == name) {
-			if (!getComponent(name)->getType().compare("input")) {
-				_nbrInput -= 1;
-				return true;
-			}
-		}
-	}
-	throw FileError("Error : False Argument");
-}
-
-bool nts::Parser::argsNameChecker(char **av)
-{
-	int tokenPlace;
-	int i = 2;
-	std::string tmp;
-
-	while (av[i]) {
-		tmp = av[i];
-		tokenPlace = tmp.find("=");
-		if (tokenPlace < 1)
-			throw FileError("Error : Check the argument !");
-		tmp = tmp.substr(0, tokenPlace);
-		_vector.push_back(tmp);
-		i++;
-	}
-	for (auto k = _vector.begin(); k != _vector.end(); k += 1) {
-		if (count(_vector.begin(), _vector.end(), *k) != 1)
-			throw FileError("Error : Check the argument \
-there are multiple definitions of an input !");
-	}
-	return (true);
-}
-
-void nts::Parser::argsChecker(const char *str)
-{
-	std::string arg(str);
-	std::string chipset;
-	std::string value;
-	int tokenPlace;
-
-	tokenPlace = arg.find("=");
-	chipset = arg.substr(0, tokenPlace);
-	value = arg.substr(tokenPlace + 1, arg.length());
-	if (value.compare("1") != 0 && value.compare("0") != 0)
-		throw FileError("Error : Check the value !");
-	if (isComponentInList(chipset)) {
-		auto &tmp = getComponent(chipset);
-		if (value.compare("0") == 0)
-			tmp->compute(3);
-		else
-			tmp->compute(2);
-	} else {
-		throw FileError("Error : Check the input name !");
-	}
-}
-
-bool nts::Parser::argsHandler(int ac, char **av)
-{
-	int i = 2;
-
-	if (ac < i + 1)
-		throw FileError("Error : Please provide inputs's value");
-	if (argsNameChecker(av) == true)
-		while (av[i]) {
-			argsChecker(av[i]);
-			++i;
-		}
-	for (auto i = _vector.begin(); i != _vector.end(); i++) {
-		rmInputArgs(*i);
-	}
-	return true;
 }

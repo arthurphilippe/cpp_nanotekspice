@@ -43,7 +43,7 @@ void nts::Runtime::callLoop()
 void nts::Runtime::callInputValueChanger(std::string &line)
 {
 	try {
-		_args.argsChecker(line.c_str());
+		_circuit.setInputCommand(line.c_str());
 	} catch (const FileError &error) {
 		error.what();
 	}
@@ -57,7 +57,7 @@ void nts::Runtime::callDisplay()
 
 void nts::Runtime::callDump()
 {
-	_args.listDump();
+	_circuit.listDump();
 }
 
 void nts::Runtime::exitProgram()

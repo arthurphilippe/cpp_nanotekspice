@@ -38,7 +38,6 @@ namespace nts {
 		std::map<std::string, RunFuncPtr> _map;
 	private:
 		RunState _state;
-		nts::Parser _args;
 		nts::Circuit _circuit;
 		nts::Simulation _sim;
 	};
