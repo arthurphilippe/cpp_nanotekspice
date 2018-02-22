@@ -18,9 +18,9 @@ namespace nts {
 		Simulation(std::vector<std::unique_ptr<IComponent>> &);
 		~Simulation();
 		void run();
-		void display();
+		void display() const;
 		void loop();
-		void printSortedOutput();
+		void printSortedOutput() const;
 		const std::stringstream &getBuffer() const
 		{
 			return _output;

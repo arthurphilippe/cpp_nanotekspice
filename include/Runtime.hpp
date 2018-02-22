@@ -29,8 +29,8 @@ namespace nts {
 		void exitProgram();
 		void callLoop();
 		void callSimulate();
-		void callDisplay();
-		void callDump();
+		void callDisplay() const;
+		void callDump() const;
 		void callInputValueChanger(std::string &line);
 		void findCommand(const std::string &str);
 		using RunFuncPtr = std::function<void(void)>;

@@ -50,12 +50,12 @@ void nts::Runtime::callInputValueChanger(std::string &line)
 	_state = COMMAND_LAUNCHED;
 }
 
-void nts::Runtime::callDisplay()
+void nts::Runtime::callDisplay() const
 {
 	_sim.display();
 }
 
-void nts::Runtime::callDump()
+void nts::Runtime::callDump() const
 {
 	_args.listDump();
 }

@@ -68,7 +68,7 @@ bool nts::Simulation::sortFunctor(const std::string &a, const std::string &b)
 	return (ret < 0);
 }
 
-void nts::Simulation::printSortedOutput()
+void nts::Simulation::printSortedOutput() const
 {
 	std::vector<std::string> _vector;
 	std::string tmp;
@@ -86,7 +86,7 @@ void nts::Simulation::printSortedOutput()
 	}
 }
 
-void nts::Simulation::display()
+void nts::Simulation::display() const
 {
 	printSortedOutput();
 }
