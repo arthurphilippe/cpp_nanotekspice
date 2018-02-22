@@ -243,7 +243,7 @@ bool nts::Parser::rmInputArgs(const std::string &name)
 	for (auto i = _vector.begin(); i != _vector.end(); i += 1) {
 		if (*i == name) {
 			if (!getComponent(name)->getType().compare("input")) {
-				_nbrInput -= 1;;
+				_nbrInput -= 1;
 				return true;
 			}
 		}
