@@ -10,8 +10,9 @@
 
 #include <map>
 #include <functional>
-#include "Parser.hpp"
+// #include "Parser.hpp"
 #include "Simulation.hpp"
+#include "Circuit.hpp"
 
 namespace nts {
 	class Runtime {
@@ -38,6 +39,7 @@ namespace nts {
 	private:
 		RunState _state;
 		nts::Parser _args;
+		nts::Circuit _circuit;
 		nts::Simulation _sim;
 	};
 }

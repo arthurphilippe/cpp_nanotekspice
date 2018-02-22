@@ -13,7 +13,7 @@
 #include "Simulation.hpp"
 
 nts::Runtime::Runtime(int ac, char **av)
-try : _state(RUN), _args(ac, av), _sim(_args.getList())
+try : _state(RUN), _circuit(ac, av), _sim(_circuit.getComponents())
 {
 	_map["exit"] = std::bind(&Runtime::exitProgram, this);
 	_map["display"] = std::bind(&Runtime::callDisplay, this);

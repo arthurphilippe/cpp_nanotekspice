@@ -22,9 +22,20 @@ class nts::Circuit {
 public:
 	Circuit(int ac, char **av);
 	~Circuit();
+	componentList &getComponents()
+	{
+		return _components;
+	}
+	void _setInputCommand(std::string arg)
+	{
+
+	}
 private:
 	class Parser;
 	class ArgsHandler;
+private:
+	nts::Circuit::Parser initialiser;
+	nts::Circuit::ArgsHandler setter;
 	std::string _name;
 	componentList _components;
 };
@@ -63,6 +74,7 @@ private:
 class nts::Circuit::ArgsHandler {
 public:
 	ArgsHandler(int ac, char **av, componentList &components, int inputNb);
+	void _applyArgument(std::string arg);
 private:
 	int _ac;
 	char **_av;
@@ -74,7 +86,6 @@ private:
 	bool _isComponentInList(const std::string &name);
 	std::unique_ptr<nts::IComponent> &_getComponent(
 		const std::string &name);
-	void _applyArgument(std::string arg);
 	bool _validateInputNb(const std::string &name);
 };
 

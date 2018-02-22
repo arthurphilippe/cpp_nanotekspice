@@ -17,10 +17,12 @@
 #include "Circuit.hpp"
 
 nts::Circuit::Circuit(int ac, char **av)
-	: _name(av[1])
+	: _name(av[1]),
+	_initialiser(_name, _components),
+	_setter(ac, av, _components, initialiser.getInputCount())
 {
-	Parser initialiser(_name, _components);
-	ArgsHandler setter(ac, av, _components, initialiser.getInputCount());
+	// Parser initialiser(_name, _components);
+	// ArgsHandler setter(ac, av, _components, initialiser.getInputCount());
 }
 
 nts::Circuit::~Circuit()
