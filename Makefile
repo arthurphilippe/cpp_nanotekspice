@@ -52,8 +52,8 @@ SRCS_TEST	=	tests/test-LogicGates.cpp	\
 			tests/test-Clock.cpp		\
 			tests/test-Components.cpp	\
 			tests/test-Simulation.cpp	\
-#			tests/test-Args.cpp
-#			tests/test-Parser.cpp		\
+			tests/test-Args.cpp		\
+			tests/test-Parser.cpp		\
 
 SRCS_TEST	+=	$(OBJS)
 
