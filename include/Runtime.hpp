@@ -10,8 +10,8 @@
 
 #include <map>
 #include <functional>
-#include "Parser.hpp"
 #include "Simulation.hpp"
+#include "Circuit.hpp"
 
 namespace nts {
 	class Runtime {
@@ -37,7 +37,7 @@ namespace nts {
 		std::map<std::string, RunFuncPtr> _map;
 	private:
 		RunState _state;
-		nts::Parser _args;
+		nts::Circuit _circuit;
 		nts::Simulation _sim;
 	};
 }

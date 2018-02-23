@@ -5,48 +5,48 @@
 ** Readfile
 */
 
-#ifndef READFILE_HPP_
-	#define READFILE_HPP_
+#ifndef PARSER_HPP_
+	#define PARSER_HPP_
 
-#include <vector>
-#include <memory>
-#include "DefaultComponent.hpp"
-#include "IComponent.hpp"
+	#include <vector>
+	#include <memory>
+	#include "DefaultComponent.hpp"
+	#include "IComponent.hpp"
 
 namespace nts {
-	class Parser {
-	public:
-		Parser(int ac, char **av);
-		~Parser() {}
-		enum ParseWork {
-			CHIPSET,
-			LINK
-		};
-		std::vector<std::unique_ptr<IComponent>> &getList();
-		void listDump() const;
-		void argsChecker(const char *str);
-	private:
-		void isValid() const;
-		void checkLine(std::string line);
-		void setRom(const std::string &type, std::string &name);
-		void linkSetter(const std::string &, const int &,
-				const std::string &, const int &);
-		void readFile();
-		void parseLine(std::string line, ParseWork a);
-		void setChipset(const std::string &, std::string &);
-		void setLink(const std::string &, const std::string &);
-		bool argsHandler(int ac, char **av);
-		bool argsNameChecker(char **av);
-		bool isComponentInList(const std::string &name);
-		std::unique_ptr<nts::IComponent> &getComponent(
-			const std::string &name);
-		bool rmInputArgs(const std::string &);
-		std::vector<std::unique_ptr<IComponent>> _list;
-		std::string _fileName;
-		int _ac;
-		int _nbrInput;
-		std::vector<std::string> _vector;
+	class Parser;
+}
+
+class nts::Parser {
+public:
+	Parser(const std::string &circuitName, componentList &components);
+	~Parser() {}
+	void populateList();
+	int getInputCount() const noexcept
+	{
+		return _inputCount;
+	}
+private:
+	// TODO: rename those two
+	enum Mode {
+		CHIPSET,
+		LINK
 	};
+	const std::string &_circuitName;
+	componentList &_components;
+	int _inputCount;
+	Mode _currMode;
+	void _updateMode(const std::string &line);
+	bool _isModeTitleLine(const std::string &line);
+	void _parseLine(const std::string &line);
+	void _setChipset(const std::string &type, const std::string &name);
+	void _parseLink(const std::string &a, const std::string &b);
+	void _setLink(const std::string &a, const int &a_value,
+			const std::string &b, const int &b_value);
+	std::unique_ptr<nts::IComponent> &_getComponent(
+		const std::string &name);
+	bool _isComponentInList(const std::string &name);
+	void _setRom(const std::string &type, std::string name);
 };
 
-#endif /* READFILE_HPP_ */
+#endif /* PARSER_HPP_ */
