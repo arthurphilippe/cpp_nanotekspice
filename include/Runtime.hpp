@@ -34,7 +34,7 @@ namespace nts {
 		void callInputValueChanger(std::string &line);
 		void findCommand(const std::string &str);
 		using RunFuncPtr = std::function<void(void)>;
-		std::map<std::string, RunFuncPtr> _map;
+		std::unordered_map<std::string, RunFuncPtr> _map;
 	private:
 		RunState _state;
 		nts::Circuit _circuit;
