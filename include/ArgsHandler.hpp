@@ -10,9 +10,10 @@
 
 	#include <vector>
 	#include <memory>
+	#include <algorithm>
 	#include "DefaultComponent.hpp"
 	#include "IComponent.hpp"
-	#include <algorithm>
+
 
 namespace nts {
 	class ArgsHandler;
