@@ -12,7 +12,7 @@
 	#include <memory>
 	#include "DefaultComponent.hpp"
 	#include "IComponent.hpp"
-
+	#include <algorithm>
 
 namespace nts {
 	class ArgsHandler;
