@@ -17,21 +17,21 @@ namespace nts {
 	public:
 		Simulation(std::vector<std::unique_ptr<IComponent>> &);
 		~Simulation();
-		void run();
-		void display() const;
-		void loop();
-		void printSortedOutput() const;
-		const std::stringstream &getBuffer() const
+		void run() noexcept;
+		void display() const noexcept;
+		void loop() noexcept;
+		void printSortedOutput() const noexcept;
+		const std::stringstream &getBuffer() const noexcept
 		{
 			return _output;
 		}
-		static void sigIntHandler(int);
+		static void sigIntHandler(int) noexcept;
 	private:
 		static bool sortFunctor(const std::string &a,
-					const std::string &b);
+					const std::string &b) noexcept;
+		void _computeOutput(std::unique_ptr<IComponent> &comp) noexcept;
 		std::vector<std::unique_ptr<IComponent>> &_components;
 		std::stringstream _output;
-		void computeOutput(std::unique_ptr<IComponent> &comp);
 		static bool _intSignalRecieved;
 	};
 }
