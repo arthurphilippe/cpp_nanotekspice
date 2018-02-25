@@ -25,7 +25,7 @@ nts::Tristate nts::Output::compute(std::size_t pin)
 	return _state;
 }
 
-bool nts::Output::isValid() const
+bool nts::Output::isValid() const noexcept
 {
 	auto it = _links.begin();
 

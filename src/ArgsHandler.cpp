@@ -81,6 +81,7 @@ void nts::ArgsHandler::_applyArgument(std::string arg)
 }
 
 bool nts::ArgsHandler::_isComponentInList(const std::string &name)
+const noexcept
 {
 	bool found = false;
 
@@ -92,7 +93,7 @@ bool nts::ArgsHandler::_isComponentInList(const std::string &name)
 }
 
 std::unique_ptr<nts::IComponent> &nts::ArgsHandler::_getComponent(
-	const std::string &name)
+	const std::string &name) const noexcept
 {
 	for (auto i = _components.begin(); i != _components.end(); i++) {
 		if ((*i)->getName() == name)

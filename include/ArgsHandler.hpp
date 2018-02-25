@@ -31,9 +31,9 @@ private:
 	std::vector<std::string> _vector;
 	void _applyArguments();
 	bool _validateArgsName();
-	bool _isComponentInList(const std::string &name);
+	bool _isComponentInList(const std::string &name) const noexcept;
 	std::unique_ptr<nts::IComponent> &_getComponent(
-		const std::string &name);
+		const std::string &name) const noexcept;
 	bool _validateInputNb(const std::string &name);
 };
 

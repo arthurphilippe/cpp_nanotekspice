@@ -28,7 +28,7 @@
 #include "components/Clock.hpp"
 #include "Error.hpp"
 
-void nts::DefaultComponent::dump() const
+void nts::DefaultComponent::dump() const noexcept
 {
 	auto link = _links.begin();
 
@@ -44,14 +44,14 @@ void nts::DefaultComponent::dump() const
 }
 
 void nts::DefaultComponent::setLink(std::size_t pin, IComponent &other,
-					std::size_t otherPin)
+					std::size_t otherPin) noexcept
 {
 	ComponentLink newLink = {other, otherPin, pin, UNDEFINED};
 
 	_links.push_back(newLink);
 }
 
-nts::Tristate nts::DefaultComponent::getLinkByPin(size_t pin)
+nts::Tristate nts::DefaultComponent::getLinkByPin(size_t pin) const noexcept
 {
 	auto link = _links.begin();
 
@@ -64,17 +64,17 @@ nts::Tristate nts::DefaultComponent::getLinkByPin(size_t pin)
 	return UNDEFINED;
 }
 
-const std::string &nts::DefaultComponent::getName() const
+const std::string &nts::DefaultComponent::getName() const noexcept
 {
 	return _name;
 }
 
-const std::string &nts::DefaultComponent::getType() const
+const std::string &nts::DefaultComponent::getType() const noexcept
 {
 	return _type;
 }
 
-bool nts::DefaultComponent::isValid() const
+bool nts::DefaultComponent::isValid() const noexcept
 {
 	return true;
 }

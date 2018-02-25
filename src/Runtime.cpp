@@ -40,7 +40,7 @@ void nts::Runtime::callLoop()
 	_sim.loop();
 }
 
-void nts::Runtime::callInputValueChanger(std::string &line)
+void nts::Runtime::callInputValueChanger(std::string &line) noexcept
 {
 	try {
 		_circuit.setInputCommand(line.c_str());
@@ -50,12 +50,12 @@ void nts::Runtime::callInputValueChanger(std::string &line)
 	_state = COMMAND_LAUNCHED;
 }
 
-void nts::Runtime::callDisplay()
+void nts::Runtime::callDisplay() const
 {
 	_sim.display();
 }
 
-void nts::Runtime::callDump()
+void nts::Runtime::callDump() const
 {
 	_circuit.listDump();
 }
@@ -78,7 +78,7 @@ void nts::Runtime::findCommand(const std::string &str)
 	return;
 }
 
-bool nts::Runtime::doCommand(std::string &command)
+bool nts::Runtime::doCommand(std::string &command) noexcept
 {
 	_state = RUN;
 	if (command.length() > 0) {
@@ -90,7 +90,7 @@ bool nts::Runtime::doCommand(std::string &command)
 	return (_state == UNKNOW_COMMAND) ? (false) : (true);
 }
 
-bool nts::Runtime::run()
+bool nts::Runtime::run() noexcept
 {
 	std::string command;
 	while (_state != EXIT)

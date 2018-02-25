@@ -31,7 +31,7 @@ void nts::Circuit::setInputCommand(std::string arg)
 	_setter._applyArgument(arg);
 }
 
-void nts::Circuit::listDump() const
+void nts::Circuit::listDump() const noexcept
 {
 	for (auto i = _components.begin(); i != _components.end(); i++) {
 		(*i)->dump();

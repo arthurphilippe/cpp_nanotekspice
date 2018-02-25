@@ -15,7 +15,7 @@
 
 bool nts::Simulation::_intSignalRecieved(false);
 
-void nts::Simulation::sigIntHandler(int signum)
+void nts::Simulation::sigIntHandler(int signum) noexcept
 {
 	(void) signum;
 	_intSignalRecieved = true;
@@ -38,7 +38,7 @@ nts::Simulation::Simulation(std::vector<std::unique_ptr<nts::IComponent>> &comps
 nts::Simulation::~Simulation()
 {}
 
-void nts::Simulation::run()
+void nts::Simulation::run() noexcept
 {
 	auto it = _components.begin();
 
@@ -46,7 +46,7 @@ void nts::Simulation::run()
 	while (it != _components.end()) {
 		std::unique_ptr<IComponent> &comp = *it;
 		if (comp->getType().compare("output") == 0)
-			computeOutput(comp);
+			_computeOutput(comp);
 		++it;
 	}
 	for (auto i = _components.begin() ; i != _components.end(); ++i) {
@@ -56,7 +56,8 @@ void nts::Simulation::run()
 	}
 }
 
-bool nts::Simulation::sortFunctor(const std::string &a, const std::string &b)
+bool nts::Simulation::sortFunctor(const std::string &a,
+					const std::string &b) noexcept
 {
 	std::string name_a;
 	std::string name_b;
@@ -68,7 +69,7 @@ bool nts::Simulation::sortFunctor(const std::string &a, const std::string &b)
 	return (ret < 0);
 }
 
-void nts::Simulation::printSortedOutput()
+void nts::Simulation::printSortedOutput() const noexcept
 {
 	std::vector<std::string> _vector;
 	std::string tmp;
@@ -86,19 +87,19 @@ void nts::Simulation::printSortedOutput()
 	}
 }
 
-void nts::Simulation::display()
+void nts::Simulation::display() const noexcept
 {
 	printSortedOutput();
 }
 
-void nts::Simulation::loop()
+void nts::Simulation::loop() noexcept
 {
 	_intSignalRecieved = false;
 	while (!_intSignalRecieved)
 		run();
 }
 
-void nts::Simulation::computeOutput(std::unique_ptr<IComponent> &comp)
+void nts::Simulation::_computeOutput(std::unique_ptr<IComponent> &comp) noexcept
 {
 	auto state = comp->compute();
 

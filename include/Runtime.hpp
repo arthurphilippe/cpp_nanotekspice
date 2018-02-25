@@ -24,21 +24,21 @@ namespace nts {
 		};
 		Runtime(int ac, char **av);
 		~Runtime();
-		bool doCommand(std::string &command);
-		bool run();
+		bool doCommand(std::string &command) noexcept;
+		bool run() noexcept;
 		void exitProgram();
 		void callLoop();
 		void callSimulate();
-		void callDisplay();
-		void callDump();
-		void callInputValueChanger(std::string &line);
+		void callDisplay() const;
+		void callDump() const;
+		void callInputValueChanger(std::string &line) noexcept;
 		void findCommand(const std::string &str);
 		using RunFuncPtr = std::function<void(void)>;
-		std::map<std::string, RunFuncPtr> _map;
 	private:
 		RunState _state;
 		nts::Circuit _circuit;
 		nts::Simulation _sim;
+		std::map<std::string, RunFuncPtr> _map;
 	};
 }
 
