@@ -14,12 +14,11 @@
 #include "Error.hpp"
 #include "Simulation.hpp"
 #include "ComponentFactory.hpp"
-#include "Circuit.hpp"
 
 nts::Circuit::Circuit(int ac, char **av)
 	: _name(av[1]),
 	_components(),
-	_initialiser(_name, _components),
+	_initialiser(_name, *this),
 	_setter(ac, av, _components, _initialiser.getInputCount())
 {}
 
@@ -36,4 +35,15 @@ void nts::Circuit::listDump() const
 	for (auto i = _components.begin(); i != _components.end(); i++) {
 		(*i)->dump();
 	}
+}
+
+bool nts::Circuit::isComponentInList(const std::string &query)
+{
+	bool found = false;
+
+	for (auto i = _components.begin(); i != _components.end(); i++) {
+		if ((*i)->getName() == query)
+			found = true;
+	}
+	return found;
 }

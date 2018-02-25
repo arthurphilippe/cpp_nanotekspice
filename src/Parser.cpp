@@ -14,11 +14,13 @@
 #include "Error.hpp"
 #include "Simulation.hpp"
 #include "ComponentFactory.hpp"
+#include "Circuit.hpp"
 
 nts::Parser::Parser(const std::string &circuitName,
-				componentList &components)
+				Circuit &circuit)
 	: _circuitName(circuitName),
-		_components(components),
+		_components(circuit.getComponents()),
+		_circuit(circuit),
 		_inputCount(0)
 {
 	populateList();
@@ -98,7 +100,7 @@ One of the chipset isn't linked to an pin");
 void nts::Parser::_setLink(const std::string &a, const int &a_value,
 				const std::string &b, const int &b_value)
 {
-	if (!_isComponentInList(a) || !_isComponentInList(b))
+	if (!_circuit.isComponentInList(a) || !_circuit.isComponentInList(b))
 		throw FileError("Error: _setLink: missing component");
 	auto &tmp = _getComponent(a);
 	auto &tmp_b = _getComponent(b);
@@ -116,21 +118,10 @@ std::unique_ptr<nts::IComponent> &nts::Parser::_getComponent(
 	return *(_components.begin());
 }
 
-bool nts::Parser::_isComponentInList(const std::string &name)
-{
-	bool found = false;
-
-	for (auto i = _components.begin(); i != _components.end(); i++) {
-		if ((*i)->getName() == name)
-			found = true;
-	}
-	return found;
-}
-
 void nts::Parser::_setChipset(const std::string &type,
 					const std::string &name)
 {
-	if (_isComponentInList(name))
+	if (_circuit.isComponentInList(name))
 		throw FileError("Error in the file, there are multiple re\
 definitions of an input");
 	if (name.length() < 1)

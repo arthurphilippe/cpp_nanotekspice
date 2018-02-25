@@ -12,6 +12,7 @@
 	#include <memory>
 	#include "DefaultComponent.hpp"
 	#include "IComponent.hpp"
+	#include "Circuit.hpp"
 
 namespace nts {
 	class Parser;
@@ -19,7 +20,7 @@ namespace nts {
 
 class nts::Parser {
 public:
-	Parser(const std::string &circuitName, componentList &components);
+	Parser(const std::string &circuitName, Circuit &circuit);
 	~Parser() {}
 	void populateList();
 	int getInputCount() const noexcept
@@ -34,6 +35,7 @@ private:
 	};
 	const std::string &_circuitName;
 	componentList &_components;
+	Circuit &_circuit;
 	int _inputCount;
 	Mode _currMode;
 	void _updateMode(const std::string &line);
@@ -45,7 +47,6 @@ private:
 			const std::string &b, const int &b_value);
 	std::unique_ptr<nts::IComponent> &_getComponent(
 		const std::string &name);
-	bool _isComponentInList(const std::string &name);
 	void _setRom(const std::string &type, std::string name);
 };
 

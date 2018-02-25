@@ -29,9 +29,7 @@ public:
 	}
 	void setInputCommand(std::string arg);
 	void listDump() const;
-private:
-	class Parser;
-	class ArgsHandler;
+	bool isComponentInList(const std::string &query);
 private:
 	std::string _name;
 	componentList _components;
