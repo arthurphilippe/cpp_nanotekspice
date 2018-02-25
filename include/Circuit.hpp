@@ -23,12 +23,12 @@ class nts::Circuit {
 public:
 	Circuit(int ac, char **av);
 	~Circuit();
-	componentList &getComponents()
+	componentList &getComponents() noexcept
 	{
 		return _components;
 	}
 	void setInputCommand(std::string arg);
-	void listDump() const;
+	void listDump() const noexcept;
 private:
 	class Parser;
 	class ArgsHandler;

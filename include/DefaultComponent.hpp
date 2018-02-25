@@ -22,16 +22,12 @@ namespace nts {
 	public:
 		virtual ~DefaultComponent() {};
 		void setLink(std::size_t pin, IComponent &other,
-				std::size_t otherPin) override;
-		void dump() const override;
-		static std::unique_ptr<IComponent> createComponent(
-			const std::string &type,
-			const std::string &value = "",
-			const std::string &param = "");
-		const std::string &getName() const override;
-		const std::string &getType() const override;
-		nts::Tristate getLinkByPin(size_t pin) override;
-		virtual bool isValid() const override;
+				std::size_t otherPin) noexcept override;
+		void dump() const noexcept override;
+		const std::string &getName() const noexcept override;
+		const std::string &getType() const noexcept override;
+		nts::Tristate getLinkByPin(size_t pin) const noexcept override;
+		virtual bool isValid() const noexcept override;
 	protected:
 		std::string			_name;
 		std::string			_type;
