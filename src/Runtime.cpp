@@ -13,7 +13,7 @@
 #include "Simulation.hpp"
 
 nts::Runtime::Runtime(int ac, char **av)
-try : _state(RUN), _args(ac, av), _sim(_args.getList())
+try : _state(RUN), _circuit(ac, av), _sim(_circuit.getComponents())
 {
 	_map["exit"] = std::bind(&Runtime::exitProgram, this);
 	_map["display"] = std::bind(&Runtime::callDisplay, this);
@@ -43,7 +43,7 @@ void nts::Runtime::callLoop()
 void nts::Runtime::callInputValueChanger(std::string &line)
 {
 	try {
-		_args.argsChecker(line.c_str());
+		_circuit.setInputCommand(line.c_str());
 	} catch (const FileError &error) {
 		error.what();
 	}
@@ -57,7 +57,7 @@ void nts::Runtime::callDisplay() const
 
 void nts::Runtime::callDump() const
 {
-	_args.listDump();
+	_circuit.listDump();
 }
 
 void nts::Runtime::exitProgram()

@@ -16,6 +16,8 @@
 	#include "IComponent.hpp"
 
 namespace nts {
+	using componentList = std::vector<std::unique_ptr<IComponent>>;
+
 	class DefaultComponent : public IComponent {
 	public:
 		virtual ~DefaultComponent() {};
