@@ -68,13 +68,13 @@ void nts::Runtime::exitProgram()
 void nts::Runtime::findCommand(const std::string &str)
 {
 	RunFuncPtr commandFcnt;
-	if (str.length() > 0) {
-		if (_map.find(str) == _map.end())
-			return;
+	if (str.length() > 0 && _map.find(str) != _map.end()) {
 		commandFcnt = _map[str];
 		_state = COMMAND_LAUNCHED;
 		commandFcnt();
 	}
+	else
+		_state = UNKNOW_COMMAND;
 	return;
 }
 
