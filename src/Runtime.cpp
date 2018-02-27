@@ -95,8 +95,7 @@ bool nts::Runtime::run() noexcept
 	std::string command;
 	while (_state != EXIT)
 	{
-		if (isatty(fileno(stdin)))
-			std::cout << "> ";
+		std::cout << "> ";
 		getline(std::cin, command);
 		if (std::cin.eof())
 			_state = EXIT;
