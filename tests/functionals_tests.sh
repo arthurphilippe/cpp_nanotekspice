@@ -32,16 +32,9 @@ function ret_test {
 mkdir tests/logs/ -p
 
 echo -n ":: Running no args test... "
-./nanotekspice &> tests/logs/test1.log << EOF
-a=1
-simulate
-display
-b=1
-simulate
-display
-EOF
+./nanotekspice &> tests/logs/test1.log
 
-echo "OK"
+ret_test 84 $?
 
 echo -n ":: Running simple xor test... "
 ./nanotekspice tests/nts_files/xor.nts a=0 b=0 &> tests/logs/test1.log << EOF
