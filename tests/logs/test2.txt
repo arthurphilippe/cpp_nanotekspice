@@ -1,14 +1,15 @@
 nout=1
 out=0
-nout=1
+> > > nout=1
 out=0
-nout=0
+> > > nout=0
 out=1
-nout=0
+> > nout=0
 out=1
-nout=1
+> > > nout=1
 out=0
-nout=0
+> > > > nout=0
 out=1
-nout=1
+> > > nout=1
 out=1
+> 
