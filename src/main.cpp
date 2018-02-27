@@ -26,6 +26,10 @@ static void print_usage()
 
 int main(int ac, char **av)
 {
+	if (ac < 3) {
+		print_usage();
+		return 84;
+	}
 	try {
 		nts::Runtime test(ac, av);
 		test.run();
