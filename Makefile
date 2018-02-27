@@ -11,7 +11,7 @@ NAME		=	nanotekspice
 
 RM		=	rm -vf
 
-MAIN		=	src/main.cpp
+MAIN		=	src/Main.cpp
 
 SRCS		=	src/LogicGates.cpp			\
 			src/DefaultComponent.cpp		\
