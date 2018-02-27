@@ -15,14 +15,14 @@
 	#include <functional>
 	#include "IComponent.hpp"
 
-namespace nts{
+namespace nts {
 	class ComponentFactory {
 		public:
 			ComponentFactory() = delete;
 			static std::unique_ptr<IComponent> createComponent(
-			const std::string &type,
-			const std::string &value = "",
-			const std::string &param = "");
+				const std::string &type,
+				const std::string &value = "",
+				const std::string &param = "");
 
 		protected:
 		private:
