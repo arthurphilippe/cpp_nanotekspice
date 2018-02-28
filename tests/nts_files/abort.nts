@@ -1,0 +1,10 @@
+.chipsets:
+clock   a
+input   entree1
+4081    AND1-1
+output  s
+.links:
+AND1-1:1 entree1:1
+AND1-1:2 a:2
+#sortie
+AND1-1:3 s:1
