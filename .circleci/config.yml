@@ -23,6 +23,7 @@ jobs:
       - run:
           name: Code Coverage
           command: ./tests/coverage.sh
+
   build_clang:
     docker:
       - image: arthurphilippe/clang
