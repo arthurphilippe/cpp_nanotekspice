@@ -97,7 +97,8 @@ echo -n ":: Running xor without terminal test... "
 
 ./nanotekspice tests/nts_files/romxor_without_terminal.nts reset=1 dump=1 &> /dev/null <<EOF
 display
-compute
+simulate
+display
 EOF
 
 ret_test $? 0
@@ -110,6 +111,25 @@ exit
 EOF
 
 ret_test $? 0
+
+
+echo -n ":: Running command not found test... "
+
+./nanotekspice tests/nts_files/counter.nts reset=1 &> /dev/null <<EOF
+daboudi
+dabouda
+EOF
+
+ret_test $? 0
+
+echo -n ":: Running chipset 4081 ... "
+
+./nanotekspice tests/nts_files/abort.nts entree1=1 &> /dev/null <<EOF
+simulate
+EOF
+
+ret_test $? 0
+
 
 if  [ "$1" == "loop" ]; then
     ./tests/loop_test.sh
