@@ -40,8 +40,11 @@ jobs:
           name: Functional Tests Execution
           command: ./tests/functionals_tests.sh
       - run:
-          name: Code Coverage
-          command: ./tests/coverage.sh && cat coverage.log
+          name: Code Coverage - Compilation
+          command: ./tests/coverage.sh
+      - run:
+          name: Code Coverage - Display
+          command: cat coverage.log
 
   epitest:
     docker:

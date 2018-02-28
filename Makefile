@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-CXX		=	g++ --coverage
+CXX		=	g++
 
 NAME		=	nanotekspice
 
@@ -72,7 +72,7 @@ debug: CPPFLAGS += -ggdb
 debug: fclean
 debug: $(NAME)
 
-tests: CXX=g++ --coverage
+tests: CXX=g++
 tests: $(TEST)
 
 tests_run: tests
