@@ -132,7 +132,7 @@ ret_test $? 0
 
 
 if  [ "$1" == "loop" ]; then
-    ./tests/loop_test.sh
+	./tests/loop_test.sh
 fi
 
 exit $RET
