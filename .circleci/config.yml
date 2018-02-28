@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  full_test:
     docker:
       - image: arthurphilippe/epitech-c-cpp-plain
     steps:
@@ -14,10 +14,15 @@ jobs:
       - run:
           name: Tidy up
           command: make clean
-      - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~
+      - run:
+          name: Unit Tests Execution
+          command: ./unit_tests.out
+      - run:
+          name: Functional Tests Execution
+          command: ./tests/functionals_tests.sh
+      - run:
+          name: Code Coverage
+          command: ./tests/coverage.sh
   build_clang:
     docker:
       - image: arthurphilippe/clang
@@ -26,25 +31,6 @@ jobs:
       - run:
           name: Build Project Using clang
           command: make CXX=clang++ CPPFLAGS=-W\ -Wextra\ -Wall\ -Werror\ -Iinclude/\ -std=c++17 -j 4
-
-  test:
-    docker:
-      - image: arthurphilippe/epitech-c-cpp-plain
-    steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Unit Tests Execution
-          command: ./unit_tests.out
-      - run:
-          name: Functional Tests Execution
-          command: ./tests/functionals_tests.sh
-      - run:
-          name: Code Coverage - Compilation
-          command: ./tests/coverage.sh
-      - run:
-          name: Code Coverage - Display
-          command: cat coverage.log
 
   epitest:
     docker:
@@ -71,10 +57,7 @@ workflows:
   version: 2
   commit:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - full_test
       - build_clang
   planned:
     triggers:
