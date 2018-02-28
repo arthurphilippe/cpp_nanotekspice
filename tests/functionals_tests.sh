@@ -93,10 +93,11 @@ EOF
 
 ret_test $? 0
 
-echo -n ":: Running xor test... "
+echo -n ":: Running xor without terminal test... "
 
 ./nanotekspice tests/nts_files/romxor_without_terminal.nts reset=1 dump=1 &> /dev/null <<EOF
 display
+compute
 EOF
 
 ret_test $? 0
