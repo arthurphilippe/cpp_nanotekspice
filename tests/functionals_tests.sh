@@ -85,4 +85,37 @@ echo -n ":: Running invalid chipset test... "
 
 ret_test $? 84
 
+echo -n ":: Running dump test... "
+
+./nanotekspice tests/nts_files/counter.nts reset=1 &> /dev/null <<EOF
+dump
+EOF
+
+ret_test $? 0
+
+echo -n ":: Running loop test... "
+
+./nanotekspice tests/nts_files/counter.nts reset=1 &> /dev/null <<EOF
+loop
+EOF
+
+ret_test $? 0
+
+echo -n ":: Running xor test... "
+
+./nanotekspice tests/nts_files/romxor_without_terminal.nts reset=1 dump=1 &> /dev/null <<EOF
+display
+EOF
+
+ret_test $? 0
+
+
+echo -n ":: Running exit test... "
+
+./nanotekspice tests/nts_files/counter.nts reset=1 &> /dev/null <<EOF
+exit
+EOF
+
+ret_test $? 0
+
 exit $RET
