@@ -106,7 +106,8 @@ bool nts::ArgsHandler::_validateInputNb(const std::string &name)
 {
 	for (auto i = _vector.begin(); i != _vector.end(); i += 1) {
 		if (*i == name) {
-			if (!_getComponent(name)->getType().compare("input")) {
+			if (!_getComponent(name)->getType().compare("input") ||
+				!_getComponent(name)->getType().compare("clock")) {
 				_inputCount -= 1;
 				return true;
 			}
