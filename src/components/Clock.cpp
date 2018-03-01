@@ -9,7 +9,6 @@
 
 nts::Tristate nts::Clock::_state = TRUE;
 
-
 nts::Clock::Clock(const std::string &name)
 {
 	_name.assign(name);
@@ -18,8 +17,11 @@ nts::Clock::Clock(const std::string &name)
 
 nts::Tristate nts::Clock::compute(std::size_t pin)
 {
-	(void) pin;
 	if (pin == 2)
+		_state = TRUE;
+	else if (pin == 3)
+		_state = FALSE;
+	else if (pin == 4)
 		_state = (_state == TRUE) ? FALSE : TRUE;
 	return _state;
 }

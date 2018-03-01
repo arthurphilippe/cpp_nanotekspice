@@ -149,7 +149,7 @@ Rom can have a value");
 		auto tmpComp = nts::ComponentFactory::createComponent(
 				type, name);
 		_components.push_back(std::move(tmpComp));
-		if (type == "input") {
+		if (type == "input" || type == "clock") {
 			++_inputCount;
 		}
 	}

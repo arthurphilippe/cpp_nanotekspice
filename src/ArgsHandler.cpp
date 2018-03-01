@@ -23,7 +23,7 @@ void nts::ArgsHandler::_applyArguments()
 	int i(2);
 
 	if (_ac < i + 1)
-		throw FileError("Error : Please provide inputs's value");
+		throw FileError("Error: Please provide inputs's value");
 	if (_validateArgsName() == true)
 		while (_av[i]) {
 			_applyArgument(_av[i]);
@@ -32,7 +32,9 @@ void nts::ArgsHandler::_applyArguments()
 	for (auto i = _vector.begin(); i != _vector.end(); i++) {
 		_validateInputNb(*i);
 	}
-
+	if (_inputCount != 0) {
+		throw FileError("Error: Please provice inputs's value");
+	}
 }
 
 bool nts::ArgsHandler::_validateArgsName()
@@ -52,7 +54,7 @@ bool nts::ArgsHandler::_validateArgsName()
 	}
 	for (auto k = _vector.begin(); k != _vector.end(); k += 1) {
 		if (count(_vector.begin(), _vector.end(), *k) != 1)
-			throw FileError("Error : Check the argument \
+			throw FileError("Error: Check the argument \
 there are multiple definitions of an input!");
 	}
 	return (true);

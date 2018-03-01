@@ -52,7 +52,7 @@ void nts::Simulation::run() noexcept
 	for (auto i = _components.begin() ; i != _components.end(); ++i) {
 		std::unique_ptr<IComponent> &comp = *i;
 		if (comp->getType().compare("clock") == 0)
-			comp->compute(2);
+			comp->compute(4);
 	}
 }
 
