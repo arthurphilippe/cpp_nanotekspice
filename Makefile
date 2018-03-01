@@ -72,11 +72,12 @@ debug: CPPFLAGS += -ggdb
 debug: fclean
 debug: $(NAME)
 
-tests: CXX=g++
 tests: $(TEST)
 
-tests_run: tests
+tests_run: CXX=g++ --coverage
+tests_run: tests $(NAME)
 	@./$(TEST)
+	@bash ./tests/functionals_tests.sh
 
 $(NAME): $(OBJ_MAIN) $(OBJS)
 	@printf "[\033[0;36mlinking\033[0m]% 41s\r" $(NAME) | tr " " "."
@@ -94,6 +95,9 @@ fclean: clean
 	@$(RM) $(NAME) $(TEST) > /dev/null
 	@printf "[\033[0;31mdeletion\033[0m][binary]% 32s\n" $(NAME) | tr " " "."
 
+cov_clean: fclean
+	@find -type f \( -name "*.gcno" -o -name "*.gc*" -o -name "*.html" \) -delete
+
 re: fclean all
 
-.PHONY: all clean fclean re debug tests
+.PHONY: all clean fclean re debug tests tests_run clean cov_clean

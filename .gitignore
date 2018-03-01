@@ -6,3 +6,5 @@ vgcore*
 *.log
 .vscode/
 nanotekspice
+*.gc*
+*.html

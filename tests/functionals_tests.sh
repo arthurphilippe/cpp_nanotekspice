@@ -50,7 +50,7 @@ diff_test tests/logs/test1.log tests/logs/test1.txt $? 0
 
 echo -n ":: Running D latch test... "
 
-./nanotekspice tests/nts_files/d_latch.nts data=0 set=0 reset=1 &> tests/logs/test2.log << EOF
+./nanotekspice tests/nts_files/d_latch.nts data=0 set=0 reset=1 clock=1 &> tests/logs/test2.log << EOF
 reset=0
 simulate
 display
@@ -75,7 +75,7 @@ diff_test tests/logs/test2.log tests/logs/test2.txt $? 0
 
 echo -n ":: Running invalid links test... "
 
-./nanotekspice tests/nts_files/errorlink2.nts reset=1 &> /dev/null
+./nanotekspice tests/nts_files/errorlink2.nts reset=1 clock=1 &> /dev/null
 
 ret_test $? 84
 
@@ -84,5 +84,55 @@ echo -n ":: Running invalid chipset test... "
 ./nanotekspice tests/nts_files/chipseterror2.nts &> /dev/null
 
 ret_test $? 84
+
+echo -n ":: Running dump test... "
+
+./nanotekspice tests/nts_files/counter.nts reset=1 clock=1 &> /dev/null <<EOF
+dump
+EOF
+
+ret_test $? 0
+
+echo -n ":: Running xor without terminal test... "
+
+./nanotekspice tests/nts_files/romxor_without_terminal.nts reset=1 dump=1 clock=1 &> /dev/null <<EOF
+display
+simulate
+display
+EOF
+
+ret_test $? 0
+
+
+echo -n ":: Running exit test... "
+
+./nanotekspice tests/nts_files/counter.nts reset=1 clock=1 &> /dev/null <<EOF
+exit
+EOF
+
+ret_test $? 0
+
+
+echo -n ":: Running command not found test... "
+
+./nanotekspice tests/nts_files/counter.nts reset=1 clock=1 &> /dev/null <<EOF
+daboudi
+dabouda
+EOF
+
+ret_test $? 0
+
+echo -n ":: Running chipset 4081 ... "
+
+./nanotekspice tests/nts_files/abort.nts entree1=1 a=1&> /dev/null <<EOF
+simulate
+EOF
+
+ret_test $? 0
+
+
+if  [ "$1" == "loop" ]; then
+	./tests/loop_test.sh
+fi
 
 exit $RET
