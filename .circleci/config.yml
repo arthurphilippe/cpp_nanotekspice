@@ -25,7 +25,7 @@ jobs:
           command: ./tests/coverage.sh
       - run:
           name: Code Coverage - Output
-          command: echo ":: Displaying tests results" && cat tests/coverage.log
+          command: cat tests/coverage.log
 
   build_clang:
     docker:
