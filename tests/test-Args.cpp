@@ -156,13 +156,13 @@ Test(FalseName, Arguments, .init = redirect_all_std) {
 
 Test(RealFile, Arguments, .init = redirect_all_std) {
 	bool thrown = false;
-	char *str[4] = {"kappa", "tests/nts_files/counter.nts",
-			"reset=1",
+	char *str[] = {"kappa", "tests/nts_files/counter.nts",
+			"reset=1", "clock=0",
 			NULL
 	};
 	try
 	{
-		parserTester(3, str);
+		parserTester(4, str);
 	}
 	catch (const FileError &error)
 	{

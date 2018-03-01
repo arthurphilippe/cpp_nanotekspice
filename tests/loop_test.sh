@@ -31,7 +31,7 @@ function ret_test {
 
 echo -n ":: Running loop test... "
 
-./nanotekspice tests/nts_files/counter.nts reset=1 &> /dev/null <<EOF
+./nanotekspice tests/nts_files/counter.nts reset=1 clock=1 &> /dev/null <<EOF
 loop
 EOF
 ret_test $? 0
