@@ -21,8 +21,11 @@ jobs:
           name: Functional Tests Execution
           command: ./tests/functionals_tests.sh
       - run:
-          name: Code Coverage
+          name: Code Coverage - Compilation
           command: ./tests/coverage.sh
+      - run:
+          name: Code Coverage - Display
+          command: ./tests/display_coverage.sh
 
   build_clang:
     docker:

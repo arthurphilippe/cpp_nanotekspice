@@ -20,8 +20,6 @@ if [ "$1" == "html" ] || [ "$2" == "html" ]; then
 else
 	echo -e "\n:: Proccessing coverage artefacts..."
 	gcovr -r . --exclude-directories=include/ --delete -s > coverage.log
-	echo -e "\n:: Displaying tests results..."
-	cat coverage.log
 fi
 
 echo ":: Cleanning up..."
