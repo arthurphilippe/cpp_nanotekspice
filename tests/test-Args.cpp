@@ -26,17 +26,10 @@ static void redirect_all_std(void)
 */
 Test(NoOuputLink, Arguments, .init = redirect_all_std)
 {
-	bool thrown = false;
 	char *str[] = {"./nanotekspice", "tests/nts_files/nooutputlink.nts",
 			"reset=1", "clock=1",
 			NULL};
-	try {
-		parserTester(4, str);
-	} catch (const FileError &error) {
-		error.what();
-		thrown = true;
-	}
-	cr_assert(thrown);
+	cr_assert_throw(parserTester(4, str), FileError);
 }
 
 /*
@@ -44,17 +37,10 @@ Test(NoOuputLink, Arguments, .init = redirect_all_std)
 */
 Test(RealFileWithImpossibleValue, Arguments, .init = redirect_all_std)
 {
-	bool thrown = false;
 	char *str[] = {"./nanotekspice", "tests/counter.nts",
-		       "reset=allah", "clock=poulet",
+			"reset=allah", "clock=poulet",
 			NULL};
-	try {
-		parserTester(4, str);
-	} catch (const FileError &error) {
-		error.what();
-		thrown = true;
-	}
-	cr_assert(thrown);
+	cr_assert_throw(parserTester(4, str), FileError);
 }
 
 /*
@@ -63,34 +49,20 @@ Test(RealFileWithImpossibleValue, Arguments, .init = redirect_all_std)
 */
 Test(NoArgs, Arguments, .init = redirect_all_std)
 {
-	bool thrown = false;
 	char *str[] = {"./nanotekspice", "tests/counter.nts",
 			"",
 			NULL};
-	try {
-		parserTester(2, str);
-	} catch (const FileError &error) {
-		error.what();
-		thrown = true;
-	}
-	cr_assert(thrown);
+	cr_assert_throw(parserTester(2, str), FileError);
 }
 
 /*
 **	Test a false file
 */
 Test(FalseNameWithValue, Arguments, .init = redirect_all_std) {
-	bool thrown = false;
 	char *str[] = {"./nanotekspice", "tests/counter.nts",
 			"potato=0",
 			NULL};
-	try {
-		parserTester(3, str);
-	} catch (const FileError &error) {
-		error.what();
-		thrown = true;
-	}
-	cr_assert(thrown);
+	cr_assert_throw(parserTester(3, str), FileError);
 }
 
 /*
@@ -98,16 +70,9 @@ Test(FalseNameWithValue, Arguments, .init = redirect_all_std) {
 */
 Test(NoArgumentAtAll, Arguments, .init = redirect_all_std)
 {
-	bool thrown = false;
 	char *str[2] = {"./nanotekspice",
 			NULL};
-	try {
-		parserTester(1, str);
-	} catch (const FileError &error) {
-		error.what();
-		thrown = true;
-	}
-	cr_assert(thrown);
+	cr_assert_throw(parserTester(1, str), FileError);
 }
 
 /*
@@ -115,17 +80,10 @@ Test(NoArgumentAtAll, Arguments, .init = redirect_all_std)
 */
 Test(RealNameWithEgal, Arguments, .init = redirect_all_std)
 {
-	bool thrown = false;
 	char *str[] = {"./nanotekspice", "tests/counter.nts",
 			"reset=",
 			NULL};
-	try {
-		parserTester(3, str);
-	} catch (const FileError &error) {
-		error.what();
-		thrown = true;
-	}
-	cr_assert(thrown);
+	cr_assert_throw(parserTester(3, str), FileError);
 }
 
 /*
@@ -133,50 +91,29 @@ Test(RealNameWithEgal, Arguments, .init = redirect_all_std)
 */
 Test(FalseName, Arguments, .init = redirect_all_std)
 {
-	bool thrown = false;
 	char *str[] = {"./nanotekspice", "tests/counter.nts",
 			"motismadex",
 			NULL};
-	try {
-		parserTester(3, str);
-	} catch (const FileError &error) {
-		error.what();
-		thrown = true;
-	}
-	cr_assert(thrown);
+	cr_assert_throw(parserTester(4, str), FileError);
 }
 
 /*
 **	Functionnal Test
 */
 Test(RealFile, Arguments, .init = redirect_all_std) {
-	bool thrown = false;
 	char *str[] = {"./nanotekspice", "tests/nts_files/counter.nts",
 			"reset=1", "clock=0",
 			NULL
 	};
-	try {
-		parserTester(4, str);
-	} catch (const FileError &error) {
-		error.what();
-		thrown = true;
-	}
-	cr_assert(!thrown);
+	cr_assert_none_throw(parserTester(4, str));
 }
 
 /*
 **	Test a non existant configuration file
 */
 Test(FalseFile, Arguments, .init = redirect_all_std) {
-	bool thrown = false;
 	char *str[] = {"./nanotekspice", "u_u", "o1=1", NULL};
-	try {
-		parserTester(3, str);
-	} catch (const FileError &error) {
-		error.what();
-		thrown = true;
-	}
-	cr_assert(thrown);
+	cr_assert_throw(parserTester(3, str), FileError);
 }
 
 #pragma GCC diagnostic pop

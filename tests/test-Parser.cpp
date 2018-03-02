@@ -35,119 +35,56 @@ static void redirect_all_std(void)
 }
 
 Test(NoDefOfchipsets, Parser, .init = redirect_all_std) {
-	bool verify = false;
 	char *str[4] = {"nanotekspice",
 			"tests/nts_files/nochipsetdef.nts", "a=1", NULL};
-	try {
-		nts::Circuit circuit(3, str);
-	} catch (const FileError &error) {
-		verify = true;
-		error.what();
-	}
-	cr_assert(verify);
+	cr_assert_throw(nts::Circuit circuit(3, str), FileError);
 }
 
 Test(ChipError, Parser, .init = redirect_all_std) {
-	bool verify = false;
 	char *str[4] = {"nanotekspice", "tests/nts_files/chiperror.nts", "a=1", NULL};
-	try {
-		nts::Circuit circuit(3, str);
-	} catch (const FileError &error) {
-		verify = true;
-		error.what();
-	}
-	cr_assert(verify);
+	cr_assert_throw(nts::Circuit circuit(3, str), FileError);
 }
 
 Test(ChipError2, Parser, .init = redirect_all_std) {
-	bool verify = false;
 	char *str[4] = {"nanotekspice",
 			"tests/nts_files/chipseterror2.nts", "a=1", NULL};
-	try {
-		nts::Circuit circuit(3, str);
-	} catch (const FileError &error) {
-		verify = true;
-		error.what();
-	}
-	cr_assert(verify);
+	cr_assert_throw(nts::Circuit circuit(3, str), FileError);
 }
 
 Test(NoDefOfchipsetsbutchipPresent, Parser, .init = redirect_all_std) {
-	bool verify = false;
 	char *str[4] = {"nanotekspice",
 			"tests/nts_files/nodefchip.nts", "a=1", NULL};
-	try {
-		nts::Circuit circuit(3, str);
-	} catch (const FileError &error) {
-		verify = true;
-		error.what();
-	}
-	cr_assert(verify);
+	cr_assert_throw(nts::Circuit circuit(3, str), FileError);
 }
 
 Test(NoLink, Parser, .init = redirect_all_std) {
-	bool verify = false;
 	char *str[4] = {"nanotekspice",
 			"tests/nts_files/nolink.nts", "a=1", NULL};
-	try {
-		nts::Circuit circuit(3, str);
-	} catch (const FileError &error) {
-		verify = true;
-		error.what();
-	}
-	cr_assert(verify);
+	cr_assert_throw(nts::Circuit circuit(3, str), FileError);
 }
 
 Test(ErrorLink, Parser, .init = redirect_all_std) {
-	bool verify = false;
 	char *str[4] = {"nanotekspice",
 			"tests/nts_files/errorlink.nts", "a=1", NULL};
-	try {
-		nts::Circuit circuit(3, str);
-	} catch (const FileError &error) {
-		verify = true;
-		error.what();
-	}
-	cr_assert(verify);
+	cr_assert_throw(nts::Circuit circuit(3, str), FileError);
 }
 
 Test(ErrorLink2, Parser, .init = redirect_all_std) {
-	bool verify = false;
 	char *str[4] = {"nanotekspice",
 			"tests/nts_files/errorlink2.nts", "a=1", NULL};
-	try {
-		nts::Circuit circuit(3, str);
-	} catch (const FileError &error) {
-		verify = true;
-		error.what();
-	}
-	cr_assert(verify);
+	cr_assert_throw(nts::Circuit circuit(3, str), FileError);
 }
 
 Test(EmptyFile, Parser, .init = redirect_all_std) {
-	bool verify = false;
 	char *str[4] = {"nanotekspice",
 			"tests/nts_files/empty.nts", "a=1", NULL};
-	try {
-		nts::Circuit circuit(3, str);
-	} catch (const FileError &error) {
-		verify = true;
-		error.what();
-	}
-	cr_assert(verify);
+	cr_assert_throw(nts::Circuit circuit(3, str), FileError);
 }
 
 Test(NoDefOflinks, Parser, .init = redirect_all_std) {
-	bool verify = false;
 	char *str[4] = {"nanotekspice",
 			"tests/nts_files/nolinksdef.nts", "a=1", NULL};
-	try {
-	nts::Circuit circuit(3, str);
-	} catch (const FileError &error) {
-		verify = true;
-		error.what();
-	}
-	cr_assert(verify);
+	cr_assert_throw(nts::Circuit circuit(3, str), FileError);
 }
 
 #pragma GCC diagnostic pop
