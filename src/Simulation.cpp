@@ -38,7 +38,7 @@ nts::Simulation::Simulation(std::vector<std::unique_ptr<nts::IComponent>> &comps
 nts::Simulation::~Simulation()
 {}
 
-void nts::Simulation::run() noexcept
+void nts::Simulation::run()
 {
 	auto it = _components.begin();
 
@@ -99,7 +99,7 @@ void nts::Simulation::loop() noexcept
 		run();
 }
 
-void nts::Simulation::_computeOutput(std::unique_ptr<IComponent> &comp) noexcept
+void nts::Simulation::_computeOutput(std::unique_ptr<IComponent> &comp)
 {
 	auto state = comp->compute();
 

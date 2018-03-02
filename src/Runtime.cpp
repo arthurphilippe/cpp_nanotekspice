@@ -90,7 +90,7 @@ bool nts::Runtime::doCommand(std::string &command) noexcept
 	return (_state == UNKNOW_COMMAND) ? (false) : (true);
 }
 
-bool nts::Runtime::run() noexcept
+bool nts::Runtime::run()
 {
 	std::string command;
 	while (_state != EXIT)

@@ -25,7 +25,7 @@ namespace nts {
 		Runtime(int ac, char **av);
 		~Runtime();
 		bool doCommand(std::string &command) noexcept;
-		bool run() noexcept;
+		bool run();
 		void exitProgram();
 		void callLoop();
 		void callSimulate();
