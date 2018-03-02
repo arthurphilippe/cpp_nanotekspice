@@ -136,6 +136,10 @@ EOF
 
 ret_test $? 0
 
+echo -n ":: Running invalid trueComp... "
+./nanotekspice tests/nts_files/xor_invalid.nts a=1 b=1 &> /dev/null
+
+ret_test $? 84
 
 if  [ "$1" == "loop" ]; then
 	./tests/loop_test.sh
