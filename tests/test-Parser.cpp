@@ -36,7 +36,8 @@ static void redirect_all_std(void)
 
 Test(NoDefOfchipsets, Parser, .init = redirect_all_std) {
 	bool verify = false;
-	char *str[4] = {"nanotekspice", "tests/nts_files/nochipsetdef.nts", "a=1", NULL};
+	char *str[4] = {"nanotekspice",
+			"tests/nts_files/nochipsetdef.nts", "a=1", NULL};
 	try {
 		nts::Circuit circuit(3, str);
 	} catch (const FileError &error) {
@@ -60,7 +61,8 @@ Test(ChipError, Parser, .init = redirect_all_std) {
 
 Test(ChipError2, Parser, .init = redirect_all_std) {
 	bool verify = false;
-	char *str[4] = {"nanotekspice", "tests/nts_files/chipseterror2.nts", "a=1", NULL};
+	char *str[4] = {"nanotekspice",
+			"tests/nts_files/chipseterror2.nts", "a=1", NULL};
 	try {
 		nts::Circuit circuit(3, str);
 	} catch (const FileError &error) {
@@ -69,11 +71,11 @@ Test(ChipError2, Parser, .init = redirect_all_std) {
 	}
 	cr_assert(verify);
 }
-
 
 Test(NoDefOfchipsetsbutchipPresent, Parser, .init = redirect_all_std) {
 	bool verify = false;
-	char *str[4] = {"nanotekspice", "tests/nts_files/nodefchip.nts", "a=1", NULL};
+	char *str[4] = {"nanotekspice",
+			"tests/nts_files/nodefchip.nts", "a=1", NULL};
 	try {
 		nts::Circuit circuit(3, str);
 	} catch (const FileError &error) {
@@ -83,10 +85,10 @@ Test(NoDefOfchipsetsbutchipPresent, Parser, .init = redirect_all_std) {
 	cr_assert(verify);
 }
 
-
 Test(NoLink, Parser, .init = redirect_all_std) {
 	bool verify = false;
-	char *str[4] = {"nanotekspice", "tests/nts_files/nolink.nts", "a=1", NULL};
+	char *str[4] = {"nanotekspice",
+			"tests/nts_files/nolink.nts", "a=1", NULL};
 	try {
 		nts::Circuit circuit(3, str);
 	} catch (const FileError &error) {
@@ -98,7 +100,8 @@ Test(NoLink, Parser, .init = redirect_all_std) {
 
 Test(ErrorLink, Parser, .init = redirect_all_std) {
 	bool verify = false;
-	char *str[4] = {"nanotekspice", "tests/nts_files/errorlink.nts", "a=1", NULL};
+	char *str[4] = {"nanotekspice",
+			"tests/nts_files/errorlink.nts", "a=1", NULL};
 	try {
 		nts::Circuit circuit(3, str);
 	} catch (const FileError &error) {
@@ -110,7 +113,8 @@ Test(ErrorLink, Parser, .init = redirect_all_std) {
 
 Test(ErrorLink2, Parser, .init = redirect_all_std) {
 	bool verify = false;
-	char *str[4] = {"nanotekspice", "tests/nts_files/errorlink2.nts", "a=1", NULL};
+	char *str[4] = {"nanotekspice",
+			"tests/nts_files/errorlink2.nts", "a=1", NULL};
 	try {
 		nts::Circuit circuit(3, str);
 	} catch (const FileError &error) {
@@ -122,7 +126,8 @@ Test(ErrorLink2, Parser, .init = redirect_all_std) {
 
 Test(EmptyFile, Parser, .init = redirect_all_std) {
 	bool verify = false;
-	char *str[4] = {"nanotekspice", "tests/nts_files/empty.nts", "a=1", NULL};
+	char *str[4] = {"nanotekspice",
+			"tests/nts_files/empty.nts", "a=1", NULL};
 	try {
 		nts::Circuit circuit(3, str);
 	} catch (const FileError &error) {
@@ -134,7 +139,8 @@ Test(EmptyFile, Parser, .init = redirect_all_std) {
 
 Test(NoDefOflinks, Parser, .init = redirect_all_std) {
 	bool verify = false;
-	char *str[4] = {"nanotekspice", "tests/nts_files/nolinksdef.nts", "a=1", NULL};
+	char *str[4] = {"nanotekspice",
+			"tests/nts_files/nolinksdef.nts", "a=1", NULL};
 	try {
 	nts::Circuit circuit(3, str);
 	} catch (const FileError &error) {
@@ -143,7 +149,5 @@ Test(NoDefOflinks, Parser, .init = redirect_all_std) {
 	}
 	cr_assert(verify);
 }
-
-
 
 #pragma GCC diagnostic pop
