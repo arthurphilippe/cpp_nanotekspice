@@ -7,6 +7,7 @@
 
 #include <criterion/criterion.h>
 #include <criterion/assert.h>
+#include "Error.hpp"
 #include "../include/DefaultComponent.hpp"
 #include "../include/components/Output.hpp"
 #include "../include/components/Input.hpp"
@@ -51,6 +52,50 @@ Test(Validity, InputOutput) {
 	bouton->setLink(1, *led, 1);
 
 	cr_assert((led->isValid()));
+}
+
+Test(Basic, True) {
+	auto trueComp = std::move(
+		nts::ComponentFactory::createComponent("true", "true"));
+	auto led = std::move(
+		nts::ComponentFactory::createComponent("output", "LED"));
+
+	trueComp->setLink(1, *led, 1);
+	led->setLink(1, *trueComp, 1);
+	cr_assert(led->compute() == nts::TRUE);
+}
+
+Test(Basic, False) {
+	auto falseComp = std::move(
+		nts::ComponentFactory::createComponent("false", "false"));
+	auto led = std::move(
+		nts::ComponentFactory::createComponent("output", "LED"));
+
+	falseComp->setLink(1, *led, 1);
+	led->setLink(1, *falseComp, 1);
+	cr_assert(led->compute() == nts::FALSE);
+}
+
+Test(Error, False) {
+	auto falseComp = std::move(
+		nts::ComponentFactory::createComponent("false", "false"));
+	auto led = std::move(
+		nts::ComponentFactory::createComponent("output", "LED"));
+
+	falseComp->setLink(2, *led, 1);
+	led->setLink(1, *falseComp, 2);
+	cr_assert_throw(led->compute(), RuntimeError);
+}
+
+Test(Error, True) {
+	auto trueComp = std::move(
+		nts::ComponentFactory::createComponent("true", "true"));
+	auto led = std::move(
+		nts::ComponentFactory::createComponent("output", "LED"));
+
+	trueComp->setLink(2, *led, 1);
+	led->setLink(1, *trueComp, 2);
+	cr_assert_throw(led->compute(), RuntimeError);
 }
 
 Test(Basic, 4001) {

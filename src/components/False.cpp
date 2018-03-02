@@ -5,8 +5,8 @@
 ** true
 */
 
-#include <iostream>
 #include "components/False.hpp"
+#include "Error.hpp"
 
 nts::False::False(const std::string &name)
 {
@@ -15,5 +15,7 @@ nts::False::False(const std::string &name)
 
 nts::Tristate nts::False::compute(std::size_t pin)
 {
-	return (pin == 1) ? FALSE : UNDEFINED;
+	if (pin != 1)
+		throw RuntimeError("Requested pin is unkown");
+	return FALSE;
 }
