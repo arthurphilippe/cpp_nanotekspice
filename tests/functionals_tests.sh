@@ -31,6 +31,12 @@ function ret_test {
 
 mkdir tests/logs/ -p
 
+ls | grep nanotekspice &> /dev/null
+
+if [ "$?" == 1 ]; then
+    make fclean && make -j 4
+fi
+
 echo -n ":: Running no args test... "
 ./nanotekspice &> tests/logs/test1.log
 
