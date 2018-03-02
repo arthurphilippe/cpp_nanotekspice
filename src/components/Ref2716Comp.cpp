@@ -15,5 +15,6 @@ nts::Ref2716Comp::Ref2716Comp(const std::string &name, const std::string &param)
 
 nts::Tristate nts::Ref2716Comp::compute(std::size_t pin)
 {
-	(void) pin; return TRUE;
+	(void) pin;
+	return UNDEFINED;
 }

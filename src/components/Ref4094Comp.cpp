@@ -15,5 +15,5 @@ nts::Ref4094Comp::Ref4094Comp(const std::string &name)
 nts::Tristate nts::Ref4094Comp::compute(std::size_t pin)
 {
 	(void) pin;
-	return TRUE;
+	return UNDEFINED;
 }
