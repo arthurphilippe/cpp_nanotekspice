@@ -56,6 +56,12 @@ jobs:
       - run:
           name: Functional Tests Execution
           command: ./tests/functionals_tests.sh
+      - run:
+          name: Code Coverage - Processing
+          command: ./tests/coverage.sh
+      - run:
+          name: Code Coverage - Output
+          command: cat coverage.log
 
 workflows:
   version: 2
