@@ -51,5 +51,4 @@ Test(Flip, Clock) {
 	cr_assert(state == nts::FALSE);
 	state = clock->compute(4);
 	cr_assert(state == nts::TRUE);
-
 }
