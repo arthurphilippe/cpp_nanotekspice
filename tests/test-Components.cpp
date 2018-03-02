@@ -111,15 +111,37 @@ Test(Basic, 4001) {
 	led->setLink(1, *chipset, 10);
 	chipset->setLink(8, *i1, 1);
 	chipset->setLink(9, *i2, 1);
+	chipset->setLink(1, *i1, 1);
+	chipset->setLink(2, *i2, 1);
+	chipset->setLink(5, *i1, 1);
+	chipset->setLink(6, *i2, 1);
+	chipset->setLink(12, *i1, 1);
+	chipset->setLink(13, *i2, 1);
 	led->compute();
+	cr_assert((chipset->compute(3) == nts::UNDEFINED));
+	cr_assert((chipset->compute(4) == nts::UNDEFINED));
+	cr_assert((chipset->compute(10) == nts::UNDEFINED));
+	cr_assert((chipset->compute(11) == nts::UNDEFINED));
 	cr_assert((led->compute() == nts::UNDEFINED));
 	i1->compute(2);
 	i2->compute(2);
 	led->compute();
+	cr_assert((chipset->compute(3) == nts::FALSE));
+	cr_assert((chipset->compute(4) == nts::FALSE));
+	cr_assert((chipset->compute(10) == nts::FALSE));
+	cr_assert((chipset->compute(11) == nts::FALSE));
 	cr_assert((led->compute() == nts::FALSE));
 	i1->compute(3);
+	cr_assert((chipset->compute(3) == nts::FALSE));
+	cr_assert((chipset->compute(4) == nts::FALSE));
+	cr_assert((chipset->compute(10) == nts::FALSE));
+	cr_assert((chipset->compute(11) == nts::FALSE));
 	cr_assert((led->compute() == nts::FALSE));
 	i2->compute(3);
+	cr_assert((chipset->compute(3) == nts::TRUE));
+	cr_assert((chipset->compute(4) == nts::TRUE));
+	cr_assert((chipset->compute(10) == nts::TRUE));
+	cr_assert((chipset->compute(11) == nts::TRUE));
 	cr_assert((led->compute() == nts::TRUE));
 }
 
@@ -128,24 +150,37 @@ Test(Basic, 4011) {
 		nts::ComponentFactory::createComponent("input", "i1"));
 	auto i2 = std::move(
 		nts::ComponentFactory::createComponent("input", "i2"));
-	auto led = std::move(
-		nts::ComponentFactory::createComponent("output", "LED"));
 	auto chipset = std::move(
 		nts::ComponentFactory::createComponent("4011", "chipset"));
 
-	led->setLink(1, *chipset, 10);
 	chipset->setLink(8, *i1, 1);
 	chipset->setLink(9, *i2, 1);
-	led->compute();
-	cr_assert((led->compute() == nts::UNDEFINED));
+	chipset->setLink(1, *i1, 1);
+	chipset->setLink(2, *i2, 1);
+	chipset->setLink(5, *i1, 1);
+	chipset->setLink(6, *i2, 1);
+	chipset->setLink(12, *i1, 1);
+	chipset->setLink(13, *i2, 1);
+	cr_assert((chipset->compute(3) == nts::UNDEFINED));
+	cr_assert((chipset->compute(4) == nts::UNDEFINED));
+	cr_assert((chipset->compute(10) == nts::UNDEFINED));
+	cr_assert((chipset->compute(11) == nts::UNDEFINED));
 	i1->compute(2);
 	i2->compute(2);
-	led->compute();
-	cr_assert((led->compute() == nts::FALSE));
+	cr_assert((chipset->compute(3) == nts::FALSE));
+	cr_assert((chipset->compute(4) == nts::FALSE));
+	cr_assert((chipset->compute(10) == nts::FALSE));
+	cr_assert((chipset->compute(11) == nts::FALSE));
 	i1->compute(3);
-	cr_assert((led->compute() == nts::TRUE));
+	cr_assert((chipset->compute(3) == nts::TRUE));
+	cr_assert((chipset->compute(4) == nts::TRUE));
+	cr_assert((chipset->compute(10) == nts::TRUE));
+	cr_assert((chipset->compute(11) == nts::TRUE));
 	i2->compute(3);
-	cr_assert((led->compute() == nts::TRUE));
+	cr_assert((chipset->compute(3) == nts::TRUE));
+	cr_assert((chipset->compute(4) == nts::TRUE));
+	cr_assert((chipset->compute(10) == nts::TRUE));
+	cr_assert((chipset->compute(11) == nts::TRUE));
 }
 
 Test(Basic, 4030) {
@@ -161,8 +196,18 @@ Test(Basic, 4030) {
 	led->setLink(1, *chipset, 10);
 	chipset->setLink(8, *i1, 1);
 	chipset->setLink(9, *i2, 1);
+	chipset->setLink(1, *i1, 1);
+	chipset->setLink(2, *i2, 1);
+	chipset->setLink(5, *i1, 1);
+	chipset->setLink(6, *i2, 1);
+	chipset->setLink(12, *i1, 1);
+	chipset->setLink(13, *i2, 1);
 	led->compute();
 	cr_assert((led->compute() == nts::UNDEFINED));
+	cr_assert((chipset->compute(3) == nts::UNDEFINED));
+	cr_assert((chipset->compute(4) == nts::UNDEFINED));
+	cr_assert((chipset->compute(10) == nts::UNDEFINED));
+	cr_assert((chipset->compute(11) == nts::UNDEFINED));
 	i1->compute(2);
 	i2->compute(2);
 	led->compute();
@@ -310,15 +355,26 @@ Test(Basic, 4069) {
 		nts::ComponentFactory::createComponent("4069", "chipset"));
 
 	led->setLink(1, *chipset, 12);
+	chipset->setLink(1, *i1, 1);
+	chipset->setLink(3, *i1, 1);
+	chipset->setLink(5, *i1, 1);
+	chipset->setLink(9, *i1, 1);
+	chipset->setLink(11, *i1, 1);
 	chipset->setLink(13, *i1, 1);
 	cr_assert((led->compute() == nts::UNDEFINED));
+	cr_assert((chipset->compute(2) == nts::UNDEFINED));
+	cr_assert((chipset->compute(4) == nts::UNDEFINED));
+	cr_assert((chipset->compute(6) == nts::UNDEFINED));
+	cr_assert((chipset->compute(8) == nts::UNDEFINED));
+	cr_assert((chipset->compute(10) == nts::UNDEFINED));
+	cr_assert((chipset->compute(12) == nts::UNDEFINED));
 	i1->compute(2);
 	cr_assert((led->compute() == nts::FALSE));
 	i1->compute(3);
 	cr_assert((led->compute() == nts::TRUE));
 }
 
-Test(Basic, 4013) {
+Test(Basic1, 4013) {
 	auto clock = std::move(
 		nts::ComponentFactory::createComponent("input", "clock"));
 	auto set = std::move(
@@ -360,6 +416,7 @@ Test(Basic, 4013) {
 	clock->compute(3);
 	reset->compute(2);
 	cr_assert((chipset->compute(1) == nts::FALSE));
+	chipset->compute(12);
 }
 
 Test(Udef, 4008) {
