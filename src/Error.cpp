@@ -1,9 +1,9 @@
-//
-// EPITECH PROJECT, 2018
-// 
-// File description:
-// 
-//
+/*
+** EPITECH PROJECT, 2018
+** cpp_nanotekspice
+** File description:
+** Error
+*/
 
 #include "Error.hpp"
 
