@@ -14,6 +14,5 @@ nts::True::True(const std::string &name)
 
 nts::Tristate nts::True::compute(std::size_t pin)
 {
-	(void) pin;
-	return TRUE;
+	return (pin == 1) ? TRUE : UNDEFINED;
 }

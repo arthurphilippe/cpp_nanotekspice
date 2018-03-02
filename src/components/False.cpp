@@ -15,6 +15,5 @@ nts::False::False(const std::string &name)
 
 nts::Tristate nts::False::compute(std::size_t pin)
 {
-	(void) pin;
-	return FALSE;
+	return (pin == 1) ? FALSE : UNDEFINED;
 }

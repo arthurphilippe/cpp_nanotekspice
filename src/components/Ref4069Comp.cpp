@@ -27,14 +27,14 @@ nts::Tristate nts::Ref4069Comp::compute(std::size_t pin)
 		case (6):
 			pinA = 5;
 			break;
-		case (9):
-			pinA = 8;
+		case (8):
+			pinA = 9;
 			break;
-		case (11):
-			pinA = 10;
+		case (10):
+			pinA = 11;
 			break;
-		case (13):
-			pinA = 12;
+		case (12):
+			pinA = 13;
 			break;
 		default:
 			return UNDEFINED;
