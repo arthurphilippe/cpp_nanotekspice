@@ -16,7 +16,7 @@
 namespace nts {
 	class Parser;
 	constexpr auto ERR_LINKS("Error in the file links");
-	constexpr auto ERR_LINKS_CHIPSET ("Error: One chipset isn't linked \
+	constexpr auto ERR_LINKS_CHIPSET("Error: One chipset isn't linked \
 to an pin");
 	constexpr auto ERR_SYNTAX("Error: File syntaxt is incorrect");
 	constexpr auto ERR_UKN_COMP("Error: linking an unknown component");
