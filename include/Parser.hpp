@@ -15,6 +15,23 @@
 
 namespace nts {
 	class Parser;
+	constexpr auto ERR_LINKS("Error in the file links");
+	constexpr auto ERR_LINKS_CHIPSET ("Error: One chipset isn't linked \
+to an pin");
+	constexpr auto ERR_SYNTAX("Error: File syntaxt is incorrect");
+	constexpr auto ERR_UKN_COMP("Error: linking an unknown component");
+	constexpr auto ERR_DUP_DEF("Error: multiple def. of a component");
+	constexpr auto ERR_LIST("Error: invalid chipset in list");
+	constexpr auto ERR_CMP_ARG("Error: only the 2716 chipset can have \
+a value");
+	constexpr auto ERR_FILE("Error: cannot open file");
+	constexpr auto ERR_SECTION("Error: invaliD section name");
+
+	constexpr auto LINKS_SECT(".links:");
+	constexpr auto CHIP_SECT(".chipsets:");
+	constexpr auto ROM_COMP("2716");
+	constexpr auto TYPE_INPUT("input");
+	constexpr auto TYPE_CLOCK("clock");
 }
 
 class nts::Parser {
@@ -27,7 +44,6 @@ public:
 		return _inputCount;
 	}
 private:
-	// TODO: rename those two
 	enum Mode {
 		CHIPSET,
 		LINK
