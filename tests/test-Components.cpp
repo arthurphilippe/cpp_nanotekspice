@@ -82,9 +82,9 @@ Test(Error, False) {
 	auto led = std::move(
 		nts::ComponentFactory::createComponent("output", "LED"));
 
-	falseComp->setLink(2, *led, 1);
-	led->setLink(1, *falseComp, 2);
-	cr_assert_throw(led->compute(), RuntimeError);
+	cr_assert_throw(falseComp->setLink(2, *led, 1), FileError);
+	// led->setLink(1, *falseComp, 2);
+	// cr_assert_throw(led->compute(), RuntimeError);
 }
 
 Test(Error, True) {
@@ -93,9 +93,10 @@ Test(Error, True) {
 	auto led = std::move(
 		nts::ComponentFactory::createComponent("output", "LED"));
 
-	trueComp->setLink(2, *led, 1);
-	led->setLink(1, *trueComp, 2);
-	cr_assert_throw(led->compute(), RuntimeError);
+	cr_assert_throw(trueComp->setLink(2, *led, 1), FileError);
+	// led->setLink(1, *trueComp, 2), FileError;
+	// led->setLink(1, *trueComp, 2);
+	// cr_assert_throw(led->compute(), RuntimeError);
 }
 
 Test(Basic, 4001) {
