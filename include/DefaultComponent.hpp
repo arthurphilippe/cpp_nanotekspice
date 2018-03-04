@@ -22,7 +22,7 @@ namespace nts {
 	public:
 		virtual ~DefaultComponent() {};
 		void setLink(std::size_t pin, IComponent &other,
-				std::size_t otherPin) noexcept override;
+				std::size_t otherPin) override;
 		void dump() const noexcept override;
 		const std::string &getName() const noexcept override;
 		const std::string &getType() const noexcept override;
@@ -32,6 +32,7 @@ namespace nts {
 		std::string			_name;
 		std::string			_type;
 		std::vector<ComponentLink>	_links;
+		size_t				_nb_pins;
 	private:
 	};
 }

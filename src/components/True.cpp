@@ -11,6 +11,7 @@
 nts::True::True(const std::string &name)
 {
 	_name.assign(name);
+	_nb_pins = 1;
 }
 
 nts::Tristate nts::True::compute(std::size_t pin)

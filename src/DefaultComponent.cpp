@@ -44,10 +44,13 @@ void nts::DefaultComponent::dump() const noexcept
 }
 
 void nts::DefaultComponent::setLink(std::size_t pin, IComponent &other,
-					std::size_t otherPin) noexcept
+					std::size_t otherPin)
 {
 	ComponentLink newLink = {other, otherPin, pin, UNDEFINED};
 
+	if (_nb_pins != 0 && pin > _nb_pins) {
+		throw FileError("Linking to an unkown pin");
+	}
 	_links.push_back(newLink);
 }
 
