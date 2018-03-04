@@ -83,8 +83,6 @@ Test(Error, False) {
 		nts::ComponentFactory::createComponent("output", "LED"));
 
 	cr_assert_throw(falseComp->setLink(2, *led, 1), FileError);
-	// led->setLink(1, *falseComp, 2);
-	// cr_assert_throw(led->compute(), RuntimeError);
 }
 
 Test(Error, True) {
@@ -94,9 +92,6 @@ Test(Error, True) {
 		nts::ComponentFactory::createComponent("output", "LED"));
 
 	cr_assert_throw(trueComp->setLink(2, *led, 1), FileError);
-	// led->setLink(1, *trueComp, 2), FileError;
-	// led->setLink(1, *trueComp, 2);
-	// cr_assert_throw(led->compute(), RuntimeError);
 }
 
 Test(Basic, 4001) {
